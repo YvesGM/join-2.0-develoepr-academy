@@ -12,14 +12,14 @@ Join – AI-assisted Issue Collector
 - Current phase: `PHASE-01`
 - Last completed phase: `PHASE-00`
 - Next phase: `PHASE-01`
-- Overall status: `IN_PROGRESS`
+- Overall status: `BLOCKED`
 
 ## Phase status
 
 | Phase | Name | Status |
 |---|---|---|
 | PHASE-00 | Repository Audit | COMPLETED |
-| PHASE-01 | Requirements Matrix | IN_PROGRESS |
+| PHASE-01 | Requirements Matrix | BLOCKED |
 | PHASE-02 | Domain Contracts | PENDING |
 | PHASE-03 | Functional Integration | PENDING |
 | PHASE-04 | Board Triage | PENDING |
@@ -124,21 +124,46 @@ UI phases cannot be completed until:
 - No runtime files changed. Git metadata is absent in this workspace.
 - 2026-09-07: PHASE-00 revalidated before starting PHASE-01: all 24 targeted
   fingerprints unchanged and all 10 isolated behavior checks passed. No repair needed.
-- PHASE-01 started; requirements mapping is in progress. Figma metadata access
-  returned a Starter-plan MCP call-limit error; both supplied web URLs also failed.
+- 2026-09-07: PHASE-01 progressed to 36 requirements with all ten matrix columns,
+  covering all 17 required topic groups. Structure, 15 local source links, 21 existing
+  target paths and <=400-line limits validated. The 24 source fingerprints still match.
+- PHASE-01 is BLOCKED: Figma metadata access returned a Starter-plan MCP call-limit
+  error; both supplied web URLs also failed. No actual frame content was obtained.
+- Requirement acceptance tests are specified, not executed. No application code changed.
+  PHASE-02 remains PENDING and must not start before the PHASE-01 gate passes.
+
+## Current phase resume point
+- Continue [phase-01-requirements.md](phase-01-requirements.md), requirements IC-01–36.
+- Revalidate PHASE-00 using its targeted fingerprints/checks; do not repeat its full scan.
+- Resolve Q01 source completeness: user was asked whether the supplied control files
+  are the complete planning/Academy/tutorial requirements; no answer/source yet recorded.
+- Resolve Q02 by restoring usable direct Figma access, then inspect the supplied
+  page/additional node and exact desktop/mobile frames. All current Figma IDs are
+  references from control files, not verified design content.
+- Replace unverified design dependencies with evidence and resolve contradictions;
+  do not invent numeric/color states, email-mask behavior or mobile frame IDs.
+- Current/Next remains PHASE-01 because it is unfinished. After its gate passes,
+  mark it COMPLETED and advance Current/Next to PHASE-02.
 
 ## Carry-forward questions
 - PHASE-01 needs Academy/tutorial/planning sources beyond the supplied control
   files; no separate document exists in the audited workspace.
-- Figma frame contents have not yet been inspected; inspect directly in PHASE-01.
+- Figma frame contents remain unverified due to the access-limit error; see Q02 above.
 - Current tasks use category slugs `user-story` / `technical-task`, priorities
   `urgent` / `medium` / `low`, and four existing statuses. Historical export values
   are not current enums.
 - Board cache drops additive metadata and maps unknown statuses to `todo`;
   live rendering omits unknown columns. These are required integration points.
-- Counter scope/timezone/reset semantics, metric meaning, read authorization and
-  recipient remain unresolved alongside the open n8n decisions above.
+- The 10/day limit is explicit in PHASE-01, and Summary navigation to Board is explicit
+  in PHASE-05. Counter scope/timezone/reset semantics, metric meaning, read authorization
+  and recipient remain unresolved. Q03–Q11 in the matrix separate downstream contract,
+  routing and setup decisions from missing design evidence; no stable contracts invented.
 
 ## Changed files
+Completed PHASE-00:
 - docs/issue-collector/execution/phase-00-audit.md
+- docs/issue-collector/execution/MASTER.md
+
+Current PHASE-01 run:
+- docs/issue-collector/execution/phase-01-requirements.md
 - docs/issue-collector/execution/MASTER.md

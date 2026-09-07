@@ -1,7 +1,7 @@
 # PHASE-01 – Requirements Matrix
 
 ## Status
-IN_PROGRESS
+BLOCKED
 
 ## Goal
 Map Academy requirements, tutorial decisions, Figma, and current code.
@@ -230,7 +230,7 @@ coverage remains to be resolved). No stable PHASE-02 contracts have been authore
 - PASS: PHASE-00 prerequisites (24 unchanged source fingerprints, ten behavior checks).
 - PASS: all 17 requested topic groups mapped to requirement IDs.
 - PASS: 36 rows provide all ten mandatory matrix columns, acceptance criteria and targets.
-- PASS: existing targets and local documentation links resolve; proposed files explicitly labeled.
+- PASS: 21 existing targets and 15 local documentation links resolve; proposed files explicitly labeled.
 - PASS: only this phase report and MASTER changed; both below 400 lines.
 - NOT RUN: feature acceptance tests, browser regression, live Firebase, Figma screenshots.
 - BLOCKED: design evidence required to map implementation-critical visual/state requirements.
