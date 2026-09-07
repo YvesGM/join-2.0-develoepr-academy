@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../styles/fonts.css" />
+    <link rel="stylesheet" href="../styles/assets.css" />
+    <link rel="stylesheet" href="../styles/login.css" />
+    <link rel="stylesheet" href="../styles/login-responsive.css" />
+    <link rel="stylesheet" href="../styles/signup.css" />
+    <link rel="icon" href="../assets/img/join_logo_dark.svg" />
+    <title>Sign Up - Join</title>
+  </head>
+
+  <body class="login-page">
+    <div class="page-shell">
+      <header class="login-header signup-header">
+        <img class="login-logo" src="../assets/img/join_logo_dark.svg" alt="Join" />
+      </header>
+
+      <main class="login-main">
+        <section class="login-card signup-card" aria-labelledby="signup-title">
+          <a class="signup-back" href="../index.html" aria-label="Back to login">
+            <img src="../assets/icons/left_default.svg" alt="" />
+          </a>
+
+          <h1 id="signup-title">Sign up</h1>
+          <div class="login-underline"></div>
+
+          <form class="login-form" action="#" novalidate>
+            <label class="input-field">
+              <input type="text" name="name" placeholder="Name" autocomplete="name" aria-label="Name" />
+              <span class="input-icon" aria-hidden="true">
+                <img src="../assets/icons/person.svg" alt="" />
+              </span>
+              <p id="msg-name" class="field-message" role="alert"></p>
+            </label>
+
+            <label class="input-field">
+              <input type="email" name="email" placeholder="Email" autocomplete="email" aria-label="Email" />
+              <span class="input-icon" aria-hidden="true">
+                <img src="../assets/icons/mail.svg" alt="" />
+              </span>
+              <p id="msg-email" class="field-message" role="alert"></p>
+            </label>
+
+            <label class="input-field">
+              <input type="password" name="password" placeholder="Password" autocomplete="new-password" aria-label="Password" />
+              <span class="input-icon" aria-hidden="true">
+                <img src="../assets/icons/lock.svg" alt="" />
+              </span>
+              <p id="msg-password" class="field-message" role="alert"></p>
+            </label>
+
+            <label class="input-field">
+              <input type="password" name="confirmPassword" placeholder="Confirm Password" autocomplete="new-password" aria-label="Confirm password" />
+              <span class="input-icon" aria-hidden="true">
+                <img src="../assets/icons/lock.svg" alt="" />
+              </span>
+              <p id="msg-confirmPassword" class="field-message" role="alert"></p>
+            </label>
+
+            <label class="checkbox-row">
+              <input class="checkbox-input" type="checkbox" name="privacy" aria-label="Accept privacy policy" />
+              <span class="checkbox-box" aria-hidden="true"></span>
+              <span class="checkbox-text">
+                I accept the
+                <a class="checkbox-link" href="./logout-privacy.html">Privacy policy</a>
+              </span>
+              <p id="msg-privacy" class="field-message privacy-message" role="alert"></p>
+            </label>
+
+            <div class="login-actions signup-actions">
+              <button class="btn btn-dark" type="submit" disabled>Sign up</button>
+            </div>
+          </form>
+        </section>
+      </main>
+
+      <footer class="login-footer">
+        <a href="./logout-privacy.html">Privacy Policy</a>
+        <a href="./logout-legal.html">Legal Notice</a>
+      </footer>
+    </div>
+
+    <div id="success-overlay" class="d-none" aria-hidden="true">
+      <span class="success-message">You signed up successfully</span>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+    <script src="../scripts/firebaseConfig.js"></script>
+    <script src="../scripts/db.js"></script>
+    <script src="../script.js"></script>
+    <script src="../scripts/avatar-utils.js"></script>
+    <script src="../scripts/sign-up.js"></script>
+  </body>
+</html>

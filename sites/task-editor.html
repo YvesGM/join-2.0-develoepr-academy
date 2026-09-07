@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    document.documentElement.classList.add('auth-check-pending');
+  </script>
+  <link rel="stylesheet" href="../styles/summary.css" />
+  <link rel="stylesheet" href="../styles/task-editor.css" />
+  <link rel="stylesheet" href="../styles/sidebar.css" />
+  <link rel="stylesheet" href="../styles/fonts.css" />
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" href="../assets/img/join_logo_dark.svg" />
+  <title>Add Task - Join</title>
+</head>
+
+<body>
+  <header>
+    <h2>Kanban Project Management Tool</h2>
+    <div class="header-btn">
+      <a href="./help.html" class="help-btn"><img src="../assets/icons/help_icon.svg" alt="Help Icon"></a>
+      <button id="profile-btn" class="profile-btn"></button>
+    </div>
+  </header>
+
+  <main class="addTask-container">
+    <section class="task_header">
+      <h1>Add Task</h1>
+    </section>
+
+    <div class="editor_wrapper">
+
+      <!-- LEFT -->
+      <form class="new_task" id="taskForm">
+        <div class="left_row title_field">
+          <label for="titleInput">Title
+            <span class="error">*</span>
+          </label>
+
+          <div class="left_single_row">
+            <input id="titleInput" aria-describedby="titleError" type="text" placeholder="Enter a title" required>
+          </div>
+
+          <small class="error_text">This field is required</small>
+
+        </div>
+
+        <div class="left_row">
+          <label for="descriptionBox">Description</label>
+
+          <div class="left_single_row description_box">
+            <textarea id="descriptionBox" placeholder="Enter a Description"></textarea>
+          </div>
+
+        </div>
+
+        <div class="left_row date_field">
+          <label for="dateInput">Due date
+            <span class="error">*</span>
+          </label>
+
+        <div class="left_single_row">
+    <input id="dateInput" type="date" required onfocus="setMinDateToToday()">
+</div>
+
+          <small class="error_text">This field is required</small>
+        </div>
+      </form>
+
+      <!-- DIVIDER -->
+      <div class="editor_divider"></div>
+
+      <!-- RIGHT -->
+      <div class="task_settings">
+
+        <div class="settings_block">
+          <label for="priorityRow">Priority</label>
+
+          <div class="priority_row" id="priorityRow">
+            <button type="button" class="prio urgent_btn" data-prio="urgent">
+              Urgent
+              <div>
+                <img src="../assets/icons/prio_alta.svg" class="urgent">
+              </div>
+            </button>
+
+            <button type="button" class="prio medium_btn active" data-prio="medium">
+              Medium
+              <div>
+                <img src="../assets/icons/prio_media.svg" class="medium">
+              </div>
+            </button>
+
+            <button type="button" class="prio low_btn" data-prio="low">
+              Low
+              <div>
+                <img src="../assets/icons/prio_baja.svg" class="low">
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <div class="settings_block">
+          <label for="assignedSelect">Assigned to</label>
+
+          <div class="select_native" id="assignedSelect" role="combobox" aria-expanded="false"
+            aria-controls="assignedDropdown">
+            <div class="selector_input">
+              <input type="text" id="assignedSearch" placeholder="Select contacts to assign" autocomplete="off" />
+            </div>
+
+            <div class="selector_dropdown" onclick="event.stopPropagation()" id="assignedDropdown" role="listbox">
+            </div>
+          </div>
+
+          <div id="assignedAvatars" class="assigned_avatars"></div>
+        </div>
+
+        <div class="settings_block">
+          <label for="categorySelectWrapper">Category</label>
+          <div class="select_native category-select" id="categorySelectWrapper">
+            <div class="selector_input">
+              <input type="text" id="categoryInput" placeholder="Select task category" readonly>
+            </div>
+
+            <div class="selector_dropdown" id="categoryDropdown">
+              <label class="dropdown_item" data-value="user-story" role="option">User Story</label>
+              <label class="dropdown_item" data-value="technical-task" role="option">Technical Task</label>
+            </div>
+          </div>
+          <small class="error_text">This field is required</small>
+        </div>
+
+
+        <div class="settings_block subtasks_block">
+          <label for="subtaskInput">Subtasks</label>
+
+          <div class="subtask_input">
+            <input id="subtaskInput" type="text" placeholder="Add new subtask">
+
+            <div class="subtask_actions">
+              <button id="subtaskClear" aria-label="Clear subtask">
+                <img src="../assets/icons/close.svg" alt="">
+              </button>
+              <div class="separator"></div>
+              <button id="subtaskAdd" aria-label="Add subtask">
+                <img src="../assets/icons/check.svg" alt=""></img>
+              </button>
+            </div>
+          </div>
+
+          <ul id="subtaskList" class="subtask_list"></ul>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="task_footer">
+      <p>
+        <span class="error">*</span>
+        This field is required
+      </p>
+
+      <div class="footer_actions">
+        <button class="clear_btn">Clear ✕</button>
+        <button class="create_btn">Create Task ✓</button>
+      </div>
+    </div>
+
+    <aside>
+      <img src="../assets/img/join_logo.svg" alt="Join Logo" />
+      <nav class="sidebar-navigation" aria-label="Main navigation">
+        <div class="sidebar-navigation-item">
+          <a href="./summary.html"><img src="../assets/icons/summary_icon.svg" alt="Summary Icon">Summary</a>
+        </div>
+        <div class="sidebar-navigation-item active">
+          <a href="./task-editor.html"><img src="../assets/icons/addTask_icon.svg" alt="Add Task Icon">Add Task</a>
+        </div>
+        <div class="sidebar-navigation-item">
+          <a href="./taskboard.html"><img src="../assets/icons/board_icon.svg" alt="Board Icon">Board</a>
+        </div>
+        <div class="sidebar-navigation-item">
+          <a href="./contacts.html"><img src="../assets/icons/contacts_icon.svg" alt="Contacts Icon">Contacts</a>
+        </div>
+      </nav>
+      <div class="sidebar-legal-links">
+        <div class="center">
+          <div class="active-links">
+            <div class="nav-links">
+              <a href="./privacy-policy.html">Privacy Policy</a>
+            </div>
+          </div>
+          <div class="active-links">
+            <div class="nav-links">
+              <a href="./legal-notice.html">Legal notice</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <div id="profile-menu" class="profile-overlay">
+      <nav class="profile-menu">
+        <ul class="flex-container">
+          <li class="hover-container"><a href="./legal-notice.html">Legal Notice</a></li>
+          <li class="hover-container"><a href="./privacy-policy.html">Privacy Policy</a></li>
+          <li class="hover-container"><a href="../index.html" data-logout="1">Log out</a></li>
+        </ul>
+      </nav>
+    </div>
+  </main>
+
+  <div id="taskSuccessToast" class="task_success_toast" role="status" aria-live="polite">
+    Task added to board
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+  <script src="../scripts/firebaseConfig.js"></script>
+  <script src="../scripts/db.js"></script>
+  <script src="../scripts/auth-guard.js"></script>
+  <script src="../scripts/user-context.js"></script>
+  <script src="../scripts/taskeditor.js"></script>
+  <script src="../scripts/taskeditorSelections.js"></script>
+  <script src="../scripts/taskeditorSubtasks.js"></script>
+  <script src="../scripts/taskeditorButtons.js"></script>
+  <script src="../script.js"></script>
+  <script src="../scripts/avatar-utils.js"></script>
+
+</body>
+
+
+</html>

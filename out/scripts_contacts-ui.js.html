@@ -1,0 +1,482 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> scripts/contacts-ui.js</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+             
+                <a href="index.html">
+                    <h1 class="navbar-item">Join Project</h1>
+                </a>
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Global</h3><ul><li><a href="global.html#BOARD_STATUSES">BOARD_STATUSES</a></li><li><a href="global.html#activateEditMode">activateEditMode</a></li><li><a href="global.html#addContactToEdit">addContactToEdit</a></li><li><a href="global.html#addSubtaskInEdit">addSubtaskInEdit</a></li><li><a href="global.html#boardLegacyConnectionsCache">boardLegacyConnectionsCache</a></li><li><a href="global.html#boardTaskCache">boardTaskCache</a></li><li><a href="global.html#boardUsersCache">boardUsersCache</a></li><li><a href="global.html#buildAssignedFromLegacy">buildAssignedFromLegacy</a></li><li><a href="global.html#buildAssignedUsers">buildAssignedUsers</a></li><li><a href="global.html#buildCategoryClass">buildCategoryClass</a></li><li><a href="global.html#buildColumnsFromTasks">buildColumnsFromTasks</a></li><li><a href="global.html#buildContactItemHTML">buildContactItemHTML</a></li><li><a href="global.html#buildContactTemplate">buildContactTemplate</a></li><li><a href="global.html#buildTaskObject">buildTaskObject</a></li><li><a href="global.html#buildUpdatedTaskData">buildUpdatedTaskData</a></li><li><a href="global.html#clearModalCloseTimeout">clearModalCloseTimeout</a></li><li><a href="global.html#clearSubtaskInput">clearSubtaskInput</a></li><li><a href="global.html#clearTaskFromCache">clearTaskFromCache</a></li><li><a href="global.html#closeAddTaskModal">closeAddTaskModal</a></li><li><a href="global.html#closeTaskDetail">closeTaskDetail</a></li><li><a href="global.html#createAvatar">createAvatar</a></li><li><a href="global.html#createContactLabel">createContactLabel</a></li><li><a href="global.html#createSubtaskElement">createSubtaskElement</a></li><li><a href="global.html#currentEditContacts">currentEditContacts</a></li><li><a href="global.html#currentEditSubtasks">currentEditSubtasks</a></li><li><a href="global.html#currentSelectedStatus">currentSelectedStatus</a></li><li><a href="global.html#deleteSubtaskFromEdit">deleteSubtaskFromEdit</a></li><li><a href="global.html#deleteTask">deleteTask</a></li><li><a href="global.html#editTask">editTask</a></li><li><a href="global.html#editTaskAssigned">editTaskAssigned</a></li><li><a href="global.html#ensureArray">ensureArray</a></li><li><a href="global.html#fetchBoardData">fetchBoardData</a></li><li><a href="global.html#fetchTaskWithUsers">fetchTaskWithUsers</a></li><li><a href="global.html#fetchUsers">fetchUsers</a></li><li><a href="global.html#fillContactDropdown">fillContactDropdown</a></li><li><a href="global.html#filterAssignedContacts">filterAssignedContacts</a></li><li><a href="global.html#filterTasks">filterTasks</a></li><li><a href="global.html#findClosestDeadline">findClosestDeadline</a></li><li><a href="global.html#findTaskByDeadline">findTaskByDeadline</a></li><li><a href="global.html#finishSubtaskEdit">finishSubtaskEdit</a></li><li><a href="global.html#formatDate">formatDate</a></li><li><a href="global.html#getActivePriority">getActivePriority</a></li><li><a href="global.html#getAssignedUsers">getAssignedUsers</a></li><li><a href="global.html#getAvatarColorFromName">getAvatarColorFromName</a></li><li><a href="global.html#getCardTemplate">getCardTemplate</a></li><li><a href="global.html#getCheckedAssignedUsers">getCheckedAssignedUsers</a></li><li><a href="global.html#getContactElements">getContactElements</a></li><li><a href="global.html#getEditTaskTemplate">getEditTaskTemplate</a></li><li><a href="global.html#getInitials">getInitials</a></li><li><a href="global.html#getLegacyTaskConnections">getLegacyTaskConnections</a></li><li><a href="global.html#getProgressData">getProgressData</a></li><li><a href="global.html#getRequiredFieldElements">getRequiredFieldElements</a></li><li><a href="global.html#getSubtasks">getSubtasks</a></li><li><a href="global.html#getTaskDetailTemplate">getTaskDetailTemplate</a></li><li><a href="global.html#getUsersMap">getUsersMap</a></li><li><a href="global.html#handleAddSubtask">handleAddSubtask</a></li><li><a href="global.html#handleAssignedOutsideClick">handleAssignedOutsideClick</a></li><li><a href="global.html#handleAssignedSelectionChange">handleAssignedSelectionChange</a></li><li><a href="global.html#handleCategoryOutsideClick">handleCategoryOutsideClick</a></li><li><a href="global.html#handleCreateTaskClick">handleCreateTaskClick</a></li><li><a href="global.html#handleFirebaseError">handleFirebaseError</a></li><li><a href="global.html#handleOverlayClick">handleOverlayClick</a></li><li><a href="global.html#handleTaskCreatedSuccess">handleTaskCreatedSuccess</a></li><li><a href="global.html#loadCategories">loadCategories</a></li><li><a href="global.html#loadContacts">loadContacts</a></li><li><a href="global.html#loadTaskEditorPage">loadTaskEditorPage</a></li><li><a href="global.html#mapUserToBadge">mapUserToBadge</a></li><li><a href="global.html#normalizeAssignedUser">normalizeAssignedUser</a></li><li><a href="global.html#normalizeAssignedUserObject">normalizeAssignedUserObject</a></li><li><a href="global.html#normalizeAssignedUserString">normalizeAssignedUserString</a></li><li><a href="global.html#normalizeSubtask">normalizeSubtask</a></li><li><a href="global.html#normalizeSubtasks">normalizeSubtasks</a></li><li><a href="global.html#normalizeTask">normalizeTask</a></li><li><a href="global.html#onDrop">onDrop</a></li><li><a href="global.html#openAddTaskModal">openAddTaskModal</a></li><li><a href="global.html#openAddTaskModalBoard">openAddTaskModalBoard</a></li><li><a href="global.html#openAssignedDropdown">openAssignedDropdown</a></li><li><a href="global.html#openCategoryDropdown">openCategoryDropdown</a></li><li><a href="global.html#openTaskDetail">openTaskDetail</a></li><li><a href="global.html#prioBtnActiveToggle">prioBtnActiveToggle</a></li><li><a href="global.html#redirectToBoardAfterDelay">redirectToBoardAfterDelay</a></li><li><a href="global.html#refreshEditSubtaskUI">refreshEditSubtaskUI</a></li><li><a href="global.html#removeContactFromEdit">removeContactFromEdit</a></li><li><a href="global.html#renderBoard">renderBoard</a></li><li><a href="global.html#renderCardBadge">renderCardBadge</a></li><li><a href="global.html#renderColumnHTML">renderColumnHTML</a></li><li><a href="global.html#renderContacts">renderContacts</a></li><li><a href="global.html#renderDetailBadge">renderDetailBadge</a></li><li><a href="global.html#renderEditContactBadges">renderEditContactBadges</a></li><li><a href="global.html#renderNextDeadline">renderNextDeadline</a></li><li><a href="global.html#renderPrioButtons">renderPrioButtons</a></li><li><a href="global.html#renderProgressBar">renderProgressBar</a></li><li><a href="global.html#renderSubtaskItems">renderSubtaskItems</a></li><li><a href="global.html#renderTaskDetail">renderTaskDetail</a></li><li><a href="global.html#renderUserBadges">renderUserBadges</a></li><li><a href="global.html#resetAssignedUsers">resetAssignedUsers</a></li><li><a href="global.html#resetBasicInputs">resetBasicInputs</a></li><li><a href="global.html#resetCategory">resetCategory</a></li><li><a href="global.html#resetErrorStates">resetErrorStates</a></li><li><a href="global.html#resetPriority">resetPriority</a></li><li><a href="global.html#resetSubtasks">resetSubtasks</a></li><li><a href="global.html#resetTaskForm">resetTaskForm</a></li><li><a href="global.html#resolveSubtaskTitle">resolveSubtaskTitle</a></li><li><a href="global.html#resolveUserInitials">resolveUserInitials</a></li><li><a href="global.html#saveTaskEdit">saveTaskEdit</a></li><li><a href="global.html#saveTaskToFirebase">saveTaskToFirebase</a></li><li><a href="global.html#scheduleModalHide">scheduleModalHide</a></li><li><a href="global.html#scrollModalToTop">scrollModalToTop</a></li><li><a href="global.html#selectCategory">selectCategory</a></li><li><a href="global.html#setEditPriority">setEditPriority</a></li><li><a href="global.html#setupAssignedSearch">setupAssignedSearch</a></li><li><a href="global.html#setupCategoryDropdown">setupCategoryDropdown</a></li><li><a href="global.html#setupClearButton">setupClearButton</a></li><li><a href="global.html#setupContactDropdownListeners">setupContactDropdownListeners</a></li><li><a href="global.html#setupCreateTaskButton">setupCreateTaskButton</a></li><li><a href="global.html#setupModalControls">setupModalControls</a></li><li><a href="global.html#setupRequiredField">setupRequiredField</a></li><li><a href="global.html#setupSubtasks">setupSubtasks</a></li><li><a href="global.html#shouldInitTaskEditorOnLoad">shouldInitTaskEditorOnLoad</a></li><li><a href="global.html#showTaskSuccessToast">showTaskSuccessToast</a></li><li><a href="global.html#taskEditorInitialized">taskEditorInitialized</a></li><li><a href="global.html#taskMatchesTerm">taskMatchesTerm</a></li><li><a href="global.html#toggleAssignedDropdown">toggleAssignedDropdown</a></li><li><a href="global.html#toggleCategoryDropdown">toggleCategoryDropdown</a></li><li><a href="global.html#toggleEditContactList">toggleEditContactList</a></li><li><a href="global.html#toggleRequiredError">toggleRequiredError</a></li><li><a href="global.html#toggleSubtaskActions">toggleSubtaskActions</a></li><li><a href="global.html#toggleUserSelection">toggleUserSelection</a></li><li><a href="global.html#updateAssignedAvatars">updateAssignedAvatars</a></li><li><a href="global.html#updateAssignedDisplay">updateAssignedDisplay</a></li><li><a href="global.html#updateSubtaskStatus">updateSubtaskStatus</a></li></ul></div><div class="category"><h2>Contacts</h2><h3>Global</h3><ul><li><a href="global.html#animateContactDetails">animateContactDetails</a></li><li><a href="global.html#applyContactToForm">applyContactToForm</a></li><li><a href="global.html#applyContactsState">applyContactsState</a></li><li><a href="global.html#areContactListsEqual">areContactListsEqual</a></li><li><a href="global.html#bindContactFieldEvents">bindContactFieldEvents</a></li><li><a href="global.html#clearContactErrors">clearContactErrors</a></li><li><a href="global.html#closeContactOverlay">closeContactOverlay</a></li><li><a href="global.html#createLocalContactId">createLocalContactId</a></li><li><a href="global.html#deleteContact">deleteContact</a></li><li><a href="global.html#fetchContact">fetchContact</a></li><li><a href="global.html#fetchContacts">fetchContacts</a></li><li><a href="global.html#getContactAvatarColor">getContactAvatarColor</a></li><li><a href="global.html#getContactFields">getContactFields</a></li><li><a href="global.html#getContactGroupLetter">getContactGroupLetter</a></li><li><a href="global.html#getContactInitials">getContactInitials</a></li><li><a href="global.html#getContactOverlayElements">getContactOverlayElements</a></li><li><a href="global.html#getSelectedContact">getSelectedContact</a></li><li><a href="global.html#hasDb">hasDb</a></li><li><a href="global.html#initContactForm">initContactForm</a></li><li><a href="global.html#initContactOverlay">initContactOverlay</a></li><li><a href="global.html#initMobileContactDetailsControls">initMobileContactDetailsControls</a></li><li><a href="global.html#isMobileContactsLayout">isMobileContactsLayout</a></li><li><a href="global.html#loadContacts">loadContacts</a></li><li><a href="global.html#openContactOverlay">openContactOverlay</a></li><li><a href="global.html#openEditContactOverlay">openEditContactOverlay</a></li><li><a href="global.html#readContactsCache">readContactsCache</a></li><li><a href="global.html#readLocalContactsMap">readLocalContactsMap</a></li><li><a href="global.html#refreshContactsList">refreshContactsList</a></li><li><a href="global.html#renderContactDetails">renderContactDetails</a></li><li><a href="global.html#renderContacts">renderContacts</a></li><li><a href="global.html#saveContact">saveContact</a></li><li><a href="global.html#scheduleContactDetailsSectionScrollabilitySync">scheduleContactDetailsSectionScrollabilitySync</a></li><li><a href="global.html#selectContact">selectContact</a></li><li><a href="global.html#setContactFormMessage">setContactFormMessage</a></li><li><a href="global.html#setContactOverlayMode">setContactOverlayMode</a></li><li><a href="global.html#setMobileContactActionMenuState">setMobileContactActionMenuState</a></li><li><a href="global.html#setMobileContactDetailsState">setMobileContactDetailsState</a></li><li><a href="global.html#showSuccessToast">showSuccessToast</a></li><li><a href="global.html#sortContactsByName">sortContactsByName</a></li><li><a href="global.html#syncContactDetailsSectionScrollability">syncContactDetailsSectionScrollability</a></li><li><a href="global.html#updateContact">updateContact</a></li><li><a href="global.html#updateContactAvatar">updateContactAvatar</a></li><li><a href="global.html#validateContactFields">validateContactFields</a></li><li><a href="global.html#writeContactsCache">writeContactsCache</a></li><li><a href="global.html#writeLocalContactsMap">writeLocalContactsMap</a></li></ul></div><div class="category"><h2>Login</h2><h3>Global</h3><ul><li><a href="global.html#animateSplashLogo">animateSplashLogo</a></li><li><a href="global.html#bindLoginFieldEvents">bindLoginFieldEvents</a></li><li><a href="global.html#clearSkipSplash">clearSkipSplash</a></li><li><a href="global.html#fadeOutOverlay">fadeOutOverlay</a></li><li><a href="global.html#finishSplashAnimation">finishSplashAnimation</a></li><li><a href="global.html#getAuthErrorMessage">getAuthErrorMessage</a></li><li><a href="global.html#getCenterDelta">getCenterDelta</a></li><li><a href="global.html#getLoginFields">getLoginFields</a></li><li><a href="global.html#getResponsiveSplashStartScale">getResponsiveSplashStartScale</a></li><li><a href="global.html#getSplashElements">getSplashElements</a></li><li><a href="global.html#getSplashEndScale">getSplashEndScale</a></li><li><a href="global.html#getSplashStartScale">getSplashStartScale</a></li><li><a href="global.html#handleGuestLogin">handleGuestLogin</a></li><li><a href="global.html#handleLoginSubmit">handleLoginSubmit</a></li><li><a href="global.html#hideElement">hideElement</a></li><li><a href="global.html#initGuestLogin">initGuestLogin</a></li><li><a href="global.html#initLoginForm">initLoginForm</a></li><li><a href="global.html#isLoginInputValid">isLoginInputValid</a></li><li><a href="global.html#prepareSplashLogo">prepareSplashLogo</a></li><li><a href="global.html#runSplashAnimation">runSplashAnimation</a></li><li><a href="global.html#setFormMessage">setFormMessage</a></li><li><a href="global.html#setHeaderLogoVisibility">setHeaderLogoVisibility</a></li><li><a href="global.html#setLoadingState">setLoadingState</a></li><li><a href="global.html#setLoginFieldErrorState">setLoginFieldErrorState</a></li><li><a href="global.html#setSplashTheme">setSplashTheme</a></li><li><a href="global.html#shouldSkipSplash">shouldSkipSplash</a></li><li><a href="global.html#showFinalSplashState">showFinalSplashState</a></li><li><a href="global.html#syncAnimationEnd">syncAnimationEnd</a></li><li><a href="global.html#updateLoginButtonState">updateLoginButtonState</a></li></ul></div><div class="category"><h2>Shared</h2><h3>Global</h3><ul><li><a href="global.html#clearFieldError">clearFieldError</a></li><li><a href="global.html#clearUserSession">clearUserSession</a></li><li><a href="global.html#getLoginPath">getLoginPath</a></li><li><a href="global.html#handleLogout">handleLogout</a></li><li><a href="global.html#hasFirebaseAuth">hasFirebaseAuth</a></li><li><a href="global.html#initLogoutLinks">initLogoutLinks</a></li><li><a href="global.html#initMobileHelpLink">initMobileHelpLink</a></li><li><a href="global.html#initPasswordToggles">initPasswordToggles</a></li><li><a href="global.html#isEmailValid">isEmailValid</a></li><li><a href="global.html#setFieldError">setFieldError</a></li><li><a href="global.html#setupPasswordToggle">setupPasswordToggle</a></li><li><a href="global.html#signOutIfPossible">signOutIfPossible</a></li></ul></div><div class="category"><h2>Sign-Up</h2><h3>Global</h3><ul><li><a href="global.html#bindSignupFieldEvents">bindSignupFieldEvents</a></li><li><a href="global.html#getAuthErrorMessage">getAuthErrorMessage</a></li><li><a href="global.html#getSignupFields">getSignupFields</a></li><li><a href="global.html#handleSignupSubmit">handleSignupSubmit</a></li><li><a href="global.html#initMessageVisibility">initMessageVisibility</a></li><li><a href="global.html#initSignupBackButton">initSignupBackButton</a></li><li><a href="global.html#initSignupForm">initSignupForm</a></li><li><a href="global.html#isSignupInputReady">isSignupInputReady</a></li><li><a href="global.html#setLoadingState">setLoadingState</a></li><li><a href="global.html#showSuccessAnimation">showSuccessAnimation</a></li><li><a href="global.html#updateSignupButtonState">updateSignupButtonState</a></li><li><a href="global.html#validateConfirmField">validateConfirmField</a></li><li><a href="global.html#validateEmailField">validateEmailField</a></li><li><a href="global.html#validateNameField">validateNameField</a></li><li><a href="global.html#validatePasswordField">validatePasswordField</a></li><li><a href="global.html#validatePrivacyField">validatePrivacyField</a></li><li><a href="global.html#validateSignupFields">validateSignupFields</a></li></ul></div><div class="category"><h2>Summary</h2><h3>Global</h3><ul><li><a href="global.html#getNextDeadline">getNextDeadline</a></li><li><a href="global.html#getTasks">getTasks</a></li><li><a href="global.html#getUserName">getUserName</a></li><li><a href="global.html#loadSummary">loadSummary</a></li><li><a href="global.html#renderSummary">renderSummary</a></li><li><a href="global.html#renderUserName">renderUserName</a></li><li><a href="global.html#resolveActiveUserId">resolveActiveUserId</a></li><li><a href="global.html#setGreeting">setGreeting</a></li></ul></div><div class="category"><h2>User Context</h2><h3>Global</h3><ul><li><a href="global.html#initUserContext">initUserContext</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>scripts/contacts-ui.js</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>let contactsState = [];
+let selectedContactId = "";
+const SELF_CONTACT_ID_PREFIX = "self_";
+
+
+function isOwnAccountContact(contact) {
+  return contact?.id?.startsWith(SELF_CONTACT_ID_PREFIX);
+}
+
+
+function createYouBadgeNode() {
+  const badge = document.createElement("span");
+  badge.className = "contact-you-badge";
+  badge.textContent = "(You)";
+  badge.setAttribute("aria-label", "This is your account");
+  return badge;
+}
+
+
+function createContactNameNode(contact) {
+  const name = document.createElement("span");
+  name.className = "contact-name";
+  name.textContent = contact.name || "Unknown Contact";
+  if (isOwnAccountContact(contact)) name.appendChild(createYouBadgeNode());
+  return name;
+}
+
+/**
+ * Returns initials for a contact name.
+ * @param {string} name - Contact name.
+ * @returns {string} Initials.
+ * @category Contacts
+ * @subcategory UI &amp; Init
+ */
+function getContactInitials(name) {
+  const parts = String(name || "")
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean);
+  if (!parts.length) return "U";
+  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+  return `${parts[0][0]}${parts[parts.length - 1][0]}`.toUpperCase();
+}
+
+/**
+ * Returns the visual group letter for a contact name.
+ * @param {string} name - Contact name.
+ * @returns {string} Group letter or '#'.
+ * @category Contacts
+ * @subcategory UI &amp; Init
+ */
+function getContactGroupLetter(name) {
+  const normalizedName = String(name || "").trim();
+  if (!normalizedName) return "#";
+  const firstCharacter = normalizedName.charAt(0).toLocaleUpperCase("de-DE");
+  return /[A-ZÄÖÜ]/.test(firstCharacter) ? firstCharacter : "#";
+}
+
+/**
+ * Restarts the contact details slide-in animation.
+ * @param {HTMLElement} detailsRef - Details container element.
+ * @category Contacts
+ * @subcategory UI &amp; Init
+ */
+function animateContactDetails(detailsRef) {
+  if (!detailsRef) return;
+  detailsRef.classList.remove("is-entering");
+  void detailsRef.offsetWidth;
+  detailsRef.classList.add("is-entering");
+}
+
+function createContactDetailsPlaceholder() {
+  const placeholder = document.createElement("p");
+  placeholder.className = "contact-details-placeholder";
+  placeholder.textContent = "Select a contact to view details.";
+  return placeholder;
+}
+
+function createContactDetailsAction(label, iconPath, onClick) {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "contact-details-action";
+  button.innerHTML = `&lt;img src="${iconPath}" alt="" aria-hidden="true">&lt;span>${label}&lt;/span>`;
+  button.addEventListener("click", onClick);
+  return button;
+}
+
+function createContactDetailsActions(contact) {
+  const actions = document.createElement("div");
+  actions.className = "contact-details-actions";
+  actions.appendChild(
+    createContactDetailsAction("Edit", "../assets/icons/edit.svg", () =>
+      openEditContactOverlay(contact.id, contact),
+    ),
+  );
+  actions.appendChild(
+    createContactDetailsAction(
+      "Delete",
+      "../assets/icons/delete.svg",
+      async () => {
+        await deleteContact(contact.id);
+        await refreshContactsList();
+      },
+    ),
+  );
+  return actions;
+}
+
+function createContactDetailsProfile(contact) {
+  const profile = document.createElement("div");
+  profile.className = "contact-details-profile";
+  const avatar = document.createElement("div");
+  avatar.className = "contact-details-avatar";
+  avatar.style.background = getContactAvatarColor(contact.name);
+  avatar.textContent = getContactInitials(contact.name);
+  profile.appendChild(avatar);
+  profile.appendChild(createContactDetailsProfileInfo(contact));
+  return profile;
+}
+
+function createContactDetailsProfileInfo(contact) {
+  const profileInfo = document.createElement("div");
+  profileInfo.className = "contact-details-profile-info";
+  const name = document.createElement("h2");
+  name.className = "contact-details-name";
+  name.textContent = contact.name || "Unknown Contact";
+  if (isOwnAccountContact(contact)) name.appendChild(createYouBadgeNode());
+  profileInfo.appendChild(name);
+  profileInfo.appendChild(createContactDetailsActions(contact));
+  return profileInfo;
+}
+
+function createContactDetailsEmailNode(emailValue) {
+  const emailNode = document.createElement(emailValue ? "a" : "p");
+  emailNode.className = "contact-details-email";
+  emailNode.textContent = emailValue || "-";
+  if (emailValue) emailNode.href = `mailto:${emailValue}`;
+  return emailNode;
+}
+
+function createContactDetailsLabel(text, className = "contact-details-label") {
+  const label = document.createElement("p");
+  label.className = className;
+  label.textContent = text;
+  return label;
+}
+
+function createContactDetailsInfo(contact) {
+  const info = document.createElement("div");
+  info.className = "contact-details-info";
+  appendContactDetailsInfoContent(info, contact);
+  return info;
+}
+
+function appendContactDetailsInfoContent(info, contact) {
+  const emailValue = String(contact.email || "").trim();
+  const phone = createContactDetailsLabel(
+    contact.phone || "-",
+    "contact-details-phone",
+  );
+  info.appendChild(
+    createContactDetailsLabel(
+      "Contact Information",
+      "contact-details-info-title",
+    ),
+  );
+  info.appendChild(createContactDetailsLabel("Email"));
+  info.appendChild(createContactDetailsEmailNode(emailValue));
+  info.appendChild(createContactDetailsLabel("Phone"));
+  info.appendChild(phone);
+}
+
+function renderContactDetailsPlaceholder(detailsRef) {
+  detailsRef.appendChild(createContactDetailsPlaceholder());
+  scheduleContactDetailsSectionScrollabilitySync();
+}
+
+function renderContactDetailsContent(detailsRef, contact) {
+  detailsRef.appendChild(createContactDetailsProfile(contact));
+  detailsRef.appendChild(createContactDetailsInfo(contact));
+}
+
+/**
+ * Renders selected contact details on the right side.
+ * @param {{id: string, name: string, email: string, phone: string} | null} contact - Contact to render.
+ * @param {{animate?: boolean}} [options] - Render options.
+ * @category Contacts
+ * @subcategory UI &amp; Init
+ */
+function renderContactDetails(contact, options = {}) {
+  const detailsRef = document.getElementById("contact-details");
+  if (!detailsRef) return;
+  detailsRef.replaceChildren();
+  detailsRef.classList.remove("is-entering");
+  if (!contact) {
+    renderContactDetailsPlaceholder(detailsRef);
+    return;
+  }
+  renderContactDetailsContent(detailsRef, contact);
+  if (options.animate) {
+    animateContactDetails(detailsRef);
+  }
+  scheduleContactDetailsSectionScrollabilitySync();
+}
+
+function createEmptyContactsListItem() {
+  const empty = document.createElement("p");
+  empty.className = "contact-item";
+  empty.textContent = "No contacts yet.";
+  return empty;
+}
+
+function groupContactsByLetter(contacts) {
+  return contacts.reduce((groups, contact) => {
+    const groupLetter = getContactGroupLetter(contact.name);
+    if (!groups.has(groupLetter)) groups.set(groupLetter, []);
+    groups.get(groupLetter).push(contact);
+    return groups;
+  }, new Map());
+}
+
+function createContactListInfo(contact) {
+  const info = document.createElement("div");
+  info.className = "contact-info";
+  const name = createContactNameNode(contact);
+  const email = document.createElement("span");
+  email.className = "contact-email";
+  email.textContent = contact.email || "";
+  info.appendChild(name);
+  info.appendChild(email);
+  return info;
+}
+
+function bindContactSelection(box, contactId) {
+  box.addEventListener("click", () => selectContact(contactId));
+  box.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter" &amp;&amp; event.key !== " ") return;
+    event.preventDefault();
+    selectContact(contactId);
+  });
+}
+
+function createContactAvatarNode(contact) {
+  const avatar = document.createElement("div");
+  avatar.className = "contact-logo";
+  avatar.style.background = getContactAvatarColor(contact.name);
+  avatar.textContent = getContactInitials(contact.name);
+  return avatar;
+}
+
+function createContactBox(contact) {
+  const box = document.createElement("div");
+  box.className = "contact-box";
+  box.setAttribute("role", "button");
+  box.setAttribute("tabindex", "0");
+  box.setAttribute("aria-label", `Open ${contact.name || "contact"}`);
+  if (selectedContactId === contact.id) box.classList.add("is-selected");
+  box.appendChild(createContactAvatarNode(contact));
+  box.appendChild(createContactListInfo(contact));
+  bindContactSelection(box, contact.id);
+  return box;
+}
+
+function createContactListItem(contact) {
+  const item = document.createElement("div");
+  item.className = "contact-item";
+  item.appendChild(createContactBox(contact));
+  return item;
+}
+
+function getSortedContactsInput(contacts) {
+  return sortContactsByName(Array.isArray(contacts) ? contacts : []);
+}
+
+function appendContactGroup(fragment, groupLetter, groupContacts) {
+  const title = document.createElement("h3");
+  title.className = "contact-group-title";
+  title.textContent = groupLetter;
+  fragment.appendChild(title);
+  groupContacts.forEach((contact) =>
+    fragment.appendChild(createContactListItem(contact)),
+  );
+}
+
+/**
+ * Selects a contact and updates list + details.
+ * @param {string} contactId - Contact id.
+ * @category Contacts
+ * @subcategory UI &amp; Init
+ */
+function selectContact(contactId) {
+  selectedContactId = contactId;
+  setMobileContactActionMenuState(false);
+  renderContacts(contactsState);
+  const contact = contactsState.find((item) => item.id === contactId) || null;
+  renderContactDetails(contact, { animate: !isMobileContactsLayout() });
+  if (contact &amp;&amp; isMobileContactsLayout()) {
+    setMobileContactDetailsState(true);
+  }
+}
+
+/**
+ * Renders contacts into the contacts list.
+ * @param {Array&lt;{id: string, name: string, email: string, phone: string}>} contacts - Contacts to render.
+ * @category Contacts
+ * @subcategory UI &amp; Init
+ */
+function renderContacts(contacts) {
+  const listRef = document.getElementById("contact-list");
+  if (!listRef) return;
+  listRef.replaceChildren();
+  const sortedContacts = getSortedContactsInput(contacts);
+  if (!sortedContacts.length) {
+    listRef.appendChild(createEmptyContactsListItem());
+    return;
+  }
+  const fragment = document.createDocumentFragment();
+  const groupedContacts = groupContactsByLetter(sortedContacts);
+  groupedContacts.forEach((group, groupLetter) =>
+    appendContactGroup(fragment, groupLetter, group),
+  );
+  listRef.appendChild(fragment);
+}
+
+/**
+ * Applies contacts to the page state and renders list + details.
+ * @param {Array&lt;{id: string, name: string, email: string, phone: string, createdAt?: number}>} contacts - Contacts to apply.
+ * @category Contacts
+ * @subcategory UI &amp; Init
+ */
+function applyContactsState(contacts) {
+  contactsState = sortContactsByName(Array.isArray(contacts) ? contacts : []);
+  if (
+    !selectedContactId ||
+    !contactsState.some((contact) => contact.id === selectedContactId)
+  ) {
+    selectedContactId = contactsState[0]?.id || "";
+  }
+  renderContacts(contactsState);
+  const selectedContact =
+    contactsState.find((item) => item.id === selectedContactId) || null;
+  renderContactDetails(selectedContact);
+  setMobileContactActionMenuState(false);
+  if (!contactsState.length) {
+    setMobileContactDetailsState(false);
+  }
+}
+
+/**
+ * Loads contacts from Firebase and renders them into the contacts page.
+ * @returns {Promise&lt;void>} Resolves after rendering.
+ * @category Contacts
+ * @subcategory UI &amp; Init
+ */
+async function loadContacts(options = {}) {
+  const preferCache = options?.preferCache !== false;
+  const cachedContacts = preferCache ? readContactsCache() : [];
+  if (cachedContacts.length) {
+    applyContactsState(cachedContacts);
+  }
+
+  const freshContacts = await fetchContacts();
+  if (
+    !cachedContacts.length ||
+    !areContactListsEqual(cachedContacts, freshContacts)
+  ) {
+    applyContactsState(freshContacts);
+  }
+}
+
+window.loadContacts = loadContacts;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+
+</body>
+</html>

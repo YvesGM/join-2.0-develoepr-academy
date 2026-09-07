@@ -1,0 +1,115 @@
+{
+  "contacts": {
+    "u1": {
+      "u2": true
+    }
+  },
+  "subtasks": {
+    "t1": {
+      "s1": {
+        "isDone": false,
+        "title": "HTML"
+      }
+    }
+  },
+  "taskUsers": {
+    "t1": {
+      "u1": true,
+      "u2": true,
+      "u3": true,
+      "u4": true,
+      "u5": true
+    },
+    "t2": {
+      "u1": true,
+      "u2": true,
+      "u3": true,
+      "u4": true,
+      "u5": true
+    },
+    "t3": {
+      "u1": true,
+      "u2": true,
+      "u3": true,
+      "u4": true,
+      "u5": true
+    }
+  },
+  "tasks": {
+    "t1": {
+      "description": "Firebase Auth implementieren",
+      "dueDate": "2026-02-01",
+      "priority": "normal",
+      "status": "todo",
+      "title": "Login bauen"
+    },
+    "t2": {
+      "description": "Spalten & Karten layouten",
+      "dueDate": "2026-02-05",
+      "priority": "urgent",
+      "status": "done",
+      "title": "Kanban Board UI"
+    },
+    "t3": {
+      "description": "Übersicht anzeigen",
+      "dueDate": "2026-02-03",
+      "priority": "medium",
+      "status": "done",
+      "title": "Summary Dashboard"
+    }
+  },
+  "userTasks": {
+    "u1": {
+      "t1": true,
+      "t2": true,
+      "t3": true
+    },
+    "u2": {
+      "t1": true,
+      "t2": true,
+      "t3": true
+    },
+    "u3": {
+      "t1": true,
+      "t2": true,
+      "t3": true
+    },
+    "u4": {
+      "t1": true,
+      "t2": true,
+      "t3": true
+    },
+    "u5": {
+      "t1": true,
+      "t2": true,
+      "t3": true
+    }
+  },
+  "users": {
+    "u1": {
+      "email": "andreas@mail.de",
+      "name": "Andreas",
+      "password": "testpassword"
+    },
+    "u2": {
+      "email": "julia@mail.de",
+      "name": "Julia",
+      "password": "pass1234"
+    },
+    "u3": {
+      "email": "max@mail.de",
+      "name": "Max",
+      "password": "abc123"
+    },
+    "u4": {
+      "email": "sophie@mail.de",
+      "name": "Sophie",
+      "password": "qwertz"
+    },
+    "u5": {
+      "email": "leon@mail.de",
+      "name": "Leon",
+      "password": "123456"
+    }
+  }
+}

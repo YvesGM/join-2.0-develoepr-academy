@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./styles/fonts.css" />
+    <link rel="stylesheet" href="./styles/assets.css" />
+    <link rel="stylesheet" href="./styles/login.css" />
+    <link rel="stylesheet" href="./styles/login-responsive.css" />
+    <link rel="icon" href="./assets/img/join_logo_dark.svg" />
+    <title>Join</title>
+  </head>
+
+  <body class="login-page">
+    <script>
+      const skipSplashImmediately =
+        sessionStorage.getItem('skipSplash') === '1' ||
+        sessionStorage.getItem('animationPlayed') === 'true';
+
+      if (skipSplashImmediately) {
+        document.documentElement.classList.add('skip-splash');
+      }
+    </script>
+    <div class="login-splash" aria-hidden="true"></div>
+    <img class="login-splash-logo" src="./assets/img/join_logo_dark.svg" alt="" />
+    <img class="login-splash-logo-end" src="./assets/img/join_logo_dark.svg" alt="" />
+
+    <div class="page-shell">
+      <header class="login-header">
+        <img class="login-logo" src="./assets/img/join_logo_dark.svg" alt="Join" />
+
+        <div class="login-header-actions">
+          <span class="login-header-text">Not a Join user?</span>
+          <a class="btn btn-dark login-header-signup" href="./sites/sign-up.html">Sign up</a>
+        </div>
+      </header>
+
+      <main class="login-main">
+        <section class="login-card" aria-labelledby="login-title">
+          <h1 id="login-title">Log in</h1>
+          <div class="login-underline"></div>
+
+          <form class="login-form" action="#" novalidate>
+            <label class="input-field">
+              <input type="email" name="email" placeholder="Email" autocomplete="email" aria-label="Email" />
+              <span class="input-icon" aria-hidden="true">
+                <img src="./assets/icons/mail.svg" alt="" />
+              </span>
+              <p id="msg-login-email" class="field-message" role="alert"></p>
+            </label>
+
+            <label class="input-field">
+              <input type="password" name="password" placeholder="Password" autocomplete="current-password" aria-label="Password" />
+              <span class="input-icon" aria-hidden="true">
+                <img src="./assets/icons/lock.svg" alt="" />
+              </span>
+              <p id="msg-login-password" class="field-message" role="alert"></p>
+              <p id="login-error-message" class="form-message is-hidden" role="alert"></p>
+            </label>
+
+            <div class="login-actions">
+              <button class="btn btn-dark" type="submit">Log in</button>
+              <button class="btn btn-light guest-login" type="button">Guest Log in</button>
+            </div>
+          </form>
+        </section>
+      </main>
+
+      <footer class="login-footer">
+        <a href="./sites/logout-privacy.html">Privacy Policy</a>
+        <a href="./sites/logout-legal.html">Legal Notice</a>
+      </footer>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+    <script src="./scripts/firebaseConfig.js"></script>
+    <script src="./scripts/db.js"></script>
+    <script src="./script.js"></script>
+    <script src="./scripts/login.js"></script>
+    <script src="./scripts/login-auth.js"></script>
+    <script src="./scripts/seed.js"></script>
+  </body>
+</html>

@@ -1,0 +1,427 @@
+:root {
+    --dark-blue: #2a3647;
+    --light-blue: #29abe2;
+    --bg-color: #f6f7f8;
+    --bg-color-secondary: #38485e;
+    --white: #ffffff;
+}
+
+/* ─────────────────────────────────────────────
+   BASE PAGE
+───────────────────────────────────────────── */
+.summary-page {
+    font-family: "Inter", sans-serif;
+    background-color: var(--bg-color);
+    margin: 0;
+    min-height: 100vh;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* ─────────────────────────────────────────────
+   CONTENT CONTAINER (desktop: sidebar offset)
+───────────────────────────────────────────── */
+.content-container {
+    margin-left: 328px;
+    margin-top: 96px;
+    min-height: 0;
+    height: calc(100vh - 96px);
+    box-sizing: border-box;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* ─────────────────────────────────────────────
+   SUMMARY HEADER
+───────────────────────────────────────────── */
+.summary-header {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 50px;
+    padding-top: 110px;
+}
+
+.summary-header h1 {
+    font-size: 72px;
+    margin: 0;
+    color: var(--dark-blue);
+    white-space: nowrap;
+}
+
+.header-divider-and-p {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+}
+
+.summary-header p {
+    font-size: 27px;
+    margin: 0;
+}
+
+/* Vertical divider (desktop) */
+.divider {
+    width: 3px;
+    height: 60px;
+    background-color: var(--light-blue);
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+/* ─────────────────────────────────────────────
+   DASHBOARD LAYOUT
+───────────────────────────────────────────── */
+.dashboard-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0;
+}
+
+.metrics-section {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    flex: 1;
+    max-width: 560px;
+    padding-right: 80px;
+}
+
+/* ─────────────────────────────────────────────
+   CARDS
+───────────────────────────────────────────── */
+.card {
+    background: var(--white);
+    border-radius: 30px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    transition: all 0.15s ease-in-out;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.card:hover {
+    background-color: var(--dark-blue);
+    transform: scale(1.02);
+}
+
+.card:hover .number,
+.card:hover .label,
+.card:hover .date {
+    color: var(--white);
+}
+
+.row-top,
+.row-bottom {
+    display: flex;
+    gap: 25px;
+}
+
+.small-card {
+    flex: 1;
+    justify-content: center;
+    gap: 20px;
+    height: 120px;
+    padding: 20px;
+    min-width: 0;
+}
+
+.mini-card {
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    height: 120px;
+    padding: 20px;
+    text-align: center;
+    min-width: 0;
+}
+
+/* Urgent Card */
+.urgent-card {
+    padding: 28px 48px;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.urgent-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.urgent-metrics {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.v-divider {
+    width: 2px;
+    height: 102px;
+    background-color: #D1D1D1;
+    flex-shrink: 0;
+}
+
+.urgent-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+}
+
+/* Icon Hover Logic */
+.icon-container {
+    width: 69px;
+    height: 69px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.icon-hover { display: none; }
+.card:hover .icon-standard { display: none; }
+.card:hover .icon-hover { display: block; }
+
+/* ─────────────────────────────────────────────
+   TYPOGRAPHY
+───────────────────────────────────────────── */
+.number {
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1;
+    color: black;
+}
+
+.card-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.label {
+    font-size: 16px;
+    color: var(--dark-blue);
+}
+
+.date {
+    font-size: 21px;
+    font-weight: 700;
+    margin-bottom: 5px;
+    white-space: nowrap;
+}
+
+/* ─────────────────────────────────────────────
+   GREETING
+───────────────────────────────────────────── */
+.greeting-section h2 {
+    font-size: 47px;
+    font-weight: 400;
+    margin: 0;
+}
+
+.user-name {
+    font-size: 56px;
+    font-weight: 700;
+    color: var(--light-blue);
+    display: block;
+}
+
+/* ─────────────────────────────────────────────
+   MOBILE GREETING OVERLAY
+───────────────────────────────────────────── */
+.mobile-greeting-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background-color: var(--bg-color);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 32px;
+    box-sizing: border-box;
+    pointer-events: none;
+}
+
+.mobile-greeting-overlay.visible {
+    display: flex;
+    animation: greetingFadeOut 0.7s ease-in-out 2s forwards;
+}
+
+.mobile-greeting-overlay h2 {
+    font-size: clamp(28px, 8vw, 48px);
+    font-weight: 400;
+    color: var(--dark-blue);
+    margin: 0 0 12px 0;
+}
+
+.mobile-greeting-overlay .user-name {
+    font-size: clamp(32px, 10vw, 56px);
+    font-weight: 700;
+    color: var(--light-blue);
+}
+
+@keyframes greetingFadeOut {
+    0%   { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+.board-hidden {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.board-visible {
+    opacity: 1;
+}
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE — Mobile (max 992px)
+───────────────────────────────────────────── */
+@media (max-width: 992px) {
+
+    /* ── Kernfix:
+       position:fixed + top/bottom statt height/margin.
+       Dadurch ist der scrollbare Bereich exakt zwischen
+       Header (80px oben) und Bottom-Nav (80px unten). ── */
+    .summary-page .content-container {
+        position: fixed;
+        top: var(--mobile-header-height, 80px);
+        bottom: var(--mobile-footer-height, 80px);
+        left: 0;
+        right: 0;
+        height: auto;
+        margin: 0;
+        padding: 24px 20px;
+        box-sizing: border-box;
+        overflow-y: auto;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .summary-header {
+        padding-top: 0;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        margin-bottom: 30px;
+    }
+
+    .summary-header h1 {
+        font-size: clamp(32px, 9vw, 72px);
+        white-space: nowrap;
+    }
+
+    .summary-header p {
+        font-size: clamp(14px, 3.5vw, 20px);
+    }
+
+    .divider {
+        width: 50px;
+        height: 3px;
+    }
+
+    .header-divider-and-p {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    .metrics-section {
+        max-width: 100%;
+        padding-right: 0;
+        gap: clamp(14px, 3vw, 25px);
+    }
+
+    .dashboard-wrapper {
+        display: block;
+    }
+
+    .greeting-section {
+        display: none;
+    }
+
+    .row-top,
+    .row-bottom {
+        gap: clamp(10px, 2.5vw, 25px);
+    }
+
+    .small-card {
+        height: clamp(100px, 16vw, 130px);
+        gap: clamp(10px, 2vw, 20px);
+        padding: clamp(12px, 2vw, 20px) clamp(10px, 2vw, 20px);
+    }
+
+    .mini-card {
+        height: clamp(100px, 16vw, 130px);
+        padding: clamp(10px, 2vw, 20px) clamp(8px, 1.5vw, 20px);
+    }
+
+    .urgent-card {
+        padding: clamp(16px, 3vw, 28px) clamp(16px, 4vw, 48px);
+        gap: clamp(8px, 2vw, 12px);
+    }
+
+    .urgent-left {
+        gap: clamp(10px, 2vw, 20px);
+    }
+
+    .icon-container {
+        width: clamp(44px, 8vw, 69px);
+        height: clamp(44px, 8vw, 69px);
+    }
+
+    .icon-container svg {
+        width: 100%;
+        height: 100%;
+    }
+
+    .v-divider {
+        height: clamp(60px, 12vw, 102px);
+    }
+
+    .number {
+        font-size: clamp(32px, 7vw, 48px);
+    }
+
+    .date {
+        font-size: clamp(16px, 3.5vw, 21px);
+    }
+
+    .label {
+        font-size: clamp(12px, 2vw, 16px);
+    }
+}
+
+/* ─────────────────────────────────────────────
+   LANDSCAPE MOBILE
+───────────────────────────────────────────── */
+@media (max-width: 992px) and (orientation: landscape) {
+    .summary-header {
+        margin-bottom: 20px;
+    }
+
+    .summary-header h1 {
+        font-size: clamp(32px, 5vh, 56px);
+    }
+
+    .metrics-section {
+        gap: 12px;
+    }
+
+    .small-card,
+    .mini-card {
+        height: clamp(80px, 14vh, 110px);
+    }
+
+    .urgent-card {
+        padding: 12px 24px;
+    }
+}
