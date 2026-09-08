@@ -9,7 +9,7 @@
    ========================================================================== */
 
 /** All valid board status columns in display order. @type {string[]} */
-const BOARD_STATUSES = ['todo', 'in-progress', 'await-feedback', 'done'];
+const BOARD_STATUSES = ['triage', 'todo', 'in-progress', 'await-feedback', 'done'];
 const BOARD_CACHE_KEY = 'join_board_cache_v1';
 
 /** Cache for all loaded contact objects from Firebase. @type {Object|null} */
@@ -58,22 +58,46 @@ function normalizeCachedBadge(badge) {
  */
 function normalizeCachedBoardTask(task) {
     if (!task || typeof task !== 'object') return null;
-    const status = BOARD_STATUSES.includes(task.status) ? task.status : 'todo';
-    const assignedTo = Array.isArray(task.assignedTo)
-        ? task.assignedTo.map(normalizeCachedBadge).filter(Boolean)
-        : [];
     return {
-        title: task.title || '',
-        description: task.description || '',
-        dueDate: task.dueDate || '',
-        priority: task.priority || 'low',
-        category: task.category || '',
-        status,
-        assignedTo,
-        subtasks: normalizeSubtasks(task.subtasks),
-        createdAt: task.createdAt || 0
+        ...buildCachedBoardTask(task),
+        ...getCachedIssueCollectorMetadata(task)
     };
 }
+
+/** Builds the existing Join fields for a cached board task. */
+function buildCachedBoardTask(task) {
+    return {
+        title: task.title || '', description: task.description || '',
+        dueDate: task.dueDate || '', priority: task.priority || 'low',
+        category: task.category || '', status: normalizeBoardStatus(task.status),
+        assignedTo: normalizeCachedAssignedTo(task.assignedTo),
+        subtasks: normalizeSubtasks(task.subtasks), createdAt: task.createdAt || 0
+    };
+}
+
+/** Resolves a cached status against the canonical board columns. */
+function normalizeBoardStatus(status) {
+    return BOARD_STATUSES.includes(status) ? status : 'todo';
+}
+
+/** Normalizes cached assigned contacts to board badge objects. */
+function normalizeCachedAssignedTo(assignedTo) {
+    if (!Array.isArray(assignedTo)) return [];
+    return assignedTo.map(normalizeCachedBadge).filter(Boolean);
+}
+
+/** Preserves additive Issue Collector metadata in the board cache. */
+function getCachedIssueCollectorMetadata(task) {
+    const domain = window.issueCollectorDomain;
+    if (!domain?.getIssueCollectorTaskMetadata) return {};
+    return domain.getIssueCollectorTaskMetadata(task);
+}
+
+/** Creates an empty HTML bucket for every canonical board status. */
+function createEmptyBoardColumns() {
+    return Object.fromEntries(BOARD_STATUSES.map(status => [status, '']));
+}
+
 
 /**
  * Reads the cached normalized board task map from localStorage.
@@ -111,7 +135,7 @@ function writeBoardCache(taskMap) {
  * @returns {Object}
  */
 function buildColumnsFromCachedTasks(cachedTasks) {
-    const columns = { 'todo': '', 'in-progress': '', 'await-feedback': '', 'done': '' };
+    const columns = createEmptyBoardColumns();
     Object.entries(cachedTasks).forEach(([taskId, task]) => {
         if (columns[task.status] !== undefined) columns[task.status] += getCardTemplate(task, taskId);
     });

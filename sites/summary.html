@@ -7,6 +7,7 @@
       document.documentElement.classList.add('auth-check-pending');
     </script>
     <link rel="stylesheet" href="../styles/summary.css" />
+    <link rel="stylesheet" href="../styles/issue-collector-summary.css" />
     <link rel="stylesheet" href="../styles/sidebar.css" />
     <link rel="stylesheet" href="../styles/fonts.css" />
     <link rel="stylesheet" href="../style.css" />
@@ -142,6 +143,7 @@
             </div>
           </div>
 
+          <div class="row-middle">
           <div class="card urgent-card" onclick="window.location.href='./taskboard.html'">
             <div class="urgent-left">
               <div class="icon-container">
@@ -187,6 +189,11 @@
               <span class="date" id="next-deadline"></span>
               <span class="label">Upcoming Deadline</span>
             </div>
+          </div>
+          <div class="card mini-card email-requests-card" onclick="window.location.href='./taskboard.html'">
+            <span class="number email-request-number" id="email-request-tasks"></span>
+            <span class="label">Email requests</span>
+          </div>
           </div>
 
           <div class="row-bottom">

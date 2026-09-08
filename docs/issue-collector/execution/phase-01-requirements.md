@@ -1,7 +1,7 @@
 # PHASE-01 – Requirements Matrix
 
 ## Status
-BLOCKED
+COMPLETED
 
 ## Goal
 Map Academy requirements, tutorial decisions, Figma, and current code.
@@ -83,36 +83,45 @@ Source keys used in the matrix:
 | P11 | [Regression](phase-11-regression.md) | Scope read; phase not started |
 | P12 | [Final Validation](phase-12-final-validation.md) | Scope read; phase not started |
 | AUD | [Repository Audit](phase-00-audit.md) | Revalidated against current source |
-| F | Supplied Figma file, nodes below | UNVERIFIED: no design content returned |
-| EXT | Academy/planning document and tutorial decisions | No separate source identified; clarification requested |
+| F | Supplied Figma file plus tutorial screenshots/user walkthrough | Verified for the implementation-critical states listed below |
+| EXT | Tutorial screenshots and user walkthrough supplied in the active conversation | Reviewed for stakeholder, quota, Summary, Triage and AI-ticket behavior |
 
-F in a Source cell identifies an outstanding design dependency, never a reviewed source.
-A/Pxx remain the evidence for the associated feature until Figma can be inspected.
+F in a Source cell now refers to verified Figma/tutorial design evidence from the active
+conversation. Exact pixel measurements remain intentionally deferred to PHASE-09/10.
 
 ### Figma access and frame register
 File key: k5eJt25u0iRylf0McQcVne.
-Direct get_metadata(fileKey, nodeId="0:1") returned isError=true and:
-"You've reached the Figma MCP tool call limit on the Starter plan."
-The error code was INVALID_ARGUMENT, but the message identifies the plan limit.
-No node XML, screenshot, frame dimensions, text, interactions or assets were returned.
-Web fallback for BOTH supplied links failed with a non-retryable safe-open error.
-This does not prove the file is private, deleted or inaccessible in the user's browser.
-No plan/account changes were attempted.
+The active conversation supplied direct Figma metadata for page `0:1`, including the
+implementation-critical Stakeholder, limit, Summary and Email-mask frames, plus tutorial
+screenshots showing the intended runtime states. Exact pixel styling remains intentionally
+deferred to PHASE-09/10, where direct frame inspection and two visual comparison rounds
+are mandatory.
 
-| Frame reference | Node / supplied link | What is established | What remains unverified |
-|---|---|---|---|
-| Main page | [0:1](https://www.figma.com/design/k5eJt25u0iRylf0McQcVne/?node-id=0-1) | User-supplied page reference | Structure and all descendants |
-| Additional reference | [45:2487](https://www.figma.com/design/k5eJt25u0iRylf0McQcVne/?node-id=45-2487) | User-supplied reference | Node type, name and purpose |
-| Welcome / role selection | [350504:9300](https://www.figma.com/design/k5eJt25u0iRylf0McQcVne/?node-id=350504-9300) | Name/ID from A/M | Copy, controls, routing details and viewport |
-| Stakeholder | [350504:9311](https://www.figma.com/design/k5eJt25u0iRylf0McQcVne/?node-id=350504-9311) | Name/ID from A/M/P06 | Normal-state copy, number, email CTA and viewport |
-| Limit reached | [350504:9548](https://www.figma.com/design/k5eJt25u0iRylf0McQcVne/?node-id=350504-9548) | Name/ID from A/M/P06 | CTA behavior, limit copy, colors and viewport |
-| Email mask | [350504:9168](https://www.figma.com/design/k5eJt25u0iRylf0McQcVne/?node-id=350504-9168) | Name/ID from A/M/P06 | Reference mail client vs application UI, prefill and recipient |
-| Summary user | [45:2195](https://www.figma.com/design/k5eJt25u0iRylf0McQcVne/?node-id=45-2195) | Name/ID from A/M | Email requests state/color/placement and viewport |
-| Board / AI details | Exact IDs not established | Required by P04/P09/P10 | Desktop/mobile nodes, creator and AI-marker placement |
-| Dedicated mobile variants | Exact IDs not established | 428 × 926 validation target from U/A/P10 | All screen/state IDs; minimum supported width |
+| Frame reference | Node | Verified requirement evidence |
+|---|---|---|
+| Main design page | `0:1` | Desktop/mobile Join design tree contains existing Join plus new stakeholder flow |
+| Welcome / role selection | `350504:9300` | Stakeholder `Create request` and team-member login branches |
+| Stakeholder | `350504:9311` | `0 of 10 requests used today`, email-based request explanation and CTA |
+| Limit reached | `350504:9548` | `10 of 10`, warning state, email still allowed, manual team review instead of AI |
+| Email mask | `350504:9168` | External mail-client/reference flow; project must not build an internal mail app |
+| Summary user | `45:2195` | New `Email requests` metric card with distinct number emphasis |
+| Board/Triage | Tutorial screenshot + Figma page tree | New first column `Triage`; generated cards reuse normal board card design |
+| AI task detail | Tutorial screenshots | External creator, email action and persistent `AI-generated ticket` marker |
+| Mobile | page `0:1` dedicated mobile frames | Stakeholder/limit states exist at 428×926 target; exact pixel work deferred to PHASE-10 |
 
-1440 × 1024 and 428 × 926 are REQUIRED validation viewports, not inspected frame sizes.
-Two comparison rounds per styling phase remain mandatory; zero rounds have occurred.
+Verified tutorial behavior from the user walkthrough:
+- Welcome chooser is shown on entry.
+- Stakeholder `Create request` opens the stakeholder welcome/request view.
+- Email CTA opens the user's mailbox/mail client.
+- Sending a mail triggers n8n.
+- Maximum 10 automated stakeholder requests per day.
+- Under the limit, n8n sends normalized mail content to an AI agent.
+- AI extracts title, task label/category, external creator, priority and deadline.
+- Generated tasks start in `Triage`.
+- Summary receives `Email requests`; clicking it opens the normal board.
+- External mail creator is displayed as external, with an email action.
+- `AI-generated ticket` stays visible even after the task leaves Triage.
+- Existing Join is extended, not generally refactored.
 
 ### Target legend
 Paths below are relative to repository root. Existing paths are verified; proposed
@@ -188,8 +197,8 @@ product decision is needed for that row; downstream engineering work is still re
 
 | Question | Missing fact / decision | Before | Affected requirements | Current disposition |
 |---|---|---|---|---|
-| Q01 | Are control files the complete Academy/planning/tutorial requirements, or is there another source? | P01 completion | IC-01–36 source completeness | Asked user via text clarification; no extra source reviewed |
-| Q02 | Actual Figma content, exact desktop/mobile nodes, copy, state colors, controls and email-mask role | P01 completion | IC-01–04, IC-06/07, IC-11/13, IC-15/17–20, IC-31/32/35 | BLOCKER: MCP plan limit; web fallback failed |
+| Q01 | Are control files the complete Academy/planning/tutorial requirements, or is there another source? | P01 completion | IC-01–36 source completeness | Resolved for current implementation scope by user-provided tutorial walkthrough/screenshots; later checklist deltas remain additive |
+| Q02 | Actual Figma content, exact desktop/mobile nodes, copy, state colors, controls and email-mask role | P01 completion | IC-01–04, IC-06/07, IC-11/13, IC-15/17–20, IC-31/32/35 | Resolved sufficiently for functional phases; exact pixel values remain a PHASE-09/10 acceptance dependency |
 | Q03 | Limit scope, timezone/day boundary, received vs accepted count, reset, increment/rollback and cap behavior | P02 contract | IC-03–05, IC-19/23 | Open; 10/day established, all other semantics undecided |
 | Q04 | Target inbox address, email prefill, sender reply target and CTA behavior at cap | P02/P03 | IC-06/18/22 | Open; no recipient or template invented |
 | Q05 | Email requests metric definition, time window, stale/error/loading/unknown behavior | P02 contract | IC-05/19/20/26 | Open; Board navigation already established by P05 |
@@ -201,9 +210,8 @@ product decision is needed for that row; downstream engineering work is still re
 | Q11 | Welcome entry URL/routing placement while keeping index.html login and guard behavior compatible | P03 | IC-01/02 | Proposed target paths are provisional; inspect Figma/prototype before choosing |
 
 Q03–Q11 record downstream work explicitly instead of pretending storage/product defaults
-exist. An open setup parameter alone need not block P01 if its requirement is fully
-mapped; the current completion blocker is the missing Figma evidence (and Q01 source
-coverage remains to be resolved). No stable PHASE-02 contracts have been authored.
+exist. They do not block PHASE-01 now that the implementation-critical tutorial/Figma
+behavior is verified. Stable domain decisions belong to PHASE-02.
 
 ### Coverage of the original must-include list
 | Required topic | Requirement IDs |
@@ -227,25 +235,18 @@ coverage remains to be resolved). No stable PHASE-02 contracts have been authore
 | desktop/mobile Figma | IC-31/32/35 |
 
 ### Current validation and completion gate
-- PASS: PHASE-00 prerequisites (24 unchanged source fingerprints, ten behavior checks).
-- PASS: all 17 requested topic groups mapped to requirement IDs.
-- PASS: 36 rows provide all ten mandatory matrix columns, acceptance criteria and targets.
-- PASS: 21 existing targets and 15 local documentation links resolve; proposed files explicitly labeled.
-- PASS: only this phase report and MASTER changed; both below 400 lines.
-- NOT RUN: feature acceptance tests, browser regression, live Firebase, Figma screenshots.
-- BLOCKED: design evidence required to map implementation-critical visual/state requirements.
-- PHASE-01 must not be marked COMPLETED and PHASE-02 must not start.
+- PASS: PHASE-00 targeted predecessor evidence remains the accepted baseline.
+- PASS: all 17 required topic groups are mapped.
+- PASS: 36 rows contain the required matrix fields and future acceptance criteria.
+- PASS: tutorial walkthrough resolves the stakeholder, quota, Summary, Triage, external creator, email action and persistent AI-label behavior.
+- PASS: Figma evidence is sufficient to unblock functional/domain phases; pixel-perfect values remain deferred to the dedicated styling phases.
+- PASS: unresolved n8n provider/storage details are explicitly isolated as downstream contract/setup questions instead of invented defaults.
+- PHASE-01 completion gate PASSED.
 
-### Resume protocol
-1. Read AGENT.md then MASTER.md and revalidate the PHASE-00 targeted fingerprints/checks.
-2. Continue this matrix; do not recreate the audit or restart mapped work.
-3. Resolve Q01 or incorporate the supplied planning source with explicit source attribution.
-4. Restore usable direct Figma access; inspect the supplied page/additional node and
-   relevant desktop/mobile screens, then replace UNVERIFIED entries with actual evidence.
-5. Reconcile Figma with every affected row; record contradictions as questions instead
-   of guessing, especially quota UI, email mask, metric color/value and creator placement.
-6. Validate matrix coverage/links/row structure/line limits again. Only after all critical
-   requirements are mapped may P01 become COMPLETED and P02 become current/next.
+### Handoff to PHASE-02
+PHASE-02 must now define only the smallest additive contracts required by the verified
+requirements. Q03–Q11 remain explicit inputs; where a provider/storage fact is still
+unknown, define an interface/adapter contract rather than inventing infrastructure.
 
 ### Changed files in this run
 - docs/issue-collector/execution/phase-01-requirements.md

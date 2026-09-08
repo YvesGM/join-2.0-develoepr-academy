@@ -1,0 +1,58 @@
+{
+  "normalizedMail": {
+    "messageId": "<example-message-id>",
+    "senderEmail": "stakeholder@example.com",
+    "senderDisplayName": "Felix Henri Richter",
+    "subject": "Improve CSS architecture",
+    "plainTextBody": "Please define a consistent CSS architecture for the project.",
+    "receivedAt": 1788858000000
+  },
+  "aiOutput": {
+    "title": "CSS Architecture Planning",
+    "description": "Define CSS naming conventions and structure.",
+    "category": "technical-task",
+    "priority": "urgent",
+    "dueDate": "2026-09-14"
+  },
+  "joinTask": {
+    "title": "CSS Architecture Planning",
+    "description": "Define CSS naming conventions and structure.",
+    "dueDate": "2026-09-14",
+    "priority": "urgent",
+    "category": "technical-task",
+    "assignedTo": [],
+    "subtasks": [],
+    "status": "triage",
+    "createdAt": 1788858060000,
+    "sourceType": "email",
+    "aiGenerated": true,
+    "externalCreator": {
+      "name": "Felix Henri Richter",
+      "email": "stakeholder@example.com"
+    },
+    "sourceMessageId": "<example-message-id>"
+  },
+  "counter": {
+    "used": 4,
+    "limit": 10,
+    "limitReached": false,
+    "dayKey": "2026-09-08"
+  },
+  "manualReview": {
+    "reason": "limit_reached",
+    "messageId": "<example-message-id>",
+    "senderEmail": "stakeholder@example.com",
+    "receivedAt": 1788858000000,
+    "subject": "Improve CSS architecture",
+    "normalizedBody": "Please define a consistent CSS architecture for the project.",
+    "failureStage": "quota"
+  },
+  "processingResult": {
+    "status": "created",
+    "stage": "complete",
+    "messageId": "<example-message-id>",
+    "taskId": "-exampleFirebasePushId",
+    "occurredAt": 1788858065000,
+    "errorCode": null
+  }
+}

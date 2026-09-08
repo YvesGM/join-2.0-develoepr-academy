@@ -141,7 +141,7 @@ input:focus-visible {
    ========================================================================== */
 .board {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 280px));
+    grid-template-columns: repeat(5, minmax(0, 280px));
     gap: 20px;
     align-items: start;
     justify-content: start;
@@ -215,6 +215,13 @@ input:focus-visible {
 .badge { padding: 5px 16px; border-radius: 20px; font-size: 14px; font-weight: 600; color: var(--white); width: fit-content; }
 .badge.user-story     { background-color: #0038FF; }
 .badge.technical-task { background-color: #1FD7C1; }
+
+.task-badge-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.badge.ai-generated-badge { background-color: #2A3647; }
+.external-creator { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.external-tag { font-weight: 600; color: #2A3647; }
+.external-email-action { color: #007CEE; text-decoration: none; font-weight: 600; }
+.external-email-action:hover { text-decoration: underline; }
 
 .card-title { font-size: 18px; font-weight: 700; margin: 0; line-height: 1.3; }
 

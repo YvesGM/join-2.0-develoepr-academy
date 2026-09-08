@@ -33,7 +33,7 @@ function normalizeTask(taskId, task, allContacts, legacyConnections) {
  * @returns {{ columns: Object, nextCache: Object }}
  */
 function buildColumnsFromTasks(tasks, allContacts, legacyConnections) {
-    const columns = { 'todo': '', 'in-progress': '', 'await-feedback': '', 'done': '' };
+    const columns = createEmptyBoardColumns();
     const nextCache = {};
     Object.entries(tasks).forEach(([taskId, task]) => {
         const normalized = normalizeTask(taskId, task, allContacts, legacyConnections);
@@ -127,7 +127,7 @@ function taskMatchesTerm(task, term) {
 async function filterTasks(term) {
     const noResultsEl = document.getElementById('board-no-results');
     const searchTermEl = document.getElementById('board-search-term');
-    const filteredColumns = { 'todo': '', 'in-progress': '', 'await-feedback': '', 'done': '' };
+    const filteredColumns = createEmptyBoardColumns();
     Object.entries(boardTaskCache).forEach(([taskId, task]) => {
         if (taskMatchesTerm(task, term) && filteredColumns[task.status] !== undefined) {
             filteredColumns[task.status] += getCardTemplate(task, taskId);

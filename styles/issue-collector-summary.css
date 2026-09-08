@@ -1,0 +1,30 @@
+/**
+ * Issue Collector additions for the existing Summary layout.
+ * Final Figma polish is intentionally deferred to PHASE-09/10.
+ */
+.row-middle {
+    display: flex;
+    gap: 25px;
+}
+
+.row-middle .urgent-card {
+    flex: 1;
+}
+
+.email-requests-card {
+    flex: 0 0 168px;
+}
+
+.email-request-number {
+    color: var(--light-blue);
+}
+
+@media (max-width: 992px) {
+    .row-middle {
+        gap: clamp(10px, 2.5vw, 25px);
+    }
+
+    .email-requests-card {
+        flex-basis: clamp(100px, 28vw, 168px);
+    }
+}

@@ -129,6 +129,7 @@ function renderPrioButtons(currentPrio) {
  */
 function renderMoveToItems(id, currentStatus) {
   const labels = {
+    "triage":         "Triage",
     "todo":           "To-do",
     "in-progress":    "In Progress",
     "await-feedback": "Await Feedback",
@@ -173,6 +174,40 @@ function toggleMoveToMenu(e, id) {
 // Close all menus when clicking anywhere on the document
 document.addEventListener("click", closeAllMoveToMenus);
 
+/** Escapes untrusted external text before template rendering. */
+function escapeTemplateText(value) {
+  const node = document.createElement("div");
+  node.textContent = String(value || "");
+  return node.innerHTML;
+}
+
+/** Returns the persistent AI-generated provenance badge. */
+function renderAiGeneratedBadge(task) {
+  return task.aiGenerated === true
+    ? '<span class="badge ai-generated-badge">AI-generated ticket</span>'
+    : "";
+}
+
+/** Builds external creator markup without creating a Join contact. */
+function renderExternalCreator(task) {
+  const creator = task.externalCreator;
+  if (!task.aiGenerated || !creator) return "";
+  const name = escapeTemplateText(creator.name || creator.email || "External");
+  const mailAction = renderExternalCreatorEmail(creator.email);
+  return `<div class="detail-section external-creator-section">
+    <h3 class="section-title">Creator:</h3>
+    <div class="external-creator"><span class="external-tag">Extern</span><span>${name}</span>${mailAction}</div>
+  </div>`;
+}
+
+/** Returns a validated mail action for the external creator. */
+function renderExternalCreatorEmail(email) {
+  const value = String(email || "").trim();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return "";
+  const safe = escapeTemplateText(value);
+  return `<a class="external-email-action" href="mailto:${safe}" aria-label="Email ${safe}">E-mail</a>`;
+}
+
 /** --- MAIN TEMPLATES --- **/
 
 /**
@@ -185,31 +220,46 @@ document.addEventListener("click", closeAllMoveToMenus);
  */
 function getCardTemplate(task, id) {
   const prio = (task.priority || "low").toLowerCase();
+  const status = task.status || "todo";
+  return `<div class="card" draggable="true" onclick="event.stopPropagation();openTaskDetail('${id}')" ondragstart="event.dataTransfer.setData('text/plain','${id}')" style="position:relative;">
+    ${renderTaskBadgeRow(task)}${renderCardContent(task)}${renderProgressBar(task.subtasks)}
+    ${renderCardFooter(task, prio)}${renderCardMoveMenu(id, status)}
+  </div>`;
+}
+
+/** Renders category and AI provenance badges. */
+function renderTaskBadgeRow(task) {
   const catClass = buildCategoryClass(task.category);
   const catText = task.category || "User Story";
-  const currentStatus = task.status || "todo";
+  return `<div class="task-badge-row"><div class="badge ${catClass}">${catText}</div>${renderAiGeneratedBadge(task)}</div>`;
+}
 
-  return `<div class="card" draggable="true" onclick="event.stopPropagation();openTaskDetail('${id}')" ondragstart="event.dataTransfer.setData('text/plain','${id}')" style="position:relative;">
-    <div class="badge ${catClass}">${catText}</div>
-    <div class="card-content">
-      <h2 class="card-title">${task.title || "No Title"}</h2>
-      <p class="card-description">${task.description || ""}</p>
-    </div>
-    ${renderProgressBar(task.subtasks)}
-    <div class="card-footer">
-      <div class="assigned-to-container">${renderContactBadges(task.assignedTo, 4)}</div>
-      <div class="card-footer-right">
-        <div class="prio-icon"><img src="../assets/icons/prio-${prio}.svg" alt="${prio}" onerror="this.style.display='none'"></div>
-      </div>
-    </div>
-    <div class="card-move-to">
-      <button class="move-to-btn" onclick="toggleMoveToMenu(event,'${id}')" aria-label="Move task">
-        <img src="../assets/icons/move-to-icon.png" alt="Move to">
-      </button>
-      <div class="move-to-menu" id="move-to-menu-${id}">
-        <div class="move-to-title">Move to</div>
-        ${renderMoveToItems(id, currentStatus)}
-      </div>
+/** Renders the card title and description. */
+function renderCardContent(task) {
+  return `<div class="card-content">
+    <h2 class="card-title">${task.title || "No Title"}</h2>
+    <p class="card-description">${task.description || ""}</p>
+  </div>`;
+}
+
+/** Renders the existing card footer. */
+function renderCardFooter(task, prio) {
+  return `<div class="card-footer">
+    <div class="assigned-to-container">${renderContactBadges(task.assignedTo, 4)}</div>
+    <div class="card-footer-right"><div class="prio-icon">
+      <img src="../assets/icons/prio-${prio}.svg" alt="${prio}" onerror="this.style.display='none'">
+    </div></div>
+  </div>`;
+}
+
+/** Renders the mobile move-to control. */
+function renderCardMoveMenu(id, status) {
+  return `<div class="card-move-to">
+    <button class="move-to-btn" onclick="toggleMoveToMenu(event,'${id}')" aria-label="Move task">
+      <img src="../assets/icons/move-to-icon.png" alt="Move to">
+    </button>
+    <div class="move-to-menu" id="move-to-menu-${id}">
+      <div class="move-to-title">Move to</div>${renderMoveToItems(id, status)}
     </div>
   </div>`;
 }
@@ -220,30 +270,59 @@ function getCardTemplate(task, id) {
 function getTaskDetailTemplate(task, id) {
   const prio = (task.priority || "low").toLowerCase();
   const prioLabel = prio.charAt(0).toUpperCase() + prio.slice(1);
-  const catClass = buildCategoryClass(task.category);
-  const catText = task.category || "User Story";
   return `<div class="task-detail-card">
-    <div class="detail-header">
-      <div class="badge ${catClass}">${catText}</div>
-      <button class="close-btn-overlay" onclick="closeTaskDetail()"><img src="../assets/icons/close.svg" alt="Close"></button>
-    </div>
-    <h1 class="detail-title">${task.title || "No Title"}</h1>
+    ${renderDetailHeader(task)}${renderDetailContent(task, prio, prioLabel, id)}
+    ${renderDetailActions(id)}
+  </div>`;
+}
+
+/** Renders the task-detail header and provenance badges. */
+function renderDetailHeader(task) {
+  return `<div class="detail-header">
+    ${renderTaskBadgeRow(task)}
+    <button class="close-btn-overlay" onclick="closeTaskDetail()">
+      <img src="../assets/icons/close.svg" alt="Close">
+    </button>
+  </div>`;
+}
+
+/** Renders task-detail body sections. */
+function renderDetailContent(task, prio, prioLabel, id) {
+  return `<h1 class="detail-title">${task.title || "No Title"}</h1>
     <p class="detail-description">${task.description || ""}</p>
-    <div class="detail-info-row"><span class="info-label">Due date:</span><span class="info-value">${formatDate(task.dueDate)}</span></div>
+    ${renderDetailFacts(task, prio, prioLabel)}${renderExternalCreator(task)}
+    ${renderAssignedSection(task)}${renderSubtasksSection(task, id)}`;
+}
+
+/** Renders due date and priority in the detail view. */
+function renderDetailFacts(task, prio, prioLabel) {
+  return `<div class="detail-info-row"><span class="info-label">Due date:</span>
+    <span class="info-value">${formatDate(task.dueDate)}</span></div>
     <div class="detail-prio-row"><span class="info-label">Priority:</span>
-      <div class="info-value-prio"><span>${prioLabel}</span><img src="../assets/icons/prio-${prio}.svg" alt="${prioLabel}"></div>
-    </div>
-    <div class="detail-section"><h3 class="section-title">Assigned To:</h3>
-      <div class="assigned-list">${renderContactBadges(task.assignedTo, 100, true)}</div>
-    </div>
-    <div class="detail-section"><h3 class="section-title">Subtasks</h3>
-      <div class="subtask-list">${renderSubtaskItems(task.subtasks, id)}</div>
-    </div>
-    <div class="detail-actions">
-      <button class="action-btn" onclick="deleteTask('${id}')"><img src="../assets/icons/delete_text.svg" alt="Delete"></button>
-      <div class="action-divider"></div>
-      <button class="action-btn" onclick="editTask('${id}')"><img src="../assets/icons/edit_text.svg" alt="Edit"></button>
-    </div>
+    <div class="info-value-prio"><span>${prioLabel}</span>
+    <img src="../assets/icons/prio-${prio}.svg" alt="${prioLabel}"></div></div>`;
+}
+
+/** Renders the assigned-contact section. */
+function renderAssignedSection(task) {
+  return `<div class="detail-section"><h3 class="section-title">Assigned To:</h3>
+    <div class="assigned-list">${renderContactBadges(task.assignedTo, 100, true)}</div>
+  </div>`;
+}
+
+/** Renders the task-detail subtask section. */
+function renderSubtasksSection(task, id) {
+  return `<div class="detail-section"><h3 class="section-title">Subtasks</h3>
+    <div class="subtask-list">${renderSubtaskItems(task.subtasks, id)}</div>
+  </div>`;
+}
+
+/** Renders unchanged delete/edit actions. */
+function renderDetailActions(id) {
+  return `<div class="detail-actions">
+    <button class="action-btn" onclick="deleteTask('${id}')"><img src="../assets/icons/delete_text.svg" alt="Delete"></button>
+    <div class="action-divider"></div>
+    <button class="action-btn" onclick="editTask('${id}')"><img src="../assets/icons/edit_text.svg" alt="Edit"></button>
   </div>`;
 }
 

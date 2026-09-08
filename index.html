@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./styles/assets.css" />
     <link rel="stylesheet" href="./styles/login.css" />
     <link rel="stylesheet" href="./styles/login-responsive.css" />
+    <link rel="stylesheet" href="./styles/issue-collector.css" />
     <link rel="icon" href="./assets/img/join_logo_dark.svg" />
     <title>Join</title>
   </head>
@@ -37,7 +38,23 @@
       </header>
 
       <main class="login-main">
-        <section class="login-card" aria-labelledby="login-title">
+        <section id="role-selection" class="login-card role-selection-card" aria-labelledby="role-selection-title">
+          <h1 id="role-selection-title">Welcome</h1>
+          <div class="login-underline"></div>
+          <p>Pick the option that suits your role: create a request as a stakeholder or log in if you're part of the team.</p>
+          <div class="role-selection-options">
+            <div class="role-selection-option">
+              <span>Are you a stakeholder?</span>
+              <button id="stakeholder-entry" class="btn btn-dark" type="button">Create request</button>
+            </div>
+            <div class="role-selection-option">
+              <span>Are you a team member?</span>
+              <button id="member-entry" class="btn btn-light" type="button">Member log in</button>
+            </div>
+          </div>
+        </section>
+
+        <section id="login-card" class="login-card" aria-labelledby="login-title" hidden>
           <h1 id="login-title">Log in</h1>
           <div class="login-underline"></div>
 
@@ -80,6 +97,7 @@
     <script src="./scripts/firebaseConfig.js"></script>
     <script src="./scripts/db.js"></script>
     <script src="./script.js"></script>
+    <script src="./scripts/issue-collector/welcome.js"></script>
     <script src="./scripts/login.js"></script>
     <script src="./scripts/login-auth.js"></script>
     <script src="./scripts/seed.js"></script>

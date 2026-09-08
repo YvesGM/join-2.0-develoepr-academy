@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../styles/fonts.css" />
+  <link rel="stylesheet" href="../styles/issue-collector.css" />
+  <link rel="icon" href="../assets/img/join_logo_dark.svg" />
+  <title>Join - Create Request</title>
+</head>
+<body class="stakeholder-page">
+  <main class="stakeholder-shell">
+    <div class="stakeholder-topbar">
+      <img class="stakeholder-logo" src="../assets/img/join_logo_dark.svg" alt="Join" />
+      <p class="request-counter" aria-live="polite">
+        <strong id="request-counter-value">—</strong> of
+        <strong id="request-counter-limit">10</strong> requests used today
+      </p>
+    </div>
+
+    <a class="stakeholder-back" href="../index.html">← Back</a>
+
+    <section class="stakeholder-content" aria-labelledby="stakeholder-title">
+      <h1 id="stakeholder-title">Welcome</h1>
+
+      <div id="request-normal-copy" class="stakeholder-copy">
+        <h2>Easily create a ticket by sending an email — no extra steps needed.</h2>
+        <p>Submit a feature request by email. Our AI workflow turns accepted requests into structured Join tickets.</p>
+        <p>A maximum of 10 automated requests can be processed per day.</p>
+      </div>
+
+      <div id="request-limit-copy" class="stakeholder-copy" hidden>
+        <p><strong>The daily 10-request limit has been reached!</strong></p>
+        <p>You can still send emails, but further requests are routed for manual review instead of automatic AI ticket creation.</p>
+      </div>
+
+      <div id="request-unavailable-copy" class="stakeholder-copy" hidden>
+        <p><strong>Request usage is currently unavailable.</strong></p>
+        <p>The authoritative daily limit is checked again when your email reaches the Issue Collector workflow.</p>
+      </div>
+
+      <button id="create-email-request" class="btn btn-dark" type="button" disabled>Create Email Request</button>
+    </section>
+
+    <footer class="stakeholder-footer">
+      <a href="./logout-privacy.html">Privacy Policy</a>
+      <a href="./logout-legal.html">Legal Notice</a>
+    </footer>
+  </main>
+
+  <script src="../scripts/issue-collector/domain.js"></script>
+  <script src="../scripts/issue-collector/public-config.js"></script>
+  <script src="../scripts/issue-collector/request-counter.js"></script>
+  <script src="../scripts/issue-collector/stakeholder.js"></script>
+</body>
+</html>

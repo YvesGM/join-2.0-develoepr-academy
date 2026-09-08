@@ -149,19 +149,45 @@ function renderUserName(name) {
  */
 function calculateTaskStats(tasks) {
     const taskList = Object.values(tasks || {});
-    const normalizeStatus = (status) => String(status || "").trim().toLowerCase();
-
     return {
         totalTasks: taskList.length,
-        todoCount: taskList.filter((t) => normalizeStatus(t.status) === "todo").length,
-        inProgressCount: taskList.filter((t) => normalizeStatus(t.status) === "in-progress").length,
-        doneCount: taskList.filter((t) => normalizeStatus(t.status) === "done").length,
-        urgentCount: taskList.filter((t) => t.priority === "urgent").length,
-        feedbackCount: taskList.filter((t) => {
-            const status = normalizeStatus(t.status);
-            return status === "await-feedback" || status === "awaiting-feedback";
-        }).length,
+        todoCount: countStatus(taskList, "todo"),
+        inProgressCount: countStatus(taskList, "in-progress"),
+        doneCount: countStatus(taskList, "done"),
+        urgentCount: taskList.filter((task) => task.priority === "urgent").length,
+        feedbackCount: countFeedbackTasks(taskList),
+        emailRequestCount: countEmailRequests(taskList),
     };
+}
+
+/** Counts tasks matching one normalized status. */
+function countStatus(taskList, status) {
+    return taskList.filter((task) => normalizeTaskStatus(task.status) === status).length;
+}
+
+/** Counts tasks in either supported feedback status spelling. */
+function countFeedbackTasks(taskList) {
+    return taskList.filter((task) => {
+        const status = normalizeTaskStatus(task.status);
+        return status === "await-feedback" || status === "awaiting-feedback";
+    }).length;
+}
+
+/** Normalizes a task status for Summary comparisons. */
+function normalizeTaskStatus(status) {
+    return String(status || "").trim().toLowerCase();
+}
+
+/**
+ * Counts current AI-generated tasks that originated from email.
+ *
+ * @param {Array<Object>} taskList - Current Join tasks.
+ * @returns {number} Number of email-generated AI tasks.
+ */
+function countEmailRequests(taskList) {
+    return taskList.filter((task) =>
+        task?.sourceType === "email" && task?.aiGenerated === true
+    ).length;
 }
 
 /**
@@ -182,6 +208,7 @@ function renderSummary(tasks) {
     document.getElementById("done-tasks").innerText = stats.doneCount;
     document.getElementById("urgent-tasks").innerText = stats.urgentCount;
     document.getElementById("awaitFeedback-tasks").innerText = stats.feedbackCount;
+    document.getElementById("email-request-tasks").innerText = stats.emailRequestCount;
 
     renderNextDeadline(tasks);
 }

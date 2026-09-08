@@ -1,0 +1,94 @@
+/* Functional Issue Collector layout. Pixel styling is deferred to PHASE-09/10. */
+.role-selection-card[hidden],
+.login-card[hidden],
+.stakeholder-copy[hidden] {
+  display: none;
+}
+
+.role-selection-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.role-selection-option {
+  display: grid;
+  gap: 12px;
+  min-width: 180px;
+}
+
+.stakeholder-page {
+  min-height: 100vh;
+  background: #f6f7f8;
+  color: #2a3647;
+  font-family: Inter, Arial, sans-serif;
+}
+
+.stakeholder-shell {
+  margin: 0 auto;
+  max-width: 1120px;
+  padding: 40px 24px;
+}
+
+.stakeholder-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.stakeholder-logo {
+  width: 64px;
+}
+
+.stakeholder-back {
+  display: inline-flex;
+  margin-top: 24px;
+}
+
+.stakeholder-content {
+  margin: 56px auto 0;
+  max-width: 760px;
+}
+
+.stakeholder-content h1 {
+  font-size: 48px;
+  margin-bottom: 24px;
+}
+
+.stakeholder-copy {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.request-counter {
+  white-space: nowrap;
+}
+
+.request-limit-reached .request-counter {
+  font-weight: 700;
+}
+
+.stakeholder-footer {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  margin-top: 72px;
+}
+
+@media (max-width: 600px) {
+  .stakeholder-shell {
+    padding: 24px 16px;
+  }
+
+  .stakeholder-content {
+    margin-top: 36px;
+  }
+
+  .stakeholder-content h1 {
+    font-size: 40px;
+  }
+}

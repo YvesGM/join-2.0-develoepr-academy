@@ -9,23 +9,23 @@ Read this file first on every run.
 Join – AI-assisted Issue Collector
 
 ## Current state
-- Current phase: `PHASE-01`
-- Last completed phase: `PHASE-00`
-- Next phase: `PHASE-01`
-- Overall status: `BLOCKED`
+- Current phase: `PHASE-08`
+- Last completed phase: `PHASE-07`
+- Next phase: `PHASE-08`
+- Overall status: `IN_PROGRESS`
 
 ## Phase status
 
 | Phase | Name | Status |
 |---|---|---|
 | PHASE-00 | Repository Audit | COMPLETED |
-| PHASE-01 | Requirements Matrix | BLOCKED |
-| PHASE-02 | Domain Contracts | PENDING |
-| PHASE-03 | Functional Integration | PENDING |
-| PHASE-04 | Board Triage | PENDING |
-| PHASE-05 | Summary Email Requests | PENDING |
-| PHASE-06 | Stakeholder Flow | PENDING |
-| PHASE-07 | n8n Contracts | PENDING |
+| PHASE-01 | Requirements Matrix | COMPLETED |
+| PHASE-02 | Domain Contracts | COMPLETED |
+| PHASE-03 | Functional Integration | COMPLETED |
+| PHASE-04 | Board Triage | COMPLETED |
+| PHASE-05 | Summary Email Requests | COMPLETED |
+| PHASE-06 | Stakeholder Flow | COMPLETED |
+| PHASE-07 | n8n Contracts | COMPLETED |
 | PHASE-08 | Security & Validation | PENDING |
 | PHASE-09 | Desktop Styling | PENDING |
 | PHASE-10 | Mobile Styling | PENDING |
@@ -127,37 +127,24 @@ UI phases cannot be completed until:
 - 2026-09-07: PHASE-01 progressed to 36 requirements with all ten matrix columns,
   covering all 17 required topic groups. Structure, 15 local source links, 21 existing
   target paths and <=400-line limits validated. The 24 source fingerprints still match.
-- PHASE-01 is BLOCKED: Figma metadata access returned a Starter-plan MCP call-limit
-  error; both supplied web URLs also failed. No actual frame content was obtained.
-- Requirement acceptance tests are specified, not executed. No application code changed.
-  PHASE-02 remains PENDING and must not start before the PHASE-01 gate passes.
 
 ## Current phase resume point
-- Continue [phase-01-requirements.md](phase-01-requirements.md), requirements IC-01–36.
-- Revalidate PHASE-00 using its targeted fingerprints/checks; do not repeat its full scan.
-- Resolve Q01 source completeness: user was asked whether the supplied control files
-  are the complete planning/Academy/tutorial requirements; no answer/source yet recorded.
-- Resolve Q02 by restoring usable direct Figma access, then inspect the supplied
-  page/additional node and exact desktop/mobile frames. All current Figma IDs are
-  references from control files, not verified design content.
-- Replace unverified design dependencies with evidence and resolve contradictions;
-  do not invent numeric/color states, email-mask behavior or mobile frame IDs.
-- Current/Next remains PHASE-01 because it is unfinished. After its gate passes,
-  mark it COMPLETED and advance Current/Next to PHASE-02.
+- PHASE-01 requirements completed from current repository + verified Figma/tutorial evidence.
+- PHASE-02 domain contracts completed in `docs/issue-collector/CONTRACTS.md`.
+- PHASE-03 functional entry/stakeholder/counter/mail boundaries completed and validated.
+- PHASE-04 Board Triage completed and validated.
+- PHASE-05 Summary Email Requests completed and validated.
+- PHASE-06 Stakeholder Flow completed and validated.
+- PHASE-07 n8n contracts completed and validated.
+- Continue PHASE-08 Security & Validation.
+- Revalidate the PHASE-07 contracts before changing validation/security behavior.
+- Do not perform final visual styling yet.
 
 ## Carry-forward questions
-- PHASE-01 needs Academy/tutorial/planning sources beyond the supplied control
-  files; no separate document exists in the audited workspace.
-- Figma frame contents remain unverified due to the access-limit error; see Q02 above.
-- Current tasks use category slugs `user-story` / `technical-task`, priorities
-  `urgent` / `medium` / `low`, and four existing statuses. Historical export values
-  are not current enums.
-- Board cache drops additive metadata and maps unknown statuses to `todo`;
-  live rendering omits unknown columns. These are required integration points.
-- The 10/day limit is explicit in PHASE-01, and Summary navigation to Board is explicit
-  in PHASE-05. Counter scope/timezone/reset semantics, metric meaning, read authorization
-  and recipient remain unresolved. Q03–Q11 in the matrix separate downstream contract,
-  routing and setup decisions from missing design evidence; no stable contracts invented.
+- Actual provider/inbox, n8n host, AI provider/model and Firebase service authentication remain setup decisions.
+- Stakeholder counter storage, timezone/reset and race-safe quota ownership remain n8n/Firebase decisions.
+- Public recipient address is intentionally not configured yet.
+- Exact desktop/mobile pixel values remain PHASE-09/10 Figma acceptance work.
 
 ## Changed files
 Completed PHASE-00:
@@ -167,3 +154,48 @@ Completed PHASE-00:
 Current PHASE-01 run:
 - docs/issue-collector/execution/phase-01-requirements.md
 - docs/issue-collector/execution/MASTER.md
+
+
+### 2026-09-08 continuation
+- PHASE-01 requirements gate passed using tutorial screenshots/user walkthrough and verified Figma metadata.
+- PHASE-02 domain contracts completed.
+- Current phase advanced to PHASE-03.
+
+### 2026-09-08 PHASE-03 completion
+- Added role selection and stakeholder functional flow.
+- Added provider-neutral counter/mail configuration boundaries.
+- No existing Auth/Signup/Guest/manual-task business logic changed.
+- PHASE-04 is now current.
+
+
+### 2026-09-08 PHASE-04 completion
+- Added canonical `triage` status and first Board column.
+- Reused the existing Board/card/move pipeline.
+- Fixed cache preservation for Issue Collector metadata.
+- Added persistent AI-generated marker and external creator/email detail rendering.
+- Functional Board fixture and JavaScript syntax validation passed.
+- PHASE-05 is now current.
+
+
+### 2026-09-08 PHASE-05 completion
+- Added `Email requests` Summary metric from canonical Issue Collector task metadata.
+- Added the Summary card with blue numeric state and Board navigation.
+- Kept final pixel-level Figma styling deferred to PHASE-09/10.
+- PHASE-06 is now current.
+
+
+### 2026-09-08 PHASE-06 completion
+- Revalidated Welcome role selection and preserved the existing member-login path.
+- Added explicit available, reached and unavailable stakeholder counter states through the shared adapter.
+- Kept the public mail CTA provider-neutral and disabled until a valid recipient is configured.
+- Reused existing public legal destinations.
+- Functional stakeholder fixtures and JavaScript syntax validation passed.
+- PHASE-07 is now current.
+
+
+### 2026-09-08 PHASE-07 completion
+- Revalidated PHASE-06 stakeholder state handling before starting.
+- Added provider-neutral n8n contracts for mail normalization, duplicate protection, quota handling, AI output, Join mapping, Firebase results, manual review, errors and recovery.
+- Added one safe JSON fixture bundle for n8n/project-side testing.
+- No provider credentials, secrets or runtime browser implementation were added.
+- PHASE-08 is now current.
