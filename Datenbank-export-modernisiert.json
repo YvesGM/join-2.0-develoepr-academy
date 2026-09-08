@@ -1,0 +1,212 @@
+{
+  "contacts": {
+    "u1": {
+      "name": "Andreas",
+      "email": "andreas@mail.de"
+    },
+    "u2": {
+      "name": "Julia",
+      "email": "julia@mail.de"
+    },
+    "u3": {
+      "name": "Max",
+      "email": "max@mail.de"
+    },
+    "u4": {
+      "name": "Sophie",
+      "email": "sophie@mail.de"
+    },
+    "u5": {
+      "name": "Leon",
+      "email": "leon@mail.de"
+    }
+  },
+  "subtasks": {
+    "t1": {
+      "s1": {
+        "isDone": false,
+        "title": "HTML"
+      }
+    }
+  },
+  "taskUsers": {
+    "t1": {
+      "u1": true,
+      "u2": true,
+      "u3": true,
+      "u4": true,
+      "u5": true
+    },
+    "t2": {
+      "u1": true,
+      "u2": true,
+      "u3": true,
+      "u4": true,
+      "u5": true
+    },
+    "t3": {
+      "u1": true,
+      "u2": true,
+      "u3": true,
+      "u4": true,
+      "u5": true
+    }
+  },
+  "tasks": {
+    "t1": {
+      "description": "Firebase Auth implementieren",
+      "dueDate": "2026-02-01",
+      "priority": "low",
+      "status": "todo",
+      "title": "Login bauen",
+      "category": "technical-task",
+      "assignedTo": [
+        {
+          "id": "u1",
+          "name": "Andreas"
+        },
+        {
+          "id": "u2",
+          "name": "Julia"
+        },
+        {
+          "id": "u3",
+          "name": "Max"
+        },
+        {
+          "id": "u4",
+          "name": "Sophie"
+        },
+        {
+          "id": "u5",
+          "name": "Leon"
+        }
+      ],
+      "subtasks": [
+        {
+          "title": "HTML",
+          "completed": false
+        }
+      ],
+      "createdAt": 0
+    },
+    "t2": {
+      "description": "Spalten & Karten layouten",
+      "dueDate": "2026-02-05",
+      "priority": "urgent",
+      "status": "done",
+      "title": "Kanban Board UI",
+      "category": "technical-task",
+      "assignedTo": [
+        {
+          "id": "u1",
+          "name": "Andreas"
+        },
+        {
+          "id": "u2",
+          "name": "Julia"
+        },
+        {
+          "id": "u3",
+          "name": "Max"
+        },
+        {
+          "id": "u4",
+          "name": "Sophie"
+        },
+        {
+          "id": "u5",
+          "name": "Leon"
+        }
+      ],
+      "subtasks": [],
+      "createdAt": 0
+    },
+    "t3": {
+      "description": "Übersicht anzeigen",
+      "dueDate": "2026-02-03",
+      "priority": "medium",
+      "status": "done",
+      "title": "Summary Dashboard",
+      "category": "technical-task",
+      "assignedTo": [
+        {
+          "id": "u1",
+          "name": "Andreas"
+        },
+        {
+          "id": "u2",
+          "name": "Julia"
+        },
+        {
+          "id": "u3",
+          "name": "Max"
+        },
+        {
+          "id": "u4",
+          "name": "Sophie"
+        },
+        {
+          "id": "u5",
+          "name": "Leon"
+        }
+      ],
+      "subtasks": [],
+      "createdAt": 0
+    }
+  },
+  "userTasks": {
+    "u1": {
+      "t1": true,
+      "t2": true,
+      "t3": true
+    },
+    "u2": {
+      "t1": true,
+      "t2": true,
+      "t3": true
+    },
+    "u3": {
+      "t1": true,
+      "t2": true,
+      "t3": true
+    },
+    "u4": {
+      "t1": true,
+      "t2": true,
+      "t3": true
+    },
+    "u5": {
+      "t1": true,
+      "t2": true,
+      "t3": true
+    }
+  },
+  "users": {
+    "u1": {
+      "email": "andreas@mail.de",
+      "name": "Andreas",
+      "password": "testpassword"
+    },
+    "u2": {
+      "email": "julia@mail.de",
+      "name": "Julia",
+      "password": "pass1234"
+    },
+    "u3": {
+      "email": "max@mail.de",
+      "name": "Max",
+      "password": "abc123"
+    },
+    "u4": {
+      "email": "sophie@mail.de",
+      "name": "Sophie",
+      "password": "qwertz"
+    },
+    "u5": {
+      "email": "leon@mail.de",
+      "name": "Leon",
+      "password": "123456"
+    }
+  }
+}

@@ -1,0 +1,151 @@
+{
+  "name": "Counter-Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "issue-collector-counter",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "9fb78c88-f426-41e2-b594-571fdc151827",
+      "name": "Issue Collector Counter",
+      "webhookId": "17d77e43-e7f8-4b02-9827-44f9d4c1882c"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://uhzhroacvnwemikgqjqe.supabase.co/rest/v1/rpc/issue_collector_get_daily_usage",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"p_day_key\": \"{{ $now.setZone('Europe/Berlin').toISODate() }}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        224,
+        0
+      ],
+      "id": "cdd12d72-091d-467e-898d-7413c8f408e0",
+      "name": "Get Daily Usage",
+      "credentials": {
+        "supabaseApi": {
+          "id": "q29scgLDJm1zYFcO",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "300f1b11-6ade-4485-9048-b10d56b66775",
+              "name": "used",
+              "value": "={{ $json.used }}",
+              "type": "number"
+            },
+            {
+              "id": "96fbb405-68bb-4297-9002-ba21fbc94829",
+              "name": "limit",
+              "value": "={{ $json.request_limit }}",
+              "type": "number"
+            },
+            {
+              "id": "5219ef27-24c5-4133-bdf0-5c313cbeb81e",
+              "name": "limitReached",
+              "value": "={{ $json.used >= $json.request_limit }}",
+              "type": "boolean"
+            },
+            {
+              "id": "a55efbdd-605d-4296-969a-0abeccdb4595",
+              "name": "dayKey",
+              "value": "={{ $json.day_key }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        448,
+        0
+      ],
+      "id": "0281434f-69fa-4667-988c-9ed1f4fb75a9",
+      "name": "Build Counter Response"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{{ $json }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        672,
+        0
+      ],
+      "id": "c29ee74b-cf69-40a0-b111-a96995d01528",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Issue Collector Counter": {
+      "main": [
+        [
+          {
+            "node": "Get Daily Usage",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Daily Usage": {
+      "main": [
+        [
+          {
+            "node": "Build Counter Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Counter Response": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "b5e90ec3-3b57-4f5e-a35e-89ca505b27dd",
+  "meta": {
+    "instanceId": "23427d11fa6d6678862904d9134038534b3654749c5ad1fef23554ff5724cfa7"
+  },
+  "nodeGroups": [],
+  "id": "isx7CxESZTcmhJ3I",
+  "tags": []
+}
