@@ -9,10 +9,10 @@ Read this file first on every run.
 Join – AI-assisted Issue Collector
 
 ## Current state
-- Current phase: `PHASE-12`
-- Last completed phase: `PHASE-11`
-- Next phase: `PHASE-12`
-- Overall status: `IN_PROGRESS`
+- Current phase: `NONE`
+- Last completed phase: `PHASE-12`
+- Next phase: `EXTERNAL_N8N_SETUP`
+- Overall status: `CODE_COMPLETE_N8N_SETUP_PENDING`
 
 ## Phase status
 
@@ -30,7 +30,7 @@ Join – AI-assisted Issue Collector
 | PHASE-09 | Desktop Styling | COMPLETED |
 | PHASE-10 | Mobile Styling | COMPLETED |
 | PHASE-11 | Regression | COMPLETED |
-| PHASE-12 | Final Validation | PENDING |
+| PHASE-12 | Final Validation | COMPLETED |
 
 Allowed status values:
 `PENDING`, `IN_PROGRESS`, `BLOCKED`, `COMPLETED`.
@@ -241,3 +241,16 @@ Current PHASE-01 run:
 - Local HTML references, duplicate-ID checks, CSS structure and Issue Collector secret scan passed.
 - No repository-side regression requiring source changes was found.
 - PHASE-12 Final Validation is now current.
+
+
+### 2026-09-08 PHASE-12 completion
+- Final repository-side validation completed.
+- Added the configurable public counter endpoint hook.
+- `requestEmail` and `counterEndpoint` are the only remaining public Join integration values.
+- Added `docs/issue-collector/HOME-SETUP-GUIDE.md` for the external setup sequence.
+- All project JavaScript files pass syntax validation.
+- No active-source duplicate HTML IDs were found.
+- Issue Collector-owned files remain within the project file-size limits.
+- Project-side Issue Collector status: CODE COMPLETE.
+- Next work is external mail/n8n/AI/Firebase setup plus real end-to-end testing.
+- Direct mobile Figma MCP two-pass validation remains an explicitly documented visual residual because the Starter MCP quota is exhausted.

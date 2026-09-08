@@ -1,7 +1,8 @@
 /**
  * Public Issue Collector configuration.
- * The request inbox address is not a secret and is filled during n8n setup.
+ * Values are intentionally non-secret and are filled during integration setup.
  */
 window.issueCollectorPublicConfig = Object.freeze({
   requestEmail: "",
+  counterEndpoint: "",
 });
