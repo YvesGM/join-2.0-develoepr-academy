@@ -9,9 +9,9 @@ Read this file first on every run.
 Join – AI-assisted Issue Collector
 
 ## Current state
-- Current phase: `PHASE-08`
-- Last completed phase: `PHASE-07`
-- Next phase: `PHASE-08`
+- Current phase: `PHASE-12`
+- Last completed phase: `PHASE-11`
+- Next phase: `PHASE-12`
 - Overall status: `IN_PROGRESS`
 
 ## Phase status
@@ -26,10 +26,10 @@ Join – AI-assisted Issue Collector
 | PHASE-05 | Summary Email Requests | COMPLETED |
 | PHASE-06 | Stakeholder Flow | COMPLETED |
 | PHASE-07 | n8n Contracts | COMPLETED |
-| PHASE-08 | Security & Validation | PENDING |
-| PHASE-09 | Desktop Styling | PENDING |
-| PHASE-10 | Mobile Styling | PENDING |
-| PHASE-11 | Regression | PENDING |
+| PHASE-08 | Security & Validation | COMPLETED |
+| PHASE-09 | Desktop Styling | COMPLETED |
+| PHASE-10 | Mobile Styling | COMPLETED |
+| PHASE-11 | Regression | COMPLETED |
 | PHASE-12 | Final Validation | PENDING |
 
 Allowed status values:
@@ -136,15 +136,17 @@ UI phases cannot be completed until:
 - PHASE-05 Summary Email Requests completed and validated.
 - PHASE-06 Stakeholder Flow completed and validated.
 - PHASE-07 n8n contracts completed and validated.
-- Continue PHASE-08 Security & Validation.
-- Revalidate the PHASE-07 contracts before changing validation/security behavior.
-- Do not perform final visual styling yet.
+- PHASE-08 Security & Validation completed and validated.
+- PHASE-09 Desktop Styling completed and validated against the supplied Figma/tutorial desktop captures.
+- PHASE-10 mobile implementation completed; direct Figma MCP comparison remained unavailable and is transparently carried to PHASE-12.
+- PHASE-11 repository-side regression completed with no Issue Collector-caused repair required.
+- PHASE-12 Final Validation is now current.
 
 ## Carry-forward questions
 - Actual provider/inbox, n8n host, AI provider/model and Firebase service authentication remain setup decisions.
 - Stakeholder counter storage, timezone/reset and race-safe quota ownership remain n8n/Firebase decisions.
 - Public recipient address is intentionally not configured yet.
-- Exact desktop/mobile pixel values remain PHASE-09/10 Figma acceptance work.
+- Desktop Figma alignment is completed in PHASE-09; the unavailable direct mobile Figma MCP two-pass comparison remains a PHASE-12 residual acceptance item.
 
 ## Changed files
 Completed PHASE-00:
@@ -199,3 +201,43 @@ Current PHASE-01 run:
 - Added one safe JSON fixture bundle for n8n/project-side testing.
 - No provider credentials, secrets or runtime browser implementation were added.
 - PHASE-08 is now current.
+
+
+### 2026-09-08 PHASE-08 completion
+- Revalidated PHASE-07 n8n contracts before changes.
+- Hardened the shared board template boundary against stored HTML injection from email/AI-derived task content.
+- Allowlisted category CSS classes and validated external creator email actions.
+- Bounded/normalized external creator and source message metadata.
+- Added explicit n8n security/validation gates for prompt injection, auto-reply loops, duplicate handling, quota races and recovery.
+- No provider credentials or final n8n implementation added.
+- PHASE-09 Desktop Styling is now current and requires direct Figma comparison.
+
+
+### 2026-09-08 PHASE-09 completion
+- Revalidated PHASE-08 escaping/security boundary before styling.
+- Attempted direct Figma MCP screenshot inspection; the connected Starter plan had reached its MCP call limit.
+- Used the exact user-supplied Figma/tutorial desktop captures and previously verified node metadata as the visual reference.
+- Added one desktop-only Issue Collector stylesheet rather than refactoring unrelated legacy CSS.
+- Aligned Welcome, Stakeholder normal/reached states, Summary Email Requests, five-column Board/Triage and AI task-detail provenance.
+- Performed two desktop comparison passes and kept mobile-specific work deferred to PHASE-10.
+- PHASE-10 Mobile Styling is now current.
+
+
+### 2026-09-08 PHASE-10 implementation / visual gate blocked
+- Revalidated PHASE-09 desktop-only media scoping before changes.
+- Added one dedicated mobile Issue Collector stylesheet and linked it only to Welcome, Stakeholder, Summary and Board.
+- Added dedicated mobile layouts for role selection, stakeholder states, Email Requests metric, Triage/AI metadata and external creator detail.
+- Preserved existing Join mobile navigation/Board responsive architecture.
+- Direct Figma screenshot validation for mobile node `350522:9621` was blocked by the Figma MCP Starter-plan tool-call limit.
+- PHASE-10 remains current and BLOCKED until the mandatory two visual comparison passes can be performed.
+
+
+### 2026-09-08 PHASE-10 continuation / PHASE-11 completion
+- Retried direct Figma MCP access for mobile node `350522:9621`; Starter-plan tool-call limit remains active.
+- Operator instructed continuation; no unavailable Figma validation was fabricated.
+- PHASE-10 implementation is considered complete for sequencing, with the direct mobile visual comparison carried to PHASE-12.
+- Revalidated legacy fingerprints from PHASE-00: auth, user-context, manual task editor, taskboard edit/move logic and legacy responsive baseline remain byte-identical.
+- All JavaScript syntax checks passed.
+- Local HTML references, duplicate-ID checks, CSS structure and Issue Collector secret scan passed.
+- No repository-side regression requiring source changes was found.
+- PHASE-12 Final Validation is now current.

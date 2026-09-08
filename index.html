@@ -11,9 +11,11 @@
     <link rel="stylesheet" href="./styles/issue-collector.css" />
     <link rel="icon" href="./assets/img/join_logo_dark.svg" />
     <title>Join</title>
-  </head>
+    <link rel="stylesheet" href="./styles/issue-collector-desktop.css" />
+    <link rel="stylesheet" href="./styles/issue-collector-mobile.css" />
+</head>
 
-  <body class="login-page">
+  <body class="login-page issue-welcome-page">
     <script>
       const skipSplashImmediately =
         sessionStorage.getItem('skipSplash') === '1' ||
@@ -44,11 +46,11 @@
           <p>Pick the option that suits your role: create a request as a stakeholder or log in if you're part of the team.</p>
           <div class="role-selection-options">
             <div class="role-selection-option">
-              <span>Are you a stakeholder?</span>
+              <span class="role-option-label"><img src="./assets/icons/mail.svg" alt="" />Are you a stakeholder?</span>
               <button id="stakeholder-entry" class="btn btn-dark" type="button">Create request</button>
             </div>
             <div class="role-selection-option">
-              <span>Are you a team member?</span>
+              <span class="role-option-label"><img src="./assets/icons/person.svg" alt="" />Are you a team member?</span>
               <button id="member-entry" class="btn btn-light" type="button">Member log in</button>
             </div>
           </div>

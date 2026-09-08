@@ -32,7 +32,14 @@ function formatDate(dueDate = "") {
  * Generates a CSS-compatible class name from a category text string.
  */
 function buildCategoryClass(category = "") {
-  return (category || "User Story").toLowerCase().replace(/\s+/g, "-");
+  const normalized = String(category || "").trim().toLowerCase();
+  return normalized === "technical-task" ? "technical-task" : "user-story";
+}
+
+/** Returns one supported priority for safe asset/template rendering. */
+function normalizeTemplatePriority(priority) {
+  const value = String(priority || "").trim().toLowerCase();
+  return ["urgent", "medium", "low"].includes(value) ? value : "low";
 }
 
 /** --- USER BADGE HELPERS --- **/
@@ -44,18 +51,20 @@ function resolveUserInitials(u) {
 
 function renderCardBadge(u, index) {
   const ml = index === 0 ? "0" : "-12px";
+  const initials = escapeTemplateText(resolveUserInitials(u));
   return `<div class="user-badge" style="background-color:${u.color || "#2A3647"};z-index:${10 - index};margin-left:${ml};">
-    ${resolveUserInitials(u)}
+    ${initials}
   </div>`;
 }
 
 function renderDetailBadge(u) {
   const name = u.name || "Unknown";
   const displayName = String(u.id || "").startsWith("self_") ? `${name} (You)` : name;
-  const initials = resolveUserInitials(u);
+  const initials = escapeTemplateText(resolveUserInitials(u));
+  const safeName = escapeTemplateText(displayName);
   return `<div class="assigned-user-badge-container">
     <div class="user-badge" style="background-color:${u.color || "#2A3647"};">${initials}</div>
-    <span>${displayName}</span>
+    <span>${safeName}</span>
   </div>`;
 }
 
@@ -86,7 +95,7 @@ function renderSubtaskItems(subtasksRaw, taskId) {
   if (st.length === 0) return "No subtasks";
   return st.map((s, i) => {
     const done = s?.completed || s?.done;
-    const title = resolveSubtaskTitle(s, i);
+    const title = escapeTemplateText(resolveSubtaskTitle(s, i));
     const icon = done ? "checked" : "empty";
     return `<div class="subtask-row" onclick="updateSubtaskStatus('${taskId}', ${i}, ${!done})">
       <img src="../assets/icons/checkbox_${icon}.svg"><span>${title}</span>
@@ -202,8 +211,9 @@ function renderExternalCreator(task) {
 
 /** Returns a validated mail action for the external creator. */
 function renderExternalCreatorEmail(email) {
-  const value = String(email || "").trim();
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return "";
+  const value = String(email || "").trim().toLowerCase();
+  const isValid = window.issueCollectorDomain?.isValidEmail?.(value);
+  if (!isValid) return "";
   const safe = escapeTemplateText(value);
   return `<a class="external-email-action" href="mailto:${safe}" aria-label="Email ${safe}">E-mail</a>`;
 }
@@ -219,7 +229,7 @@ function renderExternalCreatorEmail(email) {
  * @returns {string} HTML string of the task card.
  */
 function getCardTemplate(task, id) {
-  const prio = (task.priority || "low").toLowerCase();
+  const prio = normalizeTemplatePriority(task.priority);
   const status = task.status || "todo";
   return `<div class="card" draggable="true" onclick="event.stopPropagation();openTaskDetail('${id}')" ondragstart="event.dataTransfer.setData('text/plain','${id}')" style="position:relative;">
     ${renderTaskBadgeRow(task)}${renderCardContent(task)}${renderProgressBar(task.subtasks)}
@@ -230,15 +240,16 @@ function getCardTemplate(task, id) {
 /** Renders category and AI provenance badges. */
 function renderTaskBadgeRow(task) {
   const catClass = buildCategoryClass(task.category);
-  const catText = task.category || "User Story";
+  const catText = escapeTemplateText(task.category || "User Story");
   return `<div class="task-badge-row"><div class="badge ${catClass}">${catText}</div>${renderAiGeneratedBadge(task)}</div>`;
 }
 
 /** Renders the card title and description. */
 function renderCardContent(task) {
+  const title = escapeTemplateText(task.title || "No Title");
+  const description = escapeTemplateText(task.description || "");
   return `<div class="card-content">
-    <h2 class="card-title">${task.title || "No Title"}</h2>
-    <p class="card-description">${task.description || ""}</p>
+    <h2 class="card-title">${title}</h2><p class="card-description">${description}</p>
   </div>`;
 }
 
@@ -268,7 +279,7 @@ function renderCardMoveMenu(id, status) {
  * Generates the HTML for the task detail view in the overlay.
  */
 function getTaskDetailTemplate(task, id) {
-  const prio = (task.priority || "low").toLowerCase();
+  const prio = normalizeTemplatePriority(task.priority);
   const prioLabel = prio.charAt(0).toUpperCase() + prio.slice(1);
   return `<div class="task-detail-card">
     ${renderDetailHeader(task)}${renderDetailContent(task, prio, prioLabel, id)}
@@ -288,16 +299,18 @@ function renderDetailHeader(task) {
 
 /** Renders task-detail body sections. */
 function renderDetailContent(task, prio, prioLabel, id) {
-  return `<h1 class="detail-title">${task.title || "No Title"}</h1>
-    <p class="detail-description">${task.description || ""}</p>
-    ${renderDetailFacts(task, prio, prioLabel)}${renderExternalCreator(task)}
+  const title = escapeTemplateText(task.title || "No Title");
+  const description = escapeTemplateText(task.description || "");
+  return `<h1 class="detail-title">${title}</h1><p class="detail-description">${description}</p>
+    ${renderExternalCreator(task)}${renderDetailFacts(task, prio, prioLabel)}
     ${renderAssignedSection(task)}${renderSubtasksSection(task, id)}`;
 }
 
 /** Renders due date and priority in the detail view. */
 function renderDetailFacts(task, prio, prioLabel) {
+  const dueDate = escapeTemplateText(formatDate(task.dueDate));
   return `<div class="detail-info-row"><span class="info-label">Due date:</span>
-    <span class="info-value">${formatDate(task.dueDate)}</span></div>
+    <span class="info-value">${dueDate}</span></div>
     <div class="detail-prio-row"><span class="info-label">Priority:</span>
     <div class="info-value-prio"><span>${prioLabel}</span>
     <img src="../assets/icons/prio-${prio}.svg" alt="${prioLabel}"></div></div>`;
@@ -330,16 +343,19 @@ function renderDetailActions(id) {
  * Generates the HTML for the task edit form in the overlay.
  */
 function getEditTaskTemplate(task, id) {
-  const curr = (task.priority || "low").toLowerCase();
+  const curr = normalizeTemplatePriority(task.priority);
+  const title = escapeTemplateText(task.title || "");
+  const description = escapeTemplateText(task.description || "");
+  const dueDate = escapeTemplateText(task.dueDate || "");
   return `<div class="card-inner">
     <button class="close-btn-overlay" onclick="closeTaskDetail()"><img src="../assets/icons/close.svg" alt="Close"></button>
     <div class="task-edit-container"><div class="edit-scroll-area">
       <label class="edit-label">Title</label>
-      <input type="text" id="edit-title" class="edit-input" value="${task.title || ""}">
+      <input type="text" id="edit-title" class="edit-input" value="${title}">
       <label class="edit-label">Description</label>
-      <textarea id="edit-description" class="edit-textarea">${task.description || ""}</textarea>
+      <textarea id="edit-description" class="edit-textarea">${description}</textarea>
       <label class="edit-label">Due date</label>
-      <input type="date" id="edit-date" class="edit-input" value="${task.dueDate || ""}">
+      <input type="date" id="edit-date" class="edit-input" value="${dueDate}">
       <label class="edit-label edit-label-priority">Priority</label>
       <div class="priority-row-edit">${renderPrioButtons(curr)}</div>
       <label class="edit-label">Assigned to</label>

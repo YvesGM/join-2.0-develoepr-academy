@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="../styles/issue-collector.css" />
   <link rel="icon" href="../assets/img/join_logo_dark.svg" />
   <title>Join - Create Request</title>
+  <link rel="stylesheet" href="../styles/issue-collector-desktop.css" />
+    <link rel="stylesheet" href="../styles/issue-collector-mobile.css" />
 </head>
 <body class="stakeholder-page">
   <main class="stakeholder-shell">
@@ -26,18 +28,23 @@
 
       <div id="request-normal-copy" class="stakeholder-copy">
         <h2>Easily create a ticket by sending an email — no extra steps needed.</h2>
-        <p>Submit a feature request by email. Our AI workflow turns accepted requests into structured Join tickets.</p>
-        <p>A maximum of 10 automated requests can be processed per day.</p>
+        <p>On this platform, you can submit your feature requests via email. Our AI system will automatically generate a ticket with a deadline and priority level.</p>
+        <p>A total of 10 requests can be created per day. After this limit, emails can still be sent, but they will be manually reviewed by our team instead of generating AI tickets.</p>
       </div>
 
       <div id="request-limit-copy" class="stakeholder-copy" hidden>
         <p><strong>The daily 10-request limit has been reached!</strong></p>
-        <p>You can still send emails, but further requests are routed for manual review instead of automatic AI ticket creation.</p>
+        <p>Need more? No worries — you can still send emails, but our team will review them manually instead of using AI to create tickets.</p>
       </div>
 
       <div id="request-unavailable-copy" class="stakeholder-copy" hidden>
         <p><strong>Request usage is currently unavailable.</strong></p>
         <p>The authoritative daily limit is checked again when your email reaches the Issue Collector workflow.</p>
+      </div>
+
+      <div class="stakeholder-illustration" aria-hidden="true">
+        <img class="stakeholder-illustration-normal" src="../assets/img/issue-collector-stakeholder.png" alt="" />
+        <img class="stakeholder-illustration-limit" src="../assets/img/issue-collector-stakeholder-limit.png" alt="" />
       </div>
 
       <button id="create-email-request" class="btn btn-dark" type="button" disabled>Create Email Request</button>
