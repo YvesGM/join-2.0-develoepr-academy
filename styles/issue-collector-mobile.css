@@ -98,7 +98,7 @@
   .request-counter {
     margin: 6px 0 0 auto;
     color: #29abe2;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.25;
     text-align: right;
     white-space: normal;
@@ -159,7 +159,7 @@
   .stakeholder-copy p {
     margin: 0;
     color: #42526a;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.35;
   }
 
@@ -223,7 +223,7 @@
     margin: 0;
     gap: 24px;
     color: #a8a8a8;
-    font-size: 12px;
+    font-size: 14px;
   }
 
   /* Summary: preserve the mobile Join layout and add the new metric. */

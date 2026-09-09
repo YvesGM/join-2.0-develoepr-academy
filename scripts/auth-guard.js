@@ -23,22 +23,29 @@ function releaseAuthGuardVisibility() {
 }
 
 
-function enforceAuthGuard() {
-	if (isGuestSessionActive()) {
+/**
+ * Resolves page access only after Firebase restored the persisted auth state.
+ * Anonymous guest sessions therefore cannot race database reads after reload.
+ * @param {firebase.User|null} user - Current Firebase Authentication user.
+ */
+function handleAuthGuardState(user) {
+	if (user) {
 		releaseAuthGuardVisibility();
 		return;
 	}
+	redirectToAuthGuardLogin();
+}
+
+
+/**
+ * Waits for Firebase Authentication before exposing protected pages.
+ */
+function enforceAuthGuard() {
 	if (!isFirebaseAuthAvailable()) {
 		redirectToAuthGuardLogin();
 		return;
 	}
-	firebase.auth().onAuthStateChanged((user) => {
-		if (user || isGuestSessionActive()) {
-			releaseAuthGuardVisibility();
-			return;
-		}
-		redirectToAuthGuardLogin();
-	});
+	firebase.auth().onAuthStateChanged(handleAuthGuardState);
 }
 
 

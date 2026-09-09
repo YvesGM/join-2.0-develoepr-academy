@@ -35,13 +35,7 @@
         0
       ],
       "id": "cdd12d72-091d-467e-898d-7413c8f408e0",
-      "name": "Get Daily Usage",
-      "credentials": {
-        "supabaseApi": {
-          "id": "q29scgLDJm1zYFcO",
-          "name": "Supabase account"
-        }
-      }
+      "name": "Get Daily Usage"
     },
     {
       "parameters": {

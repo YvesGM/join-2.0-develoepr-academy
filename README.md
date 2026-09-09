@@ -50,6 +50,29 @@ The mailbox move is implemented by the Supabase Edge Function `supabase/function
 - external creators receive success/error/limit replies
 - later task status changes can trigger an email notification
 
+## Demo usage
+
+1. Open the Join landing page and choose the stakeholder path.
+2. Send a feature request or technical task to `info@schniefs-portfolio.de`.
+3. n8n processes the incoming email, applies the daily quota, asks Gemini for structured issue data and creates the ticket in `Triage`.
+4. Open the Join board and inspect the AI-generated ticket, creator information, priority, category, due date and optional subtasks.
+5. Move an externally created ticket to another board column to trigger the n8n status-notification workflow.
+6. Successful source emails are moved to `erledigt`; processing failures or quota rejections are moved to `zu bearbeiten`.
+
+For a team-member demo, use the member login. The guest path signs in through Firebase Anonymous Authentication and is intended to remain read-only.
+
+## n8n workflow exports
+
+Repository workflow JSON files intentionally contain no connected credential objects. After importing them into another n8n instance, reconnect the required IMAP, SMTP, Supabase, Google Service Account and Gemini credentials manually.
+
+The mailbox-move HTTP nodes use the repository-safe placeholder:
+
+```text
+__ISSUE_MAIL_MOVE_SECRET__
+```
+
+Replace that placeholder only inside n8n with the value stored as the Supabase secret `ISSUE_MAIL_MOVE_SECRET`. Do not commit the real value.
+
 ## Security
 
 Do not commit secrets.

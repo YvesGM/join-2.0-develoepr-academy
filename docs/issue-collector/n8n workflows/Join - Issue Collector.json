@@ -12,13 +12,7 @@
         -400
       ],
       "id": "6e4344d9-c037-4672-8845-ce6e38ac0b8e",
-      "name": "Email Trigger (IMAP)",
-      "credentials": {
-        "imap": {
-          "id": "OvF8xiYPUjKyFoQC",
-          "name": "IMAP account"
-        }
-      }
+      "name": "Email Trigger (IMAP)"
     },
     {
       "parameters": {
@@ -28,7 +22,7 @@
         "nodeCredentialType": "supabaseApi",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "{\n  \"p_day_key\": \"2026-09-08\",\n  \"p_limit\": 10\n}",
+        "jsonBody": "={\n  \"p_day_key\": \"{{ $now.setZone('Europe/Berlin').toISODate() }}\",\n  \"p_limit\": 10\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -38,13 +32,7 @@
         80
       ],
       "id": "b22706ce-40c4-42f5-bf5d-851ead8c3f0d",
-      "name": "Claim Daily slot",
-      "credentials": {
-        "supabaseApi": {
-          "id": "q29scgLDJm1zYFcO",
-          "name": "Supabase account"
-        }
-      }
+      "name": "Claim Daily slot"
     },
     {
       "parameters": {
@@ -69,13 +57,7 @@
       ],
       "id": "3cfdcd9d-c73b-44ad-9a3d-1db0eae3cc91",
       "name": "Dublicate Lookup",
-      "alwaysOutputData": true,
-      "credentials": {
-        "supabaseApi": {
-          "id": "q29scgLDJm1zYFcO",
-          "name": "Supabase account"
-        }
-      }
+      "alwaysOutputData": true
     },
     {
       "parameters": {
@@ -171,13 +153,6 @@
       ],
       "id": "38be05ab-4ccf-47a0-a5fb-62c9602c06df",
       "name": "Message a model",
-      "credentials": {
-        "googlePalmApi": {
-          "id": null,
-          "name": "",
-          "__aiGatewayManaged": true
-        }
-      },
       "onError": "continueErrorOutput"
     },
     {
@@ -306,7 +281,7 @@
             {
               "id": "a17ed095-b213-45df-8cc5-f35ca20d6ffb",
               "name": "description",
-              "value": "={{ $json.description }}",
+              "value": "={{ 'Dieses Ticket wurde KI-generiert.\\n\\n' + $json.description }}",
               "type": "string"
             },
             {
@@ -407,12 +382,6 @@
       ],
       "id": "ee160b8d-1b0e-4de4-b9f0-01f9a7d9a6e4",
       "name": "Create Firebase Task",
-      "credentials": {
-        "googleApi": {
-          "id": "wl2dRkJ0ULnTTKxT",
-          "name": "Google Service Account account"
-        }
-      },
       "onError": "continueErrorOutput"
     },
     {
@@ -471,13 +440,7 @@
         -432
       ],
       "id": "f1fa5c34-11ee-45c5-8e77-ed83bb71eef5",
-      "name": "Save Processed Message",
-      "credentials": {
-        "supabaseApi": {
-          "id": "q29scgLDJm1zYFcO",
-          "name": "Supabase account"
-        }
-      }
+      "name": "Save Processed Message"
     },
     {
       "parameters": {
@@ -510,13 +473,7 @@
         -432
       ],
       "id": "970fbc48-f97d-4e1b-a499-e4bba5d76e5b",
-      "name": "Log Created Run",
-      "credentials": {
-        "supabaseApi": {
-          "id": "q29scgLDJm1zYFcO",
-          "name": "Supabase account"
-        }
-      }
+      "name": "Log Created Run"
     },
     {
       "parameters": {
@@ -545,13 +502,7 @@
         -176
       ],
       "id": "12cca175-ade1-4217-9ed2-f44d05cf6bdb",
-      "name": "Log Duplicate Run",
-      "credentials": {
-        "supabaseApi": {
-          "id": "q29scgLDJm1zYFcO",
-          "name": "Supabase account"
-        }
-      }
+      "name": "Log Duplicate Run"
     },
     {
       "parameters": {
@@ -596,13 +547,7 @@
         320
       ],
       "id": "c885d3df-ded4-44c0-9b22-3826fd33ca49",
-      "name": "Store Limit Review",
-      "credentials": {
-        "supabaseApi": {
-          "id": "q29scgLDJm1zYFcO",
-          "name": "Supabase account"
-        }
-      }
+      "name": "Store Limit Review"
     },
     {
       "parameters": {
@@ -635,13 +580,7 @@
         320
       ],
       "id": "9bb4eea2-3dcd-4bda-aa73-1e82036dffc0",
-      "name": "Log Quota Run",
-      "credentials": {
-        "supabaseApi": {
-          "id": "q29scgLDJm1zYFcO",
-          "name": "Supabase account"
-        }
-      }
+      "name": "Log Quota Run"
     },
     {
       "parameters": {
@@ -686,13 +625,7 @@
         -160
       ],
       "id": "f7e116c5-6caf-46b9-a2bc-f8684213d452",
-      "name": "Store AI Review",
-      "credentials": {
-        "supabaseApi": {
-          "id": "q29scgLDJm1zYFcO",
-          "name": "Supabase account"
-        }
-      }
+      "name": "Store AI Review"
     },
     {
       "parameters": {
@@ -725,13 +658,7 @@
         -160
       ],
       "id": "648ed9e9-bf21-4095-9b4b-fcb7f4638bc9",
-      "name": "Log AI Validation Run",
-      "credentials": {
-        "supabaseApi": {
-          "id": "q29scgLDJm1zYFcO",
-          "name": "Supabase account"
-        }
-      }
+      "name": "Log AI Validation Run"
     },
     {
       "parameters": {
@@ -751,13 +678,7 @@
         128
       ],
       "id": "f8d35791-9d91-4535-91ba-b6ff6fb5060a",
-      "name": "Release Slot After AI Error",
-      "credentials": {
-        "supabaseApi": {
-          "id": "q29scgLDJm1zYFcO",
-          "name": "Supabase account"
-        }
-      }
+      "name": "Release Slot After AI Error"
     },
     {
       "parameters": {
@@ -802,13 +723,7 @@
         128
       ],
       "id": "e15fd313-14fa-46be-a38e-dbc84159ae40",
-      "name": "Store AI Error Review",
-      "credentials": {
-        "supabaseApi": {
-          "id": "q29scgLDJm1zYFcO",
-          "name": "Supabase account"
-        }
-      }
+      "name": "Store AI Error Review"
     },
     {
       "parameters": {
@@ -841,13 +756,7 @@
         128
       ],
       "id": "2a65c4d9-d50e-414c-a96a-d764386c1d30",
-      "name": "Log AI Provider Error",
-      "credentials": {
-        "supabaseApi": {
-          "id": "q29scgLDJm1zYFcO",
-          "name": "Supabase account"
-        }
-      }
+      "name": "Log AI Provider Error"
     },
     {
       "parameters": {
@@ -892,13 +801,7 @@
         -256
       ],
       "id": "f652baad-4815-44e0-ba46-2be3142a996b",
-      "name": "Store Firebase Review",
-      "credentials": {
-        "supabaseApi": {
-          "id": "q29scgLDJm1zYFcO",
-          "name": "Supabase account"
-        }
-      }
+      "name": "Store Firebase Review"
     },
     {
       "parameters": {
@@ -918,13 +821,7 @@
         -256
       ],
       "id": "ff18be11-3f24-46b6-9567-36000a7cf93b",
-      "name": "Release Slot After Firebase Error",
-      "credentials": {
-        "supabaseApi": {
-          "id": "q29scgLDJm1zYFcO",
-          "name": "Supabase account"
-        }
-      }
+      "name": "Release Slot After Firebase Error"
     },
     {
       "parameters": {
@@ -957,13 +854,7 @@
         -256
       ],
       "id": "2f5d9e6c-8c56-4b8b-9b08-b3e257e446be",
-      "name": "Log Firebase Error",
-      "credentials": {
-        "supabaseApi": {
-          "id": "q29scgLDJm1zYFcO",
-          "name": "Supabase account"
-        }
-      }
+      "name": "Log Firebase Error"
     },
     {
       "parameters": {
@@ -982,13 +873,7 @@
       ],
       "id": "b24b7912-b964-4214-be1b-46525b0ff394",
       "name": "Send Limit Reply",
-      "webhookId": "d5e4bbf3-44f6-47b9-91f3-ba3d027e5329",
-      "credentials": {
-        "smtp": {
-          "id": "Tm9Jzpc5URqWeuZm",
-          "name": "SMTP account"
-        }
-      }
+      "webhookId": "d5e4bbf3-44f6-47b9-91f3-ba3d027e5329"
     },
     {
       "parameters": {
@@ -1007,13 +892,7 @@
       ],
       "id": "adef6992-fc0a-4c00-a327-f1d2a39f02ee",
       "name": "Send Success Reply",
-      "webhookId": "bb758b65-f291-4a47-9059-ecc40ac5d80f",
-      "credentials": {
-        "smtp": {
-          "id": "Tm9Jzpc5URqWeuZm",
-          "name": "SMTP account"
-        }
-      }
+      "webhookId": "bb758b65-f291-4a47-9059-ecc40ac5d80f"
     },
     {
       "parameters": {
@@ -1031,13 +910,7 @@
       ],
       "id": "13669f86-8cd9-4d94-9256-5e43de57f454",
       "name": "Send AI Error Reply",
-      "webhookId": "8744d0ba-6495-46dc-be14-8ae8a80e31da",
-      "credentials": {
-        "smtp": {
-          "id": "Tm9Jzpc5URqWeuZm",
-          "name": "SMTP account"
-        }
-      }
+      "webhookId": "8744d0ba-6495-46dc-be14-8ae8a80e31da"
     },
     {
       "parameters": {
@@ -1056,13 +929,7 @@
       ],
       "id": "d9d83aa0-5ad1-4b97-952f-e86487124497",
       "name": "Send AI Validation Error Reply",
-      "webhookId": "def71b26-9ec1-4831-9984-7820cbb10843",
-      "credentials": {
-        "smtp": {
-          "id": "Tm9Jzpc5URqWeuZm",
-          "name": "SMTP account"
-        }
-      }
+      "webhookId": "def71b26-9ec1-4831-9984-7820cbb10843"
     },
     {
       "parameters": {
@@ -1081,13 +948,7 @@
       ],
       "id": "94a7d308-6647-4f73-9fe7-0b93f800c94b",
       "name": "Send Firebase Error Reply",
-      "webhookId": "c432ca90-4a89-4fcd-960c-3d84cd2d8388",
-      "credentials": {
-        "smtp": {
-          "id": "Tm9Jzpc5URqWeuZm",
-          "name": "SMTP account"
-        }
-      }
+      "webhookId": "c432ca90-4a89-4fcd-960c-3d84cd2d8388"
     },
     {
       "parameters": {
@@ -1098,7 +959,7 @@
           "parameters": [
             {
               "name": "x-issue-collector-secret",
-              "value": "rgihdrgvmrmcvuc8e9jdsf"
+              "value": "__ISSUE_MAIL_MOVE_SECRET__"
             }
           ]
         },
@@ -1126,7 +987,7 @@
           "parameters": [
             {
               "name": "x-issue-collector-secret",
-              "value": "rgihdrgvmrmcvuc8e9jdsf"
+              "value": "__ISSUE_MAIL_MOVE_SECRET__"
             }
           ]
         },
@@ -1154,7 +1015,7 @@
           "parameters": [
             {
               "name": "x-issue-collector-secret",
-              "value": "rgihdrgvmrmcvuc8e9jdsf"
+              "value": "__ISSUE_MAIL_MOVE_SECRET__"
             }
           ]
         },
@@ -1182,7 +1043,7 @@
           "parameters": [
             {
               "name": "x-issue-collector-secret",
-              "value": "rgihdrgvmrmcvuc8e9jdsf"
+              "value": "__ISSUE_MAIL_MOVE_SECRET__"
             }
           ]
         },
@@ -1210,7 +1071,7 @@
           "parameters": [
             {
               "name": "x-issue-collector-secret",
-              "value": "rgihdrgvmrmcvuc8e9jdsf"
+              "value": "__ISSUE_MAIL_MOVE_SECRET__"
             }
           ]
         },

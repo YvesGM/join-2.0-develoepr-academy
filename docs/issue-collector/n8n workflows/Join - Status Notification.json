@@ -69,13 +69,7 @@
       ],
       "id": "f779f550-8962-4b08-87f7-0698ac921c87",
       "name": "Send Status Update",
-      "webhookId": "cc288ecf-efb0-48d8-9354-73d6493eb224",
-      "credentials": {
-        "smtp": {
-          "id": "Tm9Jzpc5URqWeuZm",
-          "name": "SMTP account"
-        }
-      }
+      "webhookId": "cc288ecf-efb0-48d8-9354-73d6493eb224"
     },
     {
       "parameters": {
