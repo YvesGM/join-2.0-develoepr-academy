@@ -1,14 +1,14 @@
-# Issue Collector Planning Reference
+# Issue Collector documentation
 
-This directory contains the Codex execution control files.
+The Issue Collector extends Join with an email-driven AI intake workflow.
 
-Start with:
+Start here:
 
-```text
-AGENT.md
-docs/issue-collector/execution/MASTER.md
-```
+- `ARCHITECTURE.md` – system overview
+- `CONTRACTS.md` – Join-side contracts
+- `N8N-CONTRACTS.md` – n8n payload and processing contracts
+- `MAILBOX-MOVE.md` – final `erledigt` / `zu bearbeiten` mailbox wiring
+- `SECURITY-VALIDATION.md` – final security checks
+- `HOME-SETUP-GUIDE.md` – historical setup reference
 
-The execution directory is intentionally phase-based so Codex can continue across runs without repeating completed work.
-
-The actual n8n workflow is configured separately after project-side preparation is complete.
+The current implementation uses Firebase for Join application data, Supabase for automation state/quota and the mailbox Edge Function, and n8n for orchestration.

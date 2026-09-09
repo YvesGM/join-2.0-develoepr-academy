@@ -87,7 +87,7 @@
     {
       "parameters": {
         "respondWith": "json",
-        "responseBody": "{{ $json }}",
+        "responseBody": "={{ {\n  used: $json.used,\n  limit: $json.limit,\n  limitReached: $json.limitReached,\n  dayKey: $json.dayKey\n} }}",
         "options": {}
       },
       "type": "n8n-nodes-base.respondToWebhook",
@@ -141,7 +141,7 @@
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "b5e90ec3-3b57-4f5e-a35e-89ca505b27dd",
+  "versionId": "ecb1cdc4-5f2b-452f-9347-b4ae738a3a85",
   "meta": {
     "instanceId": "23427d11fa6d6678862904d9134038534b3654749c5ad1fef23554ff5724cfa7"
   },

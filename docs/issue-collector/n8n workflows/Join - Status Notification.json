@@ -1,0 +1,167 @@
+{
+  "name": "Join - Status Notification",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "join-task-status-changed",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "53d123cb-90b3-4987-9f17-3c4d1a5c552d",
+      "name": "Task Status Changed",
+      "webhookId": "6a8874a6-f177-4d41-a445-9d4adcf8979b"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "76cf66af-fec6-4c49-8e74-b2889d42a3e8",
+              "leftValue": "={{ $json.creatorEmail }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        224,
+        0
+      ],
+      "id": "29a0d341-50ea-4e12-af92-25ca4266513d",
+      "name": "Creator Email Available?"
+    },
+    {
+      "parameters": {
+        "fromEmail": "info@schniefs-portfolio.de",
+        "toEmail": "={{ $json.creatorEmail }}",
+        "subject": "Status update for your Join request",
+        "emailFormat": "text",
+        "text": "=Hello {{ $json.creatorName || 'there' }},\n\nthe status of your request \"{{ $json.title }}\" has changed.\n\nPrevious status: {{ $json.oldStatus }}\nNew status: {{ $json.newStatus }}\n\nThis is an automated notification from Join.",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        608,
+        -16
+      ],
+      "id": "f779f550-8962-4b08-87f7-0698ac921c87",
+      "name": "Send Status Update",
+      "webhookId": "cc288ecf-efb0-48d8-9354-73d6493eb224",
+      "credentials": {
+        "smtp": {
+          "id": "Tm9Jzpc5URqWeuZm",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ {\n  ok: true,\n  notified: true\n} }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        832,
+        -16
+      ],
+      "id": "ec7ec2f7-1509-4b63-9ee7-7316886313b6",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ {\n  ok: true,\n  notified: false\n} }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        224,
+        256
+      ],
+      "id": "caef1638-017a-4ce3-835a-cbc7970016c9",
+      "name": "Respond to Webhook1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Task Status Changed": {
+      "main": [
+        [
+          {
+            "node": "Creator Email Available?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Creator Email Available?": {
+      "main": [
+        [
+          {
+            "node": "Send Status Update",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond to Webhook1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Status Update": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "a3089ec0-2ed8-4290-85d6-6ddbb7e42817",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "23427d11fa6d6678862904d9134038534b3654749c5ad1fef23554ff5724cfa7"
+  },
+  "nodeGroups": [],
+  "id": "xDRjrJortLb5t6eg",
+  "tags": []
+}

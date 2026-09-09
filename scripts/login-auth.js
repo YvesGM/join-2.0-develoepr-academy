@@ -343,11 +343,19 @@ function initGuestLogin() {
  * @category Login
  * @subcategory UI & Init
  */
-function handleGuestLogin() {
-	sessionStorage.setItem('guestLogin', '1');
-	localStorage.setItem('guestLogin', '1');
-	sessionStorage.removeItem('userId');
-	window.location.href = './sites/summary.html';
+async function handleGuestLogin() {
+	try {
+		await firebase.auth().signInAnonymously();
+
+		sessionStorage.setItem('guestLogin', '1');
+		localStorage.setItem('guestLogin', '1');
+		sessionStorage.removeItem('userId');
+		sessionStorage.setItem('skipSplash', '1');
+
+		window.location.href = './sites/summary.html';
+	} catch (error) {
+		console.error('Guest authentication failed:', error);
+	}
 }
 
 document.addEventListener('DOMContentLoaded', () => {
