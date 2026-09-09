@@ -22,7 +22,7 @@
         "nodeCredentialType": "supabaseApi",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"p_day_key\": \"{{ $now.setZone('Europe/Berlin').toISODate() }}\",\n  \"p_limit\": 10\n}",
+        "jsonBody": "={{ {\n  p_day_key: $now.setZone('Europe/Berlin').toISODate(),\n  p_limit: 10\n} }}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -863,7 +863,9 @@
         "subject": "Daily Request limit reached",
         "emailFormat": "text",
         "text": "The daily limit of 10 automated Join requests has been reached.\n\nYour email has been received successfully. No automated ticket was created, but our team will review your request manually.\n\nThank you.",
-        "options": {}
+        "options": {
+          "appendAttribution": false
+        }
       },
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2.1,
@@ -881,8 +883,10 @@
         "toEmail": "={{ $('Normalize Mail').item.json.senderEmail }}",
         "subject": "Your Join request was created",
         "emailFormat": "text",
-        "text": "Your request has been successfully processed and added to the Join board.\n\nTitle: {{ $('Build Join Task').item.json.title }}\nDue date: {{ $('Build Join Task').item.json.dueDate }}\n\nYou will be notified when the status of your request changes.",
-        "options": {}
+        "text": "={{ `Your request has been successfully processed and added to the Join board.\n\nTitle: ${$('Build Join Task').item.json.title}\nDue date: ${$('Build Join Task').item.json.dueDate}\n\nYou will be notified when the status of your request changes.` }}",
+        "options": {
+          "appendAttribution": false
+        }
       },
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2.1,
@@ -900,7 +904,9 @@
         "toEmail": "={{ $('Normalize Mail').item.json.senderEmail }}",
         "subject": "Your Join request was received",
         "html": "We received your request, but it could not be processed automatically.\n\nYour email has been saved for manual review and our team will take care of it as soon as possible.",
-        "options": {}
+        "options": {
+          "appendAttribution": false
+        }
       },
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2.1,
@@ -919,7 +925,9 @@
         "subject": "Your Join request was received",
         "emailFormat": "text",
         "text": "We received your request, but the automated analysis could not create a valid ticket.\n\nYour email has been saved for manual review and our team will take care of it as soon as possible.",
-        "options": {}
+        "options": {
+          "appendAttribution": false
+        }
       },
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2.1,
@@ -938,7 +946,9 @@
         "subject": "Your Join request was received",
         "emailFormat": "text",
         "text": "We received your request, but the ticket could not be saved to the board automatically.\n\nYour email has been saved for manual review and our team will take care of it as soon as possible.",
-        "options": {}
+        "options": {
+          "appendAttribution": false
+        }
       },
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2.1,
@@ -959,7 +969,7 @@
           "parameters": [
             {
               "name": "x-issue-collector-secret",
-              "value": "__ISSUE_MAIL_MOVE_SECRET__"
+              "value": "rgihdrgvmrmcvuc8e9jdsf"
             }
           ]
         },
@@ -987,7 +997,7 @@
           "parameters": [
             {
               "name": "x-issue-collector-secret",
-              "value": "__ISSUE_MAIL_MOVE_SECRET__"
+              "value": "rgihdrgvmrmcvuc8e9jdsf"
             }
           ]
         },
@@ -1015,7 +1025,7 @@
           "parameters": [
             {
               "name": "x-issue-collector-secret",
-              "value": "__ISSUE_MAIL_MOVE_SECRET__"
+              "value": "rgihdrgvmrmcvuc8e9jdsf"
             }
           ]
         },
@@ -1043,7 +1053,7 @@
           "parameters": [
             {
               "name": "x-issue-collector-secret",
-              "value": "__ISSUE_MAIL_MOVE_SECRET__"
+              "value": "rgihdrgvmrmcvuc8e9jdsf"
             }
           ]
         },
@@ -1071,7 +1081,7 @@
           "parameters": [
             {
               "name": "x-issue-collector-secret",
-              "value": "__ISSUE_MAIL_MOVE_SECRET__"
+              "value": "rgihdrgvmrmcvuc8e9jdsf"
             }
           ]
         },
@@ -1464,7 +1474,7 @@
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "4c2a8b4c-8235-4fbc-9d7b-8e7ca41dc9e0",
+  "versionId": "0b05d384-bac3-46a2-8b6b-abe7072f7c41",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "23427d11fa6d6678862904d9134038534b3654749c5ad1fef23554ff5724cfa7"

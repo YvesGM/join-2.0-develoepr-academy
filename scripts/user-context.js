@@ -14,7 +14,13 @@
 function initUserContext() {
 	if (typeof window === 'undefined') return;
 	window.userContext = { resolveUserId, getActiveUserProfile };
-	document.addEventListener('DOMContentLoaded', hydrateUserContext);
+	document.addEventListener('DOMContentLoaded', initUserContextUi);
+}
+
+/** Shows a safe initial avatar before Firebase hydration completes. */
+function initUserContextUi() {
+	updateHeaderProfile(null);
+	hydrateUserContext();
 }
 
 

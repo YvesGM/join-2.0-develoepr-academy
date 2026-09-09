@@ -69,7 +69,20 @@
     box-sizing: border-box;
 }
 
-.detail-header      { margin-bottom: 16px; }
+.detail-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 28px;
+    margin-bottom: 16px;
+}
+
+.detail-header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-right: 34px;
+}
 .detail-title       { font-size: 36px; font-weight: 700; margin: 0 0 12px; line-height: 1.2; }
 .detail-description { font-size: 15px; line-height: 1.6; margin-bottom: 20px; }
 

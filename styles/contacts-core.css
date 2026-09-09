@@ -105,6 +105,18 @@ body {
   align-items: center;
   justify-content: flex-start;
   gap: 12px;
+  border-radius: 10px;
+  transition: background 160ms ease;
+}
+
+.contact-box:not(.is-selected):hover {
+  background: linear-gradient(
+    180deg,
+    #fafafa 0%,
+    #f7f7f7 46%,
+    #f2f2f2 72%,
+    #ececec 100%
+  );
 }
 
 .contact-box.is-selected {

@@ -4,7 +4,16 @@
 
   /** Connects role-selection controls without changing the existing login logic. */
   function initRoleSelection() {
+    bindRoleSelectionActions();
+    if (new URLSearchParams(window.location.search).get("view") === "login") {
+      showMemberLogin();
+      return;
+    }
     document.body.classList.add("issue-welcome-active");
+  }
+
+  /** Connects both public entry actions. */
+  function bindRoleSelectionActions() {
     document.getElementById("stakeholder-entry")?.addEventListener("click", openStakeholder);
     document.getElementById("member-entry")?.addEventListener("click", showMemberLogin);
   }

@@ -205,6 +205,17 @@ button {
 	border-color: var(--primary-hover);
 }
 
+/* Keep password visibility UI controlled by Join instead of the browser. */
+.input-field input[type="password"]::-ms-reveal,
+.input-field input[type="password"]::-ms-clear {
+	display: none;
+}
+
+.input-field input[type="password"] {
+	appearance: none;
+	-webkit-appearance: none;
+}
+
 .input-icon {
 	position: absolute;
 	top: 24px;
@@ -294,6 +305,13 @@ button {
 	justify-content: center;
 	gap: 32px;
 	margin-top: 36px;
+}
+
+.login-actions .btn-dark:disabled,
+.login-actions .btn-dark[disabled] {
+	opacity: 1;
+	background: var(--primary);
+	color: #ffffff;
 }
 
 .login-footer {

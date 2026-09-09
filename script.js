@@ -153,7 +153,7 @@ function clearUserSession() {
  * @subcategory UI & Init
  */
 function getLoginPath() {
-	return window.location.pathname.includes('/sites/') ? '../index.html' : './index.html';
+	return window.location.pathname.includes('/sites/') ? '../index.html?view=login' : './index.html?view=login';
 }
 
 /**

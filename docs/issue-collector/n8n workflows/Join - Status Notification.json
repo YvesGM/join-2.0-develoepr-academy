@@ -30,7 +30,7 @@
           "conditions": [
             {
               "id": "76cf66af-fec6-4c49-8e74-b2889d42a3e8",
-              "leftValue": "={{ $json.creatorEmail }}",
+              "leftValue": "={{ $json.body.creatorEmail }}",
               "rightValue": "",
               "operator": {
                 "type": "string",
@@ -55,10 +55,10 @@
     {
       "parameters": {
         "fromEmail": "info@schniefs-portfolio.de",
-        "toEmail": "={{ $json.creatorEmail }}",
+        "toEmail": "={{ $json.body.creatorEmail }}",
         "subject": "Status update for your Join request",
         "emailFormat": "text",
-        "text": "=Hello {{ $json.creatorName || 'there' }},\n\nthe status of your request \"{{ $json.title }}\" has changed.\n\nPrevious status: {{ $json.oldStatus }}\nNew status: {{ $json.newStatus }}\n\nThis is an automated notification from Join.",
+        "text": "={{ `Hello ${$json.body.creatorName || 'there'},\\n\\nthe status of your request \"${$json.body.title}\" has changed.\\n\\nPrevious status: ${$json.body.oldStatus}\\nNew status: ${$json.body.newStatus}\\n\\nThis is an automated notification from Join.` }}",
         "options": {}
       },
       "type": "n8n-nodes-base.emailSend",

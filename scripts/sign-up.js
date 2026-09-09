@@ -372,7 +372,7 @@ function animateSignupSuccessMessage(overlay) {
  */
 function redirectToLoginWithSplashSkip() {
 	sessionStorage.setItem('skipSplash', '1');
-	window.location.href = '../index.html';
+	window.location.href = '../index.html?view=login';
 }
 
 /**

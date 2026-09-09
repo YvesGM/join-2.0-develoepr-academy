@@ -17,7 +17,43 @@ function runSplashAnimation() {
 	if (!elements) return;
 	setSplashTheme(elements);
 	if (handleSkippedSplash(elements)) return;
+	if (isIssueCollectorWelcome()) return playWelcomeSplash(elements);
 	playSplashAnimation(elements);
+}
+
+/**
+ * Returns whether the public Issue Collector welcome screen is active.
+ * @returns {boolean} True when the role-selection screen is the current entry view.
+ */
+function isIssueCollectorWelcome() {
+	return document.body.classList.contains('issue-welcome-active');
+}
+
+/**
+ * Crossfades the centered Join splash into the public Welcome screen.
+ * Mirrors the Figma prototype timing: 200 ms delay and 1200 ms ease-in-out.
+ * @param {SplashElements} elements - Required splash elements.
+ */
+function playWelcomeSplash(elements) {
+	setHeaderLogoVisibility(elements.headerLogo, false);
+	const targets = [elements.splashBg, elements.splashLogo, elements.splashLogoEnd];
+	const animations = targets.map((element) => fadeWelcomeElement(element));
+	Promise.all(animations.map((animation) => animation.finished))
+		.then(() => finishSplashAnimation(elements));
+}
+
+/**
+ * Fades one splash element using the Figma prototype timing.
+ * @param {HTMLElement} element - Splash element to fade.
+ * @returns {Animation} Started animation.
+ */
+function fadeWelcomeElement(element) {
+	return element.animate([{ opacity: 1 }, { opacity: 0 }], {
+		duration: 1200,
+		delay: 200,
+		easing: 'ease-in-out',
+		fill: 'forwards',
+	});
 }
 
 

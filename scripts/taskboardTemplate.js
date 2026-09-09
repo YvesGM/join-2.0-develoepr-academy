@@ -200,7 +200,7 @@ function escapeTemplateText(value) {
 /** Returns the persistent AI-generated provenance badge. */
 function renderAiGeneratedBadge(task) {
   return task.aiGenerated === true
-    ? '<span class="badge ai-generated-badge">AI-generated ticket</span>'
+    ? '<span class="badge ai-generated-badge"><img class="ai-generated-icon" src="../assets/img/icons/ai-icon.svg" alt="">AI-generated ticket</span>'
     : "";
 }
 
@@ -258,10 +258,15 @@ function getCardTemplate(task, id) {
 }
 
 /** Renders category and AI provenance badges. */
-function renderTaskBadgeRow(task) {
+function renderCategoryBadge(task) {
   const catClass = buildCategoryClass(task.category);
   const catText = formatCategoryLabel(task.category);
-  return `<div class="task-badge-row"><div class="badge ${catClass}">${catText}</div>${renderAiGeneratedBadge(task)}</div>`;
+  return `<div class="badge ${catClass}">${catText}</div>`;
+}
+
+/** Renders only the category badge on board cards. */
+function renderTaskBadgeRow(task) {
+  return `<div class="task-badge-row">${renderCategoryBadge(task)}</div>`;
 }
 
 /** Renders the card title and description. */
@@ -310,10 +315,12 @@ function getTaskDetailTemplate(task, id) {
 /** Renders the task-detail header and provenance badges. */
 function renderDetailHeader(task) {
   return `<div class="detail-header">
-    ${renderTaskBadgeRow(task)}
-    <button class="close-btn-overlay" onclick="closeTaskDetail()">
-      <img src="../assets/icons/close.svg" alt="Close">
-    </button>
+    ${renderCategoryBadge(task)}
+    <div class="detail-header-right">${renderAiGeneratedBadge(task)}
+      <button class="close-btn-overlay" onclick="closeTaskDetail()">
+        <img src="../assets/icons/close.svg" alt="Close">
+      </button>
+    </div>
   </div>`;
 }
 

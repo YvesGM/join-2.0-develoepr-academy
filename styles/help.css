@@ -87,3 +87,9 @@ span{
   margin-right: 16px;
 }
 
+
+.join-highlight {
+  color: #29abe2;
+  font: inherit;
+  font-weight: inherit;
+}
