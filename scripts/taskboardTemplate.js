@@ -36,6 +36,13 @@ function buildCategoryClass(category = "") {
   return normalized === "technical-task" ? "technical-task" : "user-story";
 }
 
+/** Returns the Figma display label for a supported task category. */
+function formatCategoryLabel(category = "") {
+  return buildCategoryClass(category) === "technical-task"
+    ? "Technical Task"
+    : "User Story";
+}
+
 /** Returns one supported priority for safe asset/template rendering. */
 function normalizeTemplatePriority(priority) {
   const value = String(priority || "").trim().toLowerCase();
@@ -197,15 +204,28 @@ function renderAiGeneratedBadge(task) {
     : "";
 }
 
-/** Builds external creator markup without creating a Join contact. */
-function renderExternalCreator(task) {
-  const creator = task.externalCreator;
-  if (!task.aiGenerated || !creator) return "";
+function renderTaskCreator(task) {
+  if (task.aiGenerated && task.externalCreator) return renderExternalCreator(task.externalCreator);
+  if (task.creator?.type === "internal") return renderInternalCreator(task.creator);
+  return "";
+}
+
+function renderExternalCreator(creator) {
   const name = escapeTemplateText(creator.name || creator.email || "External");
   const mailAction = renderExternalCreatorEmail(creator.email);
+  return renderCreatorSection("Extern", name, mailAction, "external-tag");
+}
+
+function renderInternalCreator(creator) {
+  const name = escapeTemplateText(creator.name || creator.email || "Member");
+  const mailAction = renderExternalCreatorEmail(creator.email);
+  return renderCreatorSection("Member", name, mailAction, "internal-tag");
+}
+
+function renderCreatorSection(tag, name, action, tagClass) {
   return `<div class="detail-section external-creator-section">
     <h3 class="section-title">Creator:</h3>
-    <div class="external-creator"><span class="external-tag">Extern</span><span>${name}</span>${mailAction}</div>
+    <div class="external-creator"><span class="${tagClass}">${tag}</span><span>${name}</span>${action}</div>
   </div>`;
 }
 
@@ -240,7 +260,7 @@ function getCardTemplate(task, id) {
 /** Renders category and AI provenance badges. */
 function renderTaskBadgeRow(task) {
   const catClass = buildCategoryClass(task.category);
-  const catText = escapeTemplateText(task.category || "User Story");
+  const catText = formatCategoryLabel(task.category);
   return `<div class="task-badge-row"><div class="badge ${catClass}">${catText}</div>${renderAiGeneratedBadge(task)}</div>`;
 }
 
@@ -302,7 +322,7 @@ function renderDetailContent(task, prio, prioLabel, id) {
   const title = escapeTemplateText(task.title || "No Title");
   const description = escapeTemplateText(task.description || "");
   return `<h1 class="detail-title">${title}</h1><p class="detail-description">${description}</p>
-    ${renderExternalCreator(task)}${renderDetailFacts(task, prio, prioLabel)}
+    ${renderTaskCreator(task)}${renderDetailFacts(task, prio, prioLabel)}
     ${renderAssignedSection(task)}${renderSubtasksSection(task, id)}`;
 }
 

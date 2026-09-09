@@ -147,17 +147,29 @@ function setupCreateTaskButton() {
  * @param {HTMLFormElement} form - Task form element that will be validated.
  * @returns {void}
  */
-function handleCreateTaskClick(e, form) {
+async function handleCreateTaskClick(e, form) {
     e.preventDefault();
-
-    let valid = validateTaskForm();
-    if (!valid) return;
-
-    let task = buildTaskObject();
-
+    if (!validateTaskForm()) return;
+    const task = await addInternalCreator(buildTaskObject());
     saveTaskToFirebase(task)
         .then(handleTaskCreatedSuccess)
         .catch(handleFirebaseError);
+}
+
+/** Adds the signed-in Join member as creator of a manually created task. */
+async function addInternalCreator(task) {
+    const profile = await window.userContext?.getActiveUserProfile?.();
+    if (!profile?.id) return task;
+    return { ...task, creator: buildInternalCreator(profile) };
+}
+
+/** Builds the persisted internal creator metadata. */
+function buildInternalCreator(profile) {
+    return {
+        type: "internal", id: String(profile.id),
+        name: String(profile.name || profile.email?.split("@")[0] || "User").trim(),
+        email: String(profile.email || "").trim().toLowerCase()
+    };
 }
 
 /**
@@ -189,7 +201,7 @@ function buildTaskObject() {
         category: document.getElementById("categoryInput")?.dataset.value || "",
         assignedTo: getAssignedContacts(),
         subtasks: getSubtasks(),
-        status: "todo",
+        status: "triage",
         createdAt: Date.now()
     };
 }

@@ -28,3 +28,42 @@
         flex-basis: clamp(100px, 28vw, 168px);
     }
 }
+
+/* Desktop geometry from the Figma summary layout:
+   keep the KPI cluster as one 560px rectangle and place the greeting beside it. */
+@media (min-width: 993px) {
+    .dashboard-wrapper {
+        align-items: center;
+        gap: 80px;
+    }
+
+    .metrics-section {
+        flex: 0 0 560px;
+        width: 560px;
+        max-width: 560px;
+        padding-right: 0;
+        box-sizing: border-box;
+    }
+
+    .row-top,
+    .row-middle,
+    .row-bottom {
+        width: 100%;
+    }
+
+    .row-middle .urgent-card {
+        min-width: 0;
+    }
+
+
+    .row-middle .email-requests-card {
+        height: auto;
+        align-self: stretch;
+    }
+
+    .greeting-section {
+        flex: 0 0 385px;
+        min-width: 385px;
+    }
+}
+

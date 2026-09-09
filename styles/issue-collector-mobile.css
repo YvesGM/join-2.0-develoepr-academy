@@ -52,6 +52,25 @@
     background: #29abe2;
   }
 
+
+  .issue-welcome-active .login-footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 22px;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    gap: 22px;
+    padding: 0;
+    color: #d1d1d1;
+    font-size: 14px;
+  }
+
+  .issue-welcome-active .login-footer a {
+    color: #d1d1d1;
+  }
+
   /* Stakeholder mobile frame */
   .stakeholder-page {
     min-height: 100dvh;
@@ -79,7 +98,7 @@
   .request-counter {
     margin: 6px 0 0 auto;
     color: #29abe2;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 1.25;
     text-align: right;
     white-space: normal;
@@ -245,10 +264,11 @@
   .taskboard-page .badge.ai-generated-badge {
     padding: 0;
     border-radius: 0;
-    color: #6b57c8;
+    color: #6E52FF;
     background: transparent;
     font-size: 11px;
     font-weight: 400;
+    line-height: 1;
   }
 
   .taskboard-page .badge.ai-generated-badge::before {

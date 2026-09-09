@@ -5,4 +5,5 @@
 window.issueCollectorPublicConfig = Object.freeze({
   requestEmail: "info@schniefs-portfolio.de",
   counterEndpoint: "https://schnief.app.n8n.cloud/webhook/issue-collector-counter",
+  statusWebhookEndpoint: "https://schnief.app.n8n.cloud/webhook/join-task-status-changed",
 });

@@ -362,23 +362,30 @@ async function updateSubtaskStatus(taskId, index, completed) {
  * @param {string} newStatus
  * @returns {void}
  */
-function onDrop(taskId, newStatus) {
-    if (!taskId) return;
-    firebase.database().ref('tasks/' + taskId).update({ status: newStatus }).then(() => renderBoard());
+async function onDrop(taskId, newStatus) {
+    if (!taskId || !BOARD_STATUSES.includes(newStatus)) return;
+    const oldStatus = boardTaskCache[taskId]?.status || '';
+    if (oldStatus === newStatus) return;
+    await updateTaskStatus(taskId, newStatus);
+    await notifyTaskStatusChange(taskId, oldStatus, newStatus);
+    renderBoard();
 }
 
-/**
- * Moves a task to a new status column (mobile detail view).
- * @param {string} taskId
- * @param {string} newStatus
- * @returns {void}
- */
-function moveTaskToStatus(taskId, newStatus) {
+/** Moves a task to another board status and notifies its creator. */
+async function moveTaskToStatus(taskId, newStatus) {
     if (!taskId || !BOARD_STATUSES.includes(newStatus)) return;
-    firebase.database().ref('tasks/' + taskId).update({ status: newStatus })
-        .then(() => {
-            if (boardTaskCache[taskId]) boardTaskCache[taskId].status = newStatus;
-            closeTaskDetail();
-            renderBoard();
-        });
+    const oldStatus = boardTaskCache[taskId]?.status || '';
+    if (oldStatus === newStatus) return;
+    await updateTaskStatus(taskId, newStatus);
+    await notifyTaskStatusChange(taskId, oldStatus, newStatus);
+    closeTaskDetail();
+    renderBoard();
 }
+
+/** Persists a task status and keeps the local cache in sync. */
+async function updateTaskStatus(taskId, newStatus) {
+    await firebase.database().ref('tasks/' + taskId).update({ status: newStatus });
+    if (boardTaskCache[taskId]) boardTaskCache[taskId].status = newStatus;
+}
+
+

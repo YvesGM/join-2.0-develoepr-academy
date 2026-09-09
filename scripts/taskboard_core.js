@@ -28,7 +28,7 @@ let currentEditSubtasks = [];
 let currentEditContacts = [];
 
 /** Status of the column from which the Add Task modal was opened. @type {string} */
-let currentSelectedStatus = 'todo';
+let currentSelectedStatus = 'triage';
 
 /* ==========================================================================
    2. CACHE READ / WRITE
@@ -71,7 +71,8 @@ function buildCachedBoardTask(task) {
         dueDate: task.dueDate || '', priority: task.priority || 'low',
         category: task.category || '', status: normalizeBoardStatus(task.status),
         assignedTo: normalizeCachedAssignedTo(task.assignedTo),
-        subtasks: normalizeSubtasks(task.subtasks), createdAt: task.createdAt || 0
+        subtasks: normalizeSubtasks(task.subtasks), createdAt: task.createdAt || 0,
+        creator: normalizeCachedCreator(task.creator)
     };
 }
 
@@ -84,6 +85,16 @@ function normalizeBoardStatus(status) {
 function normalizeCachedAssignedTo(assignedTo) {
     if (!Array.isArray(assignedTo)) return [];
     return assignedTo.map(normalizeCachedBadge).filter(Boolean);
+}
+
+
+/** Normalizes persisted internal creator metadata for cached tasks. */
+function normalizeCachedCreator(creator) {
+    if (!creator || creator.type !== 'internal') return null;
+    const name = String(creator.name || '').trim();
+    const email = String(creator.email || '').trim().toLowerCase();
+    if (!name && !email) return null;
+    return { type: 'internal', id: String(creator.id || ''), name, email };
 }
 
 /** Preserves additive Issue Collector metadata in the board cache. */

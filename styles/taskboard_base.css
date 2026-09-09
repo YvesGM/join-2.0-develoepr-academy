@@ -213,7 +213,7 @@ input:focus-visible {
 .card:active { transform: translateY(-6px) rotate(2.5deg) scale(1.03); box-shadow: 0 16px 40px rgba(0,0,0,0.18); cursor: grabbing; }
 
 .badge { padding: 5px 16px; border-radius: 20px; font-size: 14px; font-weight: 600; color: var(--white); width: fit-content; }
-.badge.user-story     { background-color: #0038FF; }
+.badge.user-story     { background-color: #9747FF; }
 .badge.technical-task { background-color: #1FD7C1; }
 
 .task-badge-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }

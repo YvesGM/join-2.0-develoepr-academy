@@ -145,10 +145,10 @@ async function filterTasks(term) {
 
 /**
  * Opens the Add Task modal and sets the target column status.
- * @param {string} [status='todo']
+ * @param {string} [status='triage']
  * @returns {void}
  */
-function openAddTaskModalBoard(status = 'todo') {
+function openAddTaskModalBoard(status = 'triage') {
     currentSelectedStatus = status;
     window.currentSelectedStatus = status;
     const modal = document.getElementById('addTaskModal');
@@ -274,7 +274,7 @@ function handleOverlayClick(event) {
  */
 function buildTaskObject() {
     const status = (typeof currentSelectedStatus !== 'undefined' && currentSelectedStatus)
-        ? currentSelectedStatus : 'todo';
+        ? currentSelectedStatus : 'triage';
     return {
         title: document.getElementById("titleInput").value.trim(),
         description: document.querySelector("textarea").value.trim(),
