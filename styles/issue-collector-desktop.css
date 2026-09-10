@@ -66,7 +66,7 @@
 .taskboard-page .external-creator-section .section-title{margin:0;font-size:16px;font-weight:400;}
 .taskboard-page .external-creator{flex-wrap:nowrap;gap:8px;font-size:16px;}
 .taskboard-page .external-tag{gap:4px;padding:2px 4px;border-radius:4px;color:#000;background:#ebfc88;font-size:14px;font-weight:400;}
-.taskboard-page .external-tag::before{content:"";width:14px;height:14px;background:url("../assets/img/icons/creator-extern-icon.svg") center/contain no-repeat;flex:0 0 14px;}
+.taskboard-page .external-tag::before{content:"";width:14px;height:14px;background:url("../assets/icons/creator-extern-icon.svg") center/contain no-repeat;flex:0 0 14px;}
 .taskboard-page .external-email-action{margin-left:auto;color:#29abe2;font-size:14px;font-weight:400;white-space:nowrap;}
 .taskboard-page .external-email-action::before{content:"";width:18px;height:16px;background:url("../assets/img/icons/task-email-icon.svg") center/contain no-repeat;flex:0 0 18px;}
 @media (max-width:1320px){.summary-page .dashboard-wrapper{align-items:flex-start;flex-direction:column;gap:32px;}
@@ -86,3 +86,23 @@
 }
 .welcome-copy-mobile-break{display:none;}
 .internal-tag{background:#d1fae5;color:#047857;border-radius:4px;padding:2px 7px;font-size:12px;line-height:1.2;}
+
+@media (min-width: 769px) {
+  .taskboard-page .column-header h2 { font-size: 20px; }
+  .taskboard-page .badge { font-size: 15px; }
+  .taskboard-page .card-title { font-size: 20px; }
+  .taskboard-page .card-description { font-size: 16px; line-height: 1.4; }
+  .taskboard-page .subtask-text { font-size: 15px; }
+  .taskboard-page .detail-title { font-size: 44px; }
+  .taskboard-page .detail-description { font-size: 18px; line-height: 1.5; }
+  .taskboard-page .info-label,
+  .taskboard-page .info-value,
+  .taskboard-page .info-value-prio,
+  .taskboard-page .external-creator,
+  .taskboard-page .assigned-user-badge-container span,
+  .taskboard-page .subtask-row { font-size: 17px; }
+  .taskboard-page .external-creator-section .section-title,
+  .taskboard-page .section-title { font-size: 17px; }
+  .taskboard-page .external-tag,
+  .taskboard-page .external-email-action { font-size: 15px; }
+}

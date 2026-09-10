@@ -81,10 +81,17 @@ function startSplashLogoAnimations(elements, context) {
   ];
 }
 
-/** Selects the correct logo contrast for desktop/mobile splash. */
+/** Returns the logo source that matches the active page background. */
+function getSplashLogoSource() {
+  const welcomeCompact = isIssueCollectorWelcome() && window.matchMedia('(max-width: 992px)').matches;
+  return welcomeCompact || isMobileSplash()
+    ? './assets/img/join_logo.svg'
+    : './assets/img/join_logo_dark.svg';
+}
+
+/** Selects the correct logo contrast for the active splash background. */
 function setSplashTheme({ splashLogo, splashLogoEnd, headerLogo }) {
-  const mobile = isMobileSplash();
-  const source = mobile ? './assets/img/join_logo.svg' : './assets/img/join_logo_dark.svg';
+  const source = getSplashLogoSource();
   splashLogo.src = source;
   splashLogoEnd.src = source;
   if (headerLogo) headerLogo.src = source;
