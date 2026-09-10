@@ -219,8 +219,10 @@ input:focus-visible {
 .task-badge-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .badge.ai-generated-badge { background-color: #2A3647; }
 .external-creator { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
-.external-tag { font-weight: 600; color: #2A3647; }
-.external-email-action { color: #007CEE; text-decoration: none; font-weight: 600; }
+.external-tag { display:inline-flex; align-items:center; gap:4px; padding:2px 4px; border-radius:4px; background:#EBFC88; color:#000; font-weight:400; }
+.creator-type-icon { width:14px; height:14px; flex:0 0 14px; }
+.external-email-action { display:inline-flex; align-items:center; gap:4px; color:#007CEE; text-decoration:none; font-weight:400; }
+.external-email-action img { width:18px; height:16px; }
 .external-email-action:hover { text-decoration: underline; }
 
 .card-title { font-size: 18px; font-weight: 700; margin: 0; line-height: 1.3; }

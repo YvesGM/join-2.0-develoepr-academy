@@ -229,3 +229,16 @@
     .search-container { width: 100%; }
     .add-task         { width: 100%; justify-content: center; }
 }
+@media (min-width: 769px) {
+    .taskboard-page .card-description,
+    .taskboard-page .subtask-text { font-size: 16px; }
+    .taskboard-page .detail-description,
+    .taskboard-page .external-creator,
+    .taskboard-page .detail-info-row,
+    .taskboard-page .detail-prio-row,
+    .taskboard-page .assigned-user-badge-container,
+    .taskboard-page .subtask-row { font-size: 16px; }
+    .taskboard-page .external-creator-section .section-title,
+    .taskboard-page .section-title { font-size: 16px; }
+    .taskboard-page .external-email-action::before { content: none; }
+}

@@ -4,10 +4,6 @@
  * Edit-Modus, Kontakte, Subtasks, Delete, Status-Updates, Drag & Drop
  */
 
-/* ==========================================================================
-   1. EDIT MODE
-   ========================================================================== */
-
 /**
  * Initializes the task edit mode by populating forms with current data.
  * @async
@@ -72,10 +68,6 @@ function setEditPriority(prio) {
         .forEach(btn => btn.classList.remove('active-urgent', 'active-medium', 'active-low'));
     document.getElementById('prio-' + prio)?.classList.add('active-' + prio);
 }
-
-/* ==========================================================================
-   2. CONTACTS
-   ========================================================================== */
 
 /**
  * Formats contact names for UI display and marks own account.
@@ -187,10 +179,6 @@ function toggleEditContactList() {
     arrow.style.transform = list.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
 }
 
-/* ==========================================================================
-   3. SUBTASKS
-   ========================================================================== */
-
 /**
  * Adds a new subtask to the edit buffer and refreshes UI.
  * @returns {void}
@@ -272,10 +260,6 @@ function initEditSubtaskEnterKey() {
         if (event.key === 'Enter') { event.preventDefault(); addSubtaskInEdit(); }
     });
 }
-
-/* ==========================================================================
-   4. ACTIONS (DELETE, STATUS UPDATE, DRAG & DROP)
-   ========================================================================== */
 
 /**
  * Clears a specific task from local board caches.
@@ -388,4 +372,28 @@ async function updateTaskStatus(taskId, newStatus) {
     if (boardTaskCache[taskId]) boardTaskCache[taskId].status = newStatus;
 }
 
+/** Binds a resilient drag/drop handler to the existing board columns. */
+function bindBoardDropTargets() {
+    BOARD_STATUSES.forEach(status => {
+        const list = document.querySelector(`#${status} .task-list`);
+        if (!list) return;
+        list.addEventListener('dragover', allowBoardDrop, true);
+        list.addEventListener('drop', handleBoardDrop, true);
+    });
+}
 
+/** Enables dropping without changing the existing card drag source. */
+function allowBoardDrop(event) {
+    event.preventDefault();
+}
+
+/** Routes a native drop through the existing task status update flow. */
+function handleBoardDrop(event) {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    const status = event.currentTarget.closest('.column')?.id || '';
+    const taskId = event.dataTransfer?.getData('text/plain') || '';
+    onDrop(taskId, status);
+}
+
+document.addEventListener('DOMContentLoaded', bindBoardDropTargets);

@@ -67,3 +67,33 @@
     }
 }
 
+
+@media (min-width: 993px) and (max-width: 1180px) {
+    .summary-page .dashboard-wrapper {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 32px;
+    }
+
+    .summary-page .greeting-section {
+        flex: 0 0 auto;
+        min-width: 0;
+        padding-bottom: 48px;
+    }
+
+    .summary-page aside {
+        overflow-y: auto;
+    }
+
+    .summary-page aside > img {
+        margin-top: 36px;
+    }
+
+    .summary-page .sidebar-navigation {
+        margin-top: 52px;
+    }
+
+    .summary-page .sidebar-legal-links {
+        margin-bottom: 28px;
+    }
+}

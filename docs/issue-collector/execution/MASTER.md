@@ -254,3 +254,14 @@ Current PHASE-01 run:
 - Project-side Issue Collector status: CODE COMPLETE.
 - Next work is external mail/n8n/AI/Firebase setup plus real end-to-end testing.
 - Direct mobile Figma MCP two-pass validation remains an explicitly documented visual residual because the Starter MCP quota is exhausted.
+
+### 2026-09-10 review-feedback patch
+- Revalidated the completed Issue Collector flow before applying reviewer feedback.
+- Restored the page-load splash behavior: desktop Welcome crossfades; mobile Welcome moves the normal white/blue Join logo into the header while the overlay fades.
+- Login field errors now remain clear initially and validate on blur/submit without forced focus.
+- Added short-height/landscape scrolling so Welcome/Stakeholder legal links remain outside content cards and reachable by page scroll.
+- Added tablet Summary stacking/scroll behavior to prevent clipped greeting/legal navigation.
+- Restored native Board drag/drop binding after every render.
+- Aligned external creator provenance with Figma using the green tag, creator icon and supplied task e-mail icon.
+- Increased desktop-only Board/detail text sizes without changing mobile typography.
+- n8n root placement and repository fork strategy were intentionally left unchanged.

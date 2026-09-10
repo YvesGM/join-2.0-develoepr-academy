@@ -28,6 +28,5 @@
     document.body.classList.remove("issue-welcome-active");
     document.getElementById("role-selection")?.setAttribute("hidden", "");
     document.getElementById("login-card")?.removeAttribute("hidden");
-    document.querySelector('.login-form input[name="email"]')?.focus();
   }
 })();

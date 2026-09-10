@@ -67,9 +67,9 @@ function bindLoginFieldEvents(fields) {
  * @subcategory UI & Init
  */
 function initLoginMessageVisibility(fields) {
-	[fields.emailMessage, fields.passwordMessage].forEach((message) => {
-		message.style.visibility = 'hidden';
-	});
+	clearFieldError(fields.emailInput, fields.emailMessage);
+	clearFieldError(fields.passwordInput, fields.passwordMessage);
+	setFormMessage(fields.authMessage, '');
 }
 
 /**
