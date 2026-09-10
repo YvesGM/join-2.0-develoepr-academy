@@ -9,7 +9,7 @@ function runSplashAnimation() {
   if (!elements) return;
   setSplashTheme(elements);
   if (handleSkippedSplash(elements)) return;
-  if (isIssueCollectorWelcome() && !isMobileSplash()) return playWelcomeSplash(elements);
+  if (isIssueCollectorWelcome() && !isCompactWelcomeSplash()) return playWelcomeSplash(elements);
   playSplashAnimation(elements);
 }
 
@@ -21,6 +21,11 @@ function isIssueCollectorWelcome() {
 /** @returns {boolean} Whether the mobile splash behavior applies. */
 function isMobileSplash() {
   return window.matchMedia('(max-width: 768px)').matches;
+}
+
+/** @returns {boolean} Whether compact Welcome uses the moving splash. */
+function isCompactWelcomeSplash() {
+  return window.matchMedia('(max-width: 992px)').matches;
 }
 
 /** Crossfades the desktop Welcome splash using the Figma prototype timing. */
@@ -160,7 +165,8 @@ function getSplashStartScale(logoHeight) {
 
 /** @returns {number} Mobile-tuned centered-logo scale. */
 function getResponsiveSplashStartScale(baseScale) {
-  return isMobileSplash() ? Math.max(1, baseScale * 0.75) : baseScale;
+  const compactWelcome = isIssueCollectorWelcome() && isCompactWelcomeSplash();
+  return isMobileSplash() || compactWelcome ? Math.max(1, baseScale * 0.75) : baseScale;
 }
 
 /** Only explicit navigation flags skip animation; reloads animate again. */
