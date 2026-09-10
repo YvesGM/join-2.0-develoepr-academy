@@ -201,7 +201,7 @@ function countEmailRequests(taskList) {
  */
 function renderSummary(tasks) {
     const stats = calculateTaskStats(tasks);
-    
+
     document.getElementById("total-tasks").innerText = stats.totalTasks;
     document.getElementById("todo-tasks").innerText = stats.todoCount;
     document.getElementById("inprogress-tasks").innerText = stats.inProgressCount;
@@ -292,10 +292,10 @@ let _mobileGreetingOverlay = null;
  * @returns {void}
  */
 function showMobileGreetingIfNeeded() {
-    if (window.innerWidth > 992) return;
+    if (window.innerWidth > 1320) return;
 
     const greetText = document.getElementById('greet')?.innerHTML || '';
-    const nameText  = document.getElementById('user-name')?.innerText || '';
+    const nameText = document.getElementById('user-name')?.innerText || '';
 
     // Overlay bauen
     const overlay = document.createElement('div');
@@ -308,9 +308,9 @@ function showMobileGreetingIfNeeded() {
     _mobileGreetingOverlay = overlay;
 
     // Board zunächst unsichtbar
-    const board   = document.querySelector('.dashboard-wrapper');
-    const header  = document.querySelector('.summary-header');
-    if (board)  board.classList.add('board-hidden');
+    const board = document.querySelector('.dashboard-wrapper');
+    const header = document.querySelector('.summary-header');
+    if (board) board.classList.add('board-hidden');
     if (header) header.classList.add('board-hidden');
 
     // Overlay im nächsten Frame einblenden (CSS-Transition greift)
@@ -319,14 +319,14 @@ function showMobileGreetingIfNeeded() {
     // Nach 2s Fade + 0.7s Animation → Board einblenden, Overlay entfernen
     // Gesamtdauer: 2s Pause + 0.7s CSS-Fade = 2700ms
     setTimeout(() => {
-        if (board)  { board.classList.remove('board-hidden');  board.classList.add('board-visible'); }
+        if (board) { board.classList.remove('board-hidden'); board.classList.add('board-visible'); }
         if (header) { header.classList.remove('board-hidden'); header.classList.add('board-visible'); }
 
         overlay.addEventListener('animationend', () => {
             overlay.remove();
             _mobileGreetingOverlay = null;
         }, { once: true });
-    }, 2700);
+    }, 2000);
 }
 
 /**

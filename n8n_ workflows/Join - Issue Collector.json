@@ -36,31 +36,6 @@
     },
     {
       "parameters": {
-        "operation": "getAll",
-        "tableId": "issue_collector_messages",
-        "limit": 1,
-        "filters": {
-          "conditions": [
-            {
-              "keyName": "message_key",
-              "condition": "eq",
-              "keyValue": "={{ $json.messageKey }}"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.supabase",
-      "typeVersion": 1,
-      "position": [
-        -176,
-        -160
-      ],
-      "id": "3cfdcd9d-c73b-44ad-9a3d-1db0eae3cc91",
-      "name": "Dublicate Lookup",
-      "alwaysOutputData": true
-    },
-    {
-      "parameters": {
         "conditions": {
           "options": {
             "caseSensitive": true,
@@ -962,31 +937,28 @@
     },
     {
       "parameters": {
-        "method": "POST",
-        "url": "https://uhzhroacvnwemikgqjqe.supabase.co/functions/v1/move-mail",
-        "sendHeaders": true,
-        "headerParameters": {
-          "parameters": [
+        "operation": "getAll",
+        "tableId": "issue_collector_messages",
+        "limit": 1,
+        "filters": {
+          "conditions": [
             {
-              "name": "x-issue-collector-secret",
-              "value": "rgihdrgvmrmcvuc8e9jdsf"
+              "keyName": "message_key",
+              "condition": "eq",
+              "keyValue": "={{ $json.messageKey }}"
             }
           ]
-        },
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={{ {\n  uid: $('Email Trigger (IMAP)').item.json.attributes.uid,\n  targetFolder: 'erledigt'\n} }}",
-        "options": {}
+        }
       },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.5,
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
       "position": [
-        2176,
-        -512
+        -176,
+        -160
       ],
-      "id": "1afd8638-cbf2-437c-98fa-08b1b2ccb424",
-      "name": "Move Mail to Erledigt",
-      "onError": "continueRegularOutput"
+      "id": "3cfdcd9d-c73b-44ad-9a3d-1db0eae3cc91",
+      "name": "Duplicate Lookup",
+      "alwaysOutputData": true
     },
     {
       "parameters": {
@@ -1013,7 +985,7 @@
         448
       ],
       "id": "444e9781-161a-46c8-b549-5bfe07b17e5e",
-      "name": "Move Mail to Review",
+      "name": "Move Mail to Review - Limit",
       "onError": "continueRegularOutput"
     },
     {
@@ -1041,7 +1013,7 @@
         128
       ],
       "id": "fb5e3ff8-8b82-4dd7-bbd7-958dc2e8954e",
-      "name": "Move Mail to Review1",
+      "name": "Move Mail to Review - AI Error",
       "onError": "continueRegularOutput"
     },
     {
@@ -1069,7 +1041,7 @@
         -32
       ],
       "id": "8808b422-bc3f-43c9-b0af-aa084d1c78ff",
-      "name": "Move Mail to Review2",
+      "name": "Move Mail to Review - Validation Error",
       "onError": "continueRegularOutput"
     },
     {
@@ -1097,7 +1069,35 @@
         -256
       ],
       "id": "6f02a169-3e37-49db-883f-d2b59e087f25",
-      "name": "Move Mail to Review3",
+      "name": "Move Mail to Review - Firebase Error",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://uhzhroacvnwemikgqjqe.supabase.co/functions/v1/move-mail",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-issue-collector-secret",
+              "value": "rgihdrgvmrmcvuc8e9jdsf"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ {\n  uid: $('Email Trigger (IMAP)').item.json.attributes.uid,\n  targetFolder: 'erledigt'\n} }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        2176,
+        -512
+      ],
+      "id": "1afd8638-cbf2-437c-98fa-08b1b2ccb424",
+      "name": "Move Mail to done",
       "onError": "continueRegularOutput"
     }
   ],
@@ -1108,17 +1108,6 @@
         [
           {
             "node": "Normalize Mail",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Dublicate Lookup": {
-      "main": [
-        [
-          {
-            "node": "is Duplicate?",
             "type": "main",
             "index": 0
           }
@@ -1256,7 +1245,7 @@
       "main": [
         [
           {
-            "node": "Dublicate Lookup",
+            "node": "Duplicate Lookup",
             "type": "main",
             "index": 0
           }
@@ -1417,7 +1406,7 @@
       "main": [
         [
           {
-            "node": "Move Mail to Erledigt",
+            "node": "Move Mail to done",
             "type": "main",
             "index": 0
           }
@@ -1428,7 +1417,7 @@
       "main": [
         [
           {
-            "node": "Move Mail to Review",
+            "node": "Move Mail to Review - Limit",
             "type": "main",
             "index": 0
           }
@@ -1439,7 +1428,7 @@
       "main": [
         [
           {
-            "node": "Move Mail to Review1",
+            "node": "Move Mail to Review - AI Error",
             "type": "main",
             "index": 0
           }
@@ -1450,7 +1439,7 @@
       "main": [
         [
           {
-            "node": "Move Mail to Review2",
+            "node": "Move Mail to Review - Validation Error",
             "type": "main",
             "index": 0
           }
@@ -1461,7 +1450,18 @@
       "main": [
         [
           {
-            "node": "Move Mail to Review3",
+            "node": "Move Mail to Review - Firebase Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Duplicate Lookup": {
+      "main": [
+        [
+          {
+            "node": "is Duplicate?",
             "type": "main",
             "index": 0
           }
@@ -1474,7 +1474,7 @@
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "0b05d384-bac3-46a2-8b6b-abe7072f7c41",
+  "versionId": "2070bbdd-1af6-4465-8a27-3062d2cf8903",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "23427d11fa6d6678862904d9134038534b3654749c5ad1fef23554ff5724cfa7"

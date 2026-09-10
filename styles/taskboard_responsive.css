@@ -52,7 +52,7 @@
 .move-to-menu.open { display: block; }
 
 .move-to-title {
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 700;
     padding: 0 16px 10px;
     color: #fff;
@@ -64,7 +64,7 @@
     align-items: center;
     gap: 10px;
     padding: 9px 16px;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 400;
     cursor: pointer;
     border-radius: 10px;
@@ -76,7 +76,7 @@
 .move-to-item:hover { background: #3d5166; }
 
 .move-to-arrow {
-    font-size: 15px;
+    font-size: 16px;
     line-height: 1;
     opacity: 0.85;
 }
@@ -142,6 +142,36 @@
     body             { overflow-y: auto !important; }
 }
 
+@media (min-width: 769px) and (max-width: 1320px) {
+    .taskboard-page .board {
+        grid-template-columns: repeat(5, minmax(150px, 1fr));
+        gap: 12px;
+    }
+
+    .taskboard-page .card {
+        padding: 14px;
+    }
+
+    .taskboard-page .card-title {
+        font-size: 16px;
+    }
+
+    .taskboard-page .assigned-to-container {
+        min-width: 0;
+    }
+
+    .taskboard-page .user-badge {
+        width: 30px;
+        height: 30px;
+        min-width: 30px;
+        font-size: 16px;
+    }
+
+    .taskboard-page .assigned-to-container .user-badge + .user-badge {
+        margin-left: -6px;
+    }
+}
+
 /* ─────────────────────────────────────────────
    768px
 ───────────────────────────────────────────── */
@@ -152,7 +182,7 @@
     .search-add             { gap: 10px; width: 100%; }
     .search-container       { flex: 1; }
     .search-container input { width: 100%; min-width: 0; }
-    .add-task               { font-size: 15px; padding: 10px 16px; }
+    .add-task               { font-size: 16px; padding: 10px 16px; }
     .board                  { grid-template-columns: 1fr; gap: 20px; padding-bottom: 40px; }
     .column                 { height: auto !important; min-height: 0 !important; }
     .column-header h2       { font-size: 22px; }
@@ -211,7 +241,7 @@
     .detail-prio-row { flex-direction: column; align-items: flex-start; gap: 4px; }
     .info-label      { min-width: unset; font-size: 13px; color: var(--text-gray); font-weight: 400; }
 
-    .prio-btn-edit     { font-size: 11px; padding: 8px 2px; gap: 3px; }
+    .prio-btn-edit     { font-size: 16px; padding: 8px 2px; gap: 3px; }
     .prio-btn-edit img { width: 13px; }
 
     .detail-actions  { flex-direction: column; align-items: stretch; }

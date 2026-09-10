@@ -68,7 +68,7 @@
 }
 
 
-@media (min-width: 993px) and (max-width: 1180px) {
+@media (min-width: 993px) and (max-width: 1320px) {
     .summary-page .dashboard-wrapper {
         align-items: flex-start;
         flex-direction: column;
@@ -76,9 +76,7 @@
     }
 
     .summary-page .greeting-section {
-        flex: 0 0 auto;
-        min-width: 0;
-        padding-bottom: 48px;
+        display: none;
     }
 
     .summary-page aside {
