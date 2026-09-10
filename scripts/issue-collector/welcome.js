@@ -26,6 +26,7 @@
   /** Reveals the unchanged existing member/guest login card. */
   function showMemberLogin() {
     document.body.classList.remove("issue-welcome-active");
+    document.querySelector(".login-logo")?.setAttribute("src", "./assets/img/join_logo_dark.svg");
     document.getElementById("role-selection")?.setAttribute("hidden", "");
     document.getElementById("login-card")?.removeAttribute("hidden");
   }

@@ -82,10 +82,12 @@ function startSplashLogoAnimations(elements, context) {
 }
 
 /** Selects the correct logo contrast for desktop/mobile splash. */
-function setSplashTheme({ splashLogo, splashLogoEnd }) {
-  const source = isMobileSplash() ? './assets/img/join_logo.svg' : './assets/img/join_logo_dark.svg';
+function setSplashTheme({ splashLogo, splashLogoEnd, headerLogo }) {
+  const mobile = isMobileSplash();
+  const source = mobile ? './assets/img/join_logo.svg' : './assets/img/join_logo_dark.svg';
   splashLogo.src = source;
   splashLogoEnd.src = source;
+  if (headerLogo) headerLogo.src = source;
 }
 
 /** @returns {{splashLogo:HTMLElement,splashLogoEnd:HTMLElement,headerLogo:HTMLElement,splashBg:HTMLElement}|null} */
