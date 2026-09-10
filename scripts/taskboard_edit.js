@@ -351,8 +351,8 @@ async function onDrop(taskId, newStatus) {
     const oldStatus = boardTaskCache[taskId]?.status || '';
     if (oldStatus === newStatus) return;
     await updateTaskStatus(taskId, newStatus);
-    await notifyTaskStatusChange(taskId, oldStatus, newStatus);
     renderBoard();
+    void notifyTaskStatusChange(taskId, oldStatus, newStatus);
 }
 
 /** Moves a task to another board status and notifies its creator. */
@@ -361,9 +361,9 @@ async function moveTaskToStatus(taskId, newStatus) {
     const oldStatus = boardTaskCache[taskId]?.status || '';
     if (oldStatus === newStatus) return;
     await updateTaskStatus(taskId, newStatus);
-    await notifyTaskStatusChange(taskId, oldStatus, newStatus);
     closeTaskDetail();
     renderBoard();
+    void notifyTaskStatusChange(taskId, oldStatus, newStatus);
 }
 
 /** Persists a task status and keeps the local cache in sync. */
@@ -372,28 +372,3 @@ async function updateTaskStatus(taskId, newStatus) {
     if (boardTaskCache[taskId]) boardTaskCache[taskId].status = newStatus;
 }
 
-/** Binds a resilient drag/drop handler to the existing board columns. */
-function bindBoardDropTargets() {
-    BOARD_STATUSES.forEach(status => {
-        const list = document.querySelector(`#${status} .task-list`);
-        if (!list) return;
-        list.addEventListener('dragover', allowBoardDrop, true);
-        list.addEventListener('drop', handleBoardDrop, true);
-    });
-}
-
-/** Enables dropping without changing the existing card drag source. */
-function allowBoardDrop(event) {
-    event.preventDefault();
-}
-
-/** Routes a native drop through the existing task status update flow. */
-function handleBoardDrop(event) {
-    event.preventDefault();
-    event.stopImmediatePropagation();
-    const status = event.currentTarget.closest('.column')?.id || '';
-    const taskId = event.dataTransfer?.getData('text/plain') || '';
-    onDrop(taskId, status);
-}
-
-document.addEventListener('DOMContentLoaded', bindBoardDropTargets);

@@ -330,7 +330,7 @@
   }
 }
 
-@media (min-width: 993px) and (max-width: 1200px) {
+@media (min-width: 992px) and (max-width: 1200px) {
   .contact-overlay__panel-left {
     padding: 40px 32px;
   }

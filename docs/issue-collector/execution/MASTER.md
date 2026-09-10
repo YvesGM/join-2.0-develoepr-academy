@@ -265,3 +265,8 @@ Current PHASE-01 run:
 - Aligned external creator provenance with Figma using the green tag, creator icon and supplied task e-mail icon.
 - Increased desktop-only Board/detail text sizes without changing mobile typography.
 - n8n root placement and repository fork strategy were intentionally left unchanged.
+
+### 2026-09-10 board/tablet follow-up
+- Removed the duplicate JavaScript drag/drop binding added during review feedback; the board now uses the original single inline drop path owned by `renderColumnHTML`, avoiding two competing drop handlers.
+- Tablet Summary now gives the `Email requests` tile a proportional column instead of the narrow fixed-looking strip.
+- Desktop Board now consumes the full available width beside the 232px sidebar; five columns scale across that space without changing the mobile layout.
