@@ -1,5 +1,5 @@
 {
-  "name": "Counter-Workflow",
+  "name": "Join - Counter-Workflow",
   "nodes": [
     {
       "parameters": {
@@ -35,7 +35,13 @@
         0
       ],
       "id": "cdd12d72-091d-467e-898d-7413c8f408e0",
-      "name": "Get Daily Usage"
+      "name": "Get Daily Usage",
+      "credentials": {
+        "supabaseApi": {
+          "id": "q29scgLDJm1zYFcO",
+          "name": "Supabase account"
+        }
+      }
     },
     {
       "parameters": {
@@ -91,7 +97,7 @@
         0
       ],
       "id": "c29ee74b-cf69-40a0-b111-a96995d01528",
-      "name": "Respond to Webhook"
+      "name": "Respond Counter"
     }
   ],
   "pinData": {},
@@ -122,7 +128,7 @@
       "main": [
         [
           {
-            "node": "Respond to Webhook",
+            "node": "Respond Counter",
             "type": "main",
             "index": 0
           }
@@ -135,7 +141,7 @@
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "ecb1cdc4-5f2b-452f-9347-b4ae738a3a85",
+  "versionId": "0fbe040c-3822-4f89-9052-f8b5fa848dff",
   "meta": {
     "instanceId": "23427d11fa6d6678862904d9134038534b3654749c5ad1fef23554ff5724cfa7"
   },

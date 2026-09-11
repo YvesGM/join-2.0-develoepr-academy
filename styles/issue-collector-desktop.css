@@ -1,4 +1,13 @@
-@media (min-width:993px) {
+@media (min-width:1180px) {
+  .taskboard-page .board-container {
+    margin-left: 256px;
+    width: calc(100% - 256px);
+    max-width: none;
+    padding: 100px 40px 32px 0;
+  }
+}
+
+@media (min-width:1180px) {
   .login-page.issue-welcome-active {
     background: #2a3647;
   }
@@ -340,13 +349,6 @@
 
   .summary-page .email-request-number {
     color: #6c63ff;
-  }
-
-  .taskboard-page .board-container {
-    margin-left: 256px;
-    width: calc(100% - 256px);
-    max-width: none;
-    padding: 100px 40px 32px 0;
   }
 
   .taskboard-page .board-header {

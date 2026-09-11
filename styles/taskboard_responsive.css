@@ -31,8 +31,16 @@
     transition: background 0.15s, border-color 0.15s;
 }
 
-.move-to-btn:hover        { background: #f0f0f0; border-color: #aaa; }
-.move-to-btn img          { width: 20px; height: 20px; object-fit: contain; }
+.move-to-btn:hover {
+    background: #f0f0f0;
+    border-color: #aaa;
+}
+
+.move-to-btn img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
 
 /* --- MOVE-TO POPUP --- */
 .move-to-menu {
@@ -46,10 +54,12 @@
     padding: 12px 0 8px;
     min-width: 148px;
     z-index: 200;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.28);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
 }
 
-.move-to-menu.open { display: block; }
+.move-to-menu.open {
+    display: block;
+}
 
 .move-to-title {
     font-size: 16px;
@@ -73,7 +83,9 @@
     color: #fff;
 }
 
-.move-to-item:hover { background: #3d5166; }
+.move-to-item:hover {
+    background: #3d5166;
+}
 
 .move-to-arrow {
     font-size: 16px;
@@ -103,72 +115,179 @@
         padding-top: 100px;
     }
 
-    .board-header h1 { font-size: clamp(44px, 5vw, 64px); }
-    .board           { gap: clamp(12px, 1.5vw, 20px); }
+    .board-header h1 {
+        font-size: clamp(44px, 5vw, 64px);
+    }
+
+    .board {
+        gap: clamp(12px, 1.5vw, 20px);
+    }
 }
 
 /* ─────────────────────────────────────────────
    1200px
 ───────────────────────────────────────────── */
 @media (max-width: 1200px) {
-    .board-container { padding: 116px 24px 32px 24px; margin-bottom: 80px; }
-    .board-header h1 { font-size: 48px; }
-    .board           { gap: 16px; }
-}
-
-/* ─────────────────────────────────────────────
-   993px – 1024px: GAP-FIX
-   Sidebar noch volle Desktop-Leiste (232px)
-───────────────────────────────────────────── */
-@media (min-width: 993px) and (max-width: 1024px) {
     .board-container {
-        margin-left: 252px;
-        width: calc(100% - 252px);
-        padding: 96px 16px 28px 16px;
+        padding: 116px 24px 32px 24px;
         margin-bottom: 80px;
     }
-    .board-header h1        { font-size: 40px; }
-    .board                  { grid-template-columns: repeat(2, 1fr); gap: 16px; }
-    .search-container input { width: 140px; }
-    .move-to-wrapper        { display: flex; align-items: center; }
+
+    .board-header h1 {
+        font-size: 48px;
+    }
+
+    .board {
+        gap: 16px;
+    }
 }
 
 /* ─────────────────────────────────────────────
    ≤ 992px: Mobile — Bottom-Nav
 ───────────────────────────────────────────── */
-@media (max-width: 992px) {
-    main             { height: auto; min-height: 0; overflow-y: auto; overflow-x: hidden; }
-    .board-container { margin-left: 0; width: 100%; height: auto; min-height: 100%; overflow-y: visible; padding: 16px 20px 20px; margin-bottom: 80px; }
-    body             { overflow-y: auto !important; }
+@media (max-width: 1180px) {
+    main {
+        height: auto;
+        min-height: 0;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .board-container {
+        margin-left: 0;
+        width: 100%;
+        height: auto;
+        min-height: 100%;
+        overflow-y: visible;
+        padding: 16px 20px 20px;
+        margin-bottom: 80px;
+    }
+
+    body {
+        overflow-y: auto !important;
+    }
+
 }
 
-@media (min-width: 769px) and (max-width: 1320px) {
+@media (min-width: 993px) and (max-width: 1320px) {
     .taskboard-page .board {
-        grid-template-columns: repeat(5, minmax(150px, 1fr));
+        grid-template-columns: repeat(5, minmax(120px, 1fr));
         gap: 12px;
     }
 
     .taskboard-page .card {
         padding: 14px;
+        min-width: 0;
     }
 
     .taskboard-page .card-title {
         font-size: 16px;
+        line-height: 1.2;
+        overflow-wrap: anywhere;
+        word-break: normal;
+    }
+
+    .taskboard-page .card-description {
+        font-size: 14px;
+        line-height: 1.35;
+    }
+
+    .taskboard-page .progress-container {
+        gap: 6px;
+        min-width: 0;
+    }
+
+    .taskboard-page .subtask-text {
+        font-size: 13px;
     }
 
     .taskboard-page .assigned-to-container {
         min-width: 0;
+        flex-shrink: 1;
     }
 
     .taskboard-page .user-badge {
-        width: 30px;
-        height: 30px;
-        min-width: 30px;
-        font-size: 16px;
+        width: 26px;
+        height: 26px;
+        min-width: 26px;
+        font-size: 10px;
     }
 
-    .taskboard-page .assigned-to-container .user-badge + .user-badge {
-        margin-left: -6px;
+    .taskboard-page .assigned-to-container .user-badge+.user-badge {
+        margin-left: -7px;
+    }
+
+    .taskboard-page .prio-icon {
+        flex-shrink: 0;
+    }
+}
+
+@media (max-width: 992px) {
+    .taskboard-page .board {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding-bottom: 40px;
+    }
+
+    .taskboard-page .column {
+        width: 100%;
+        min-width: 0;
+        height: auto !important;
+        min-height: 0 !important;
+    }
+
+    .taskboard-page .task-list {
+        width: 100%;
+        flex-direction: row;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        touch-action: pan-x pan-y;
+        scroll-snap-type: x proximity;
+        padding: 0 2px 10px;
+        gap: 12px;
+        height: auto !important;
+        min-height: 0 !important;
+        scrollbar-width: thin;
+    }
+
+    .taskboard-page .task-list:has(.move-to-menu.open) {
+        padding-bottom: 280px;
+        margin-bottom: -270px;
+    }
+
+    .taskboard-page .card:has(.move-to-menu.open) {
+        z-index: 300;
+    }
+
+    .taskboard-page .card-move-to {
+        z-index: 290;
+    }
+
+    .taskboard-page .move-to-menu {
+        z-index: 320;
+    }
+
+    .taskboard-page .card {
+        min-width: 255px;
+        max-width: 255px;
+        scroll-snap-align: start;
+        flex-shrink: 0;
+        overflow: visible;
+    }
+
+    .taskboard-page .card-move-to {
+        display: flex;
+    }
+
+    .taskboard-page .card:has(.move-to-menu.open) {
+        pointer-events: none;
+    }
+
+    .taskboard-page .card:has(.move-to-menu.open) .move-to-btn,
+    .taskboard-page .card:has(.move-to-menu.open) .move-to-menu,
+    .taskboard-page .card:has(.move-to-menu.open) .move-to-item {
+        pointer-events: auto;
     }
 }
 
@@ -176,99 +295,282 @@
    768px
 ───────────────────────────────────────────── */
 @media (max-width: 768px) {
-    .board-container        { margin-left: 0; width: 100%; padding: 16px 16px 20px; margin-bottom: 80px; }
-    .board-header           { flex-direction: column; align-items: stretch; gap: 12px; margin-bottom: 20px; }
-    .board-header h1        { font-size: 36px; }
-    .search-add             { gap: 10px; width: 100%; }
-    .search-container       { flex: 1; }
-    .search-container input { width: 100%; min-width: 0; }
-    .add-task               { font-size: 16px; padding: 10px 16px; }
-    .board                  { grid-template-columns: 1fr; gap: 20px; padding-bottom: 40px; }
-    .column                 { height: auto !important; min-height: 0 !important; }
-    .column-header h2       { font-size: 22px; }
-    .task-list              { width: 100%; flex-direction: row; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; touch-action: pan-x pan-y; scroll-snap-type: x proximity; padding: 0 2px 10px; gap: 12px; height: auto !important; min-height: 0 !important; scrollbar-width: thin; }
-    .card                   { min-width: 255px; max-width: 255px; scroll-snap-align: start; flex-shrink: 0; }
-    .card .description      { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .card-move-to           { display: flex; }
-    .card:has(.move-to-menu.open) { pointer-events: none; }
+    .board-container {
+        margin-left: 0;
+        width: 100%;
+        padding: 16px 16px 20px;
+        margin-bottom: 80px;
+    }
+
+    .board-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .board-header h1 {
+        font-size: 36px;
+    }
+
+    .search-add {
+        gap: 10px;
+        width: 100%;
+    }
+
+    .search-container {
+        flex: 1;
+    }
+
+    .search-container input {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .add-task {
+        font-size: 16px;
+        padding: 10px 16px;
+    }
+
+    .column-header h2 {
+        font-size: 22px;
+    }
+
+    .card .description {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
     .card:has(.move-to-menu.open) .move-to-btn,
     .card:has(.move-to-menu.open) .move-to-menu,
-    .card:has(.move-to-menu.open) .move-to-item { pointer-events: auto; }
+    .card:has(.move-to-menu.open) .move-to-item {
+        pointer-events: auto;
+    }
 
-    #addTaskModal .modal-content  { padding: 28px 20px 20px; border-radius: 20px; max-height: 95vh; max-height: calc(100dvh - 32px); }
-    .modal-title                  { font-size: 28px; margin-bottom: 16px; }
-    #addTaskModal .editor_wrapper { flex-direction: column; gap: 0; }
-    #addTaskModal .editor_divider { display: none; }
+    #addTaskModal .modal-content {
+        padding: 28px 20px 20px;
+        border-radius: 20px;
+        max-height: 95vh;
+        max-height: calc(100dvh - 32px);
+    }
+
+    .modal-title {
+        font-size: 28px;
+        margin-bottom: 16px;
+    }
+
+    #addTaskModal .editor_wrapper {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    #addTaskModal .editor_divider {
+        display: none;
+    }
+
     #addTaskModal .new_task,
-    #addTaskModal .task_settings  { width: 100%; }
-    #addTaskModal .task_footer    { flex-direction: column; gap: 10px; align-items: stretch; }
-    #addTaskModal .footer_actions { width: 100%; flex-direction: row; }
+    #addTaskModal .task_settings {
+        width: 100%;
+    }
+
+    #addTaskModal .task_footer {
+        flex-direction: column;
+        gap: 10px;
+        align-items: stretch;
+    }
+
+    #addTaskModal .footer_actions {
+        width: 100%;
+        flex-direction: row;
+    }
+
     #addTaskModal .clear_btn,
-    #addTaskModal .create_btn     { flex: 1; text-align: center; height: 48px; font-size: 16px; }
+    #addTaskModal .create_btn {
+        flex: 1;
+        text-align: center;
+        height: 48px;
+        font-size: 16px;
+    }
 
-    .overlay-card      { max-width: calc(100vw - 24px); padding: 28px 20px; border-radius: 20px; max-height: 88vh; }
-    .detail-title      { font-size: 28px; }
-    .save-btn          { width: 100%; align-self: stretch; }
-    .priority-row-edit { gap: 6px; }
-    .prio-btn-edit     { font-size: 12px; padding: 9px 4px; gap: 4px; }
-    .prio-btn-edit img { width: 14px; }
+    .overlay-card {
+        max-width: calc(100vw - 24px);
+        padding: 28px 20px;
+        border-radius: 20px;
+        max-height: 88vh;
+    }
 
-    .detail-actions   { flex-wrap: wrap; gap: 8px; }
-    .move-to-select   { font-size: 12px; padding: 5px 8px; }
+    .detail-title {
+        font-size: 28px;
+    }
+
+    .save-btn {
+        width: 100%;
+        align-self: stretch;
+    }
+
+    .priority-row-edit {
+        gap: 6px;
+    }
+
+    .prio-btn-edit {
+        font-size: 12px;
+        padding: 9px 4px;
+        gap: 4px;
+    }
+
+    .prio-btn-edit img {
+        width: 14px;
+    }
+
+    .detail-actions {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .move-to-select {
+        font-size: 12px;
+        padding: 5px 8px;
+    }
 }
 
 /* ─────────────────────────────────────────────
    576px
 ───────────────────────────────────────────── */
 @media (max-width: 576px) {
-    #addTaskModal .footer_actions { flex-direction: row !important; }
+    #addTaskModal .footer_actions {
+        flex-direction: row !important;
+    }
 }
 
 /* ─────────────────────────────────────────────
    480px
 ───────────────────────────────────────────── */
 @media (max-width: 480px) {
-    .board-container  { margin-left: 0; width: 100%; padding: 12px 12px 16px; margin-bottom: 80px; }
-    .board-header h1  { font-size: 30px; }
-    .card             { padding: 14px; border-radius: 16px; }
-    .badge            { font-size: 13px; padding: 3px 10px; }
+    .board-container {
+        margin-left: 0;
+        width: 100%;
+        padding: 12px 12px 16px;
+        margin-bottom: 80px;
+    }
 
-    #addTaskModal .modal-content { padding: 24px 14px; border-radius: 16px; }
-    .overlay-card                { padding: 24px 14px; }
-    .detail-title                { font-size: 24px; }
+    .board-header h1 {
+        font-size: 30px;
+    }
+
+    .card {
+        padding: 14px;
+        border-radius: 16px;
+    }
+
+    .badge {
+        font-size: 13px;
+        padding: 3px 10px;
+    }
+
+    #addTaskModal .modal-content {
+        padding: 24px 14px;
+        border-radius: 16px;
+    }
+
+    .overlay-card {
+        padding: 24px 14px;
+    }
+
+    .detail-title {
+        font-size: 24px;
+    }
 
     .detail-info-row,
-    .detail-prio-row { flex-direction: column; align-items: flex-start; gap: 4px; }
-    .info-label      { min-width: unset; font-size: 13px; color: var(--text-gray); font-weight: 400; }
+    .detail-prio-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
 
-    .prio-btn-edit     { font-size: 16px; padding: 8px 2px; gap: 3px; }
-    .prio-btn-edit img { width: 13px; }
+    .info-label {
+        min-width: unset;
+        font-size: 13px;
+        color: var(--text-gray);
+        font-weight: 400;
+    }
 
-    .detail-actions  { flex-direction: column; align-items: stretch; }
-    .action-btn      { justify-content: center; }
-    .action-divider  { display: none; }
-    .move-to-select  { width: 100%; box-sizing: border-box; }
+    .prio-btn-edit {
+        font-size: 16px;
+        padding: 8px 2px;
+        gap: 3px;
+    }
+
+    .prio-btn-edit img {
+        width: 13px;
+    }
+
+    .detail-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .action-btn {
+        justify-content: center;
+    }
+
+    .action-divider {
+        display: none;
+    }
+
+    .move-to-select {
+        width: 100%;
+        box-sizing: border-box;
+    }
 }
 
 /* ─────────────────────────────────────────────
    360px
 ───────────────────────────────────────────── */
 @media (max-width: 360px) {
-    .board-container  { margin-left: 0; width: 100%; padding: 10px 10px 16px; margin-bottom: 80px; }
-    .search-add       { flex-wrap: wrap; }
-    .search-container { width: 100%; }
-    .add-task         { width: 100%; justify-content: center; }
+    .board-container {
+        margin-left: 0;
+        width: 100%;
+        padding: 10px 10px 16px;
+        margin-bottom: 80px;
+    }
+
+    .search-add {
+        flex-wrap: wrap;
+    }
+
+    .search-container {
+        width: 100%;
+    }
+
+    .add-task {
+        width: 100%;
+        justify-content: center;
+    }
 }
+
 @media (min-width: 769px) {
+
     .taskboard-page .card-description,
-    .taskboard-page .subtask-text { font-size: 16px; }
+    .taskboard-page .subtask-text {
+        font-size: 16px;
+    }
+
     .taskboard-page .detail-description,
     .taskboard-page .external-creator,
     .taskboard-page .detail-info-row,
     .taskboard-page .detail-prio-row,
     .taskboard-page .assigned-user-badge-container,
-    .taskboard-page .subtask-row { font-size: 16px; }
+    .taskboard-page .subtask-row {
+        font-size: 16px;
+    }
+
     .taskboard-page .external-creator-section .section-title,
-    .taskboard-page .section-title { font-size: 16px; }
-    .taskboard-page .external-email-action::before { content: none; }
+    .taskboard-page .section-title {
+        font-size: 16px;
+    }
+
+    .taskboard-page .external-email-action::before {
+        content: none;
+    }
 }
